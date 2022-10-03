@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="501a250ada184dda922843ba98fccfb8" Name="Diagram1">
+        <EntityTypeShape EntityType="ClubSchoolModel.Class" Width="1.5" PointX="0.75" PointY="10.5" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Club" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Group" Width="1.5" PointX="3" PointY="4" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Journal" Width="1.5" PointX="7.5" PointY="1" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Room" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Schedule" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Student" Width="1.5" PointX="3" PointY="10.125" />
+        <EntityTypeShape EntityType="ClubSchoolModel.StudentClub" Width="1.5" PointX="5.25" PointY="10.125" />
+        <EntityTypeShape EntityType="ClubSchoolModel.StudentGroup" Width="1.5" PointX="5.25" PointY="4" />
+        <EntityTypeShape EntityType="ClubSchoolModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Teacher" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="ClubSchoolModel.TeacherClub" Width="1.5" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="ClubSchoolModel.FK_Student_Class" />
+        <AssociationConnector Association="ClubSchoolModel.FK_StudentClub_Club" />
+        <AssociationConnector Association="ClubSchoolModel.FK_TeacherClub_Club" />
+        <AssociationConnector Association="ClubSchoolModel.FK_Group_Teacher" />
+        <AssociationConnector Association="ClubSchoolModel.FK_StudentGroup_Group" />
+        <AssociationConnector Association="ClubSchoolModel.FK_Journal_Schedule" />
+        <AssociationConnector Association="ClubSchoolModel.FK_Journal_StudentClub" />
+        <AssociationConnector Association="ClubSchoolModel.FK_Schedule_Room" />
+        <AssociationConnector Association="ClubSchoolModel.FK_Schedule_TeacherClub" />
+        <AssociationConnector Association="ClubSchoolModel.FK_StudentClub_Student" />
+        <AssociationConnector Association="ClubSchoolModel.FK_StudentGroup_Student" />
+        <AssociationConnector Association="ClubSchoolModel.FK_TeacherClub_Teacher" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
