@@ -71,7 +71,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentId" Type="int" Nullable="false" />
           <Property Name="ClubId" Type="int" Nullable="false" />
-          <Property Name="IsDeleted" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="StudentGroup">
           <Key>
@@ -319,7 +319,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClubSchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="ClubSchoolEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ClubSchoolEntities1" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="Classes" EntityType="ClubSchoolModel.Class" />
           <EntitySet Name="Clubs" EntityType="ClubSchoolModel.Club" />
           <EntitySet Name="Groups" EntityType="ClubSchoolModel.Group" />
@@ -461,7 +461,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="ClubId" Type="Int32" Nullable="false" />
-          <Property Name="IsDeleted" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Club" Relationship="ClubSchoolModel.FK_StudentClub_Club" FromRole="StudentClub" ToRole="Club" />
           <NavigationProperty Name="Journals" Relationship="ClubSchoolModel.FK_Journal_StudentClub" FromRole="StudentClub" ToRole="Journal" />
           <NavigationProperty Name="Student" Relationship="ClubSchoolModel.FK_StudentClub_Student" FromRole="StudentClub" ToRole="Student" />
@@ -653,12 +653,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ClubSchoolModelStoreContainer" CdmEntityContainer="ClubSchoolEntities">
+        <EntityContainerMapping StorageEntityContainer="ClubSchoolModelStoreContainer" CdmEntityContainer="ClubSchoolEntities1" >
           <EntitySetMapping Name="Classes">
             <EntityTypeMapping TypeName="ClubSchoolModel.Class">
               <MappingFragment StoreEntitySet="Class">

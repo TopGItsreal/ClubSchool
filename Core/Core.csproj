@@ -56,10 +56,10 @@
     <Compile Include="Class.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ClubSchoolEntities.cs" />
     <Compile Include="Club.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClubSchoolEntities.cs" />
     <Compile Include="ClubSchoolModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -109,32 +109,30 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="ClubSchoolModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ClubSchoolModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="ClubSchoolModel.edmx.diagram">
       <DependentUpon>ClubSchoolModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="ClubSchoolModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClubSchoolModel.Context.cs</LastGenOutput>
       <DependentUpon>ClubSchoolModel.edmx</DependentUpon>
+      <LastGenOutput>ClubSchoolModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="ClubSchoolModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ClubSchoolModel.edmx</DependentUpon>
       <LastGenOutput>ClubSchoolModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
