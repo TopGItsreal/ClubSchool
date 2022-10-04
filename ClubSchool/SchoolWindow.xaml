@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClubSchool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Школьные клубы" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -19,9 +19,11 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <Image Source="/Resources/logo.png" Width="150"/>
+            <Image Source="/Resources/logo.png" Width="80" Grid.Column="0"/>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="2">
+            <TextBlock Text="{Binding pageTitle}" Grid.Column="1" FontSize="30"/>
+
+            <StackPanel x:Name="spButtons" Orientation="Horizontal" Grid.Column="2">
                 <Button x:Name="btnBack" Content="Назад" Click="btnBack_Click"/>
                 <Button x:Name="btnForward" Content="Вперед" Click="btnForward_Click"/>
             </StackPanel>

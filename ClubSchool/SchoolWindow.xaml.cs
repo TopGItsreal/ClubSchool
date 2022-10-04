@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ClubSchool.Pages;
 
 namespace ClubSchool
 {
@@ -20,11 +21,23 @@ namespace ClubSchool
     /// </summary>
     public partial class SchoolWindow : Window
     {
+
+        public string pageTitle { get; set; }
         public SchoolWindow()
         {
             InitializeComponent();
 
-            frame.NavigationService.Navigate(new Pages.AuthorizationPage());
+            frame.Navigated += Frame_Navigated;
+            frame.NavigationService.Navigate(new AuthorizationPage());
+        }
+
+        private void Frame_Navigated(object sender, NavigationEventArgs e)
+        {
+            var pageContent = frame.Content;
+
+            pageTitle = (pageContent as Page).Title;
+
+            spButtons.Visibility = pageContent is AuthorizationPage ? Visibility.Hidden : Visibility.Visible;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
