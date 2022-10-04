@@ -13,11 +13,22 @@
 
             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                 <Setter Property="Margin" Value="2, 5"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="30"/>
             </Style>
 
-            <Style TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignTextBlock}">
+            <Style TargetType="Grid">
+                <Setter Property="Background" Value="#CFD9E0"/>
+            </Style>
+
+            <Style TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignOutlinedPasswordBox}">
                 <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+
+            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

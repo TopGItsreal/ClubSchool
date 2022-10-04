@@ -4,11 +4,31 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ClubSchool.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AuthorizationPage">
+      Title="Авторизация">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="tbLogin"
+                 materialDesign:HintAssist.Hint="Логин"
+                 materialDesign:HintAssist.Background="#CFD9E0"
+                 Grid.Column="1"
+                 Grid.Row="0"
+                 Margin="200, 0"/>
+        <PasswordBox x:Name="pbPassword"
+                     materialDesign:HintAssist.Hint="Пароль"
+                     materialDesign:HintAssist.Background="#CFD9E0"
+                     Grid.Column="1"
+                     Grid.Row="1"
+                     Margin="200, 0"/>
+
+        <Button x:Name="btnLogin" Content="Авторизация" Grid.ColumnSpan="2" Grid.Row="2" Click="btnLogin_Click" Height="60"/>
     </Grid>
 </Page>

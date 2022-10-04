@@ -42,12 +42,14 @@ namespace ClubSchool
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-
+            if (frame.CanGoBack)
+                frame.GoBack();
         }
 
         private void btnForward_Click(object sender, RoutedEventArgs e)
         {
-
+            if (frame.CanGoForward)
+                frame.GoForward();
         }
     }
 }
