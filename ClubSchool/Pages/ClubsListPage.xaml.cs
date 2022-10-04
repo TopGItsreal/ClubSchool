@@ -10,22 +10,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core;
 
 namespace ClubSchool.Pages
 {
     /// <summary>
-    /// Interaction logic for AuthorizationPage.xaml
+    /// Interaction logic for ClubsListPage.xaml
     /// </summary>
-    public partial class AuthorizationPage : Page
+    public partial class ClubsListPage : Page
     {
-        public AuthorizationPage()
+        public List<Club> Clubs { get; set; }
+        public ClubsListPage()
         {
             InitializeComponent();
-        }
+            Clubs = DataAccess.GetClubs();
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ClubsListPage());
+            DataContext = this;
         }
     }
 }

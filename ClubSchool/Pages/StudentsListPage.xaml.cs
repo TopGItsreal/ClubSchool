@@ -14,18 +14,13 @@ using System.Windows.Shapes;
 namespace ClubSchool.Pages
 {
     /// <summary>
-    /// Interaction logic for AuthorizationPage.xaml
+    /// Interaction logic for StudentsListPage.xaml
     /// </summary>
-    public partial class AuthorizationPage : Page
+    public partial class StudentsListPage : Page
     {
-        public AuthorizationPage()
+        public StudentsListPage()
         {
             InitializeComponent();
-        }
-
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ClubsListPage());
         }
     }
 }
