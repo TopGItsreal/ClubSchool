@@ -37,5 +37,7 @@ namespace Core
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TeacherClub> TeacherClubs { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserInfo> UserInfoes { get; set; }
     }
 }

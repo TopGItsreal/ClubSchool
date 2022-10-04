@@ -109,6 +109,22 @@
           <Property Name="ClubId" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="InfoId" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Group_Teacher">
           <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
           <End Role="Group" Type="Self.Group" Multiplicity="*" />
@@ -253,6 +269,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserInfo_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="InfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ClubSchoolModelStoreContainer">
           <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
@@ -266,6 +306,8 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeacherClub" EntityType="Self.TeacherClub" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Group_Teacher" Association="Self.FK_Group_Teacher">
             <End Role="Teacher" EntitySet="Teacher" />
             <End Role="Group" EntitySet="Group" />
@@ -313,6 +355,14 @@
           <AssociationSet Name="FK_TeacherClub_Teacher" Association="Self.FK_TeacherClub_Teacher">
             <End Role="Teacher" EntitySet="Teacher" />
             <End Role="TeacherClub" EntitySet="TeacherClub" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_Teacher" Association="Self.FK_UserInfo_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_User" Association="Self.FK_UserInfo_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -379,6 +429,16 @@
           <AssociationSet Name="FK_TeacherClub_Teacher" Association="ClubSchoolModel.FK_TeacherClub_Teacher">
             <End Role="Teacher" EntitySet="Teachers" />
             <End Role="TeacherClub" EntitySet="TeacherClubs" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="ClubSchoolModel.User" />
+          <EntitySet Name="UserInfoes" EntityType="ClubSchoolModel.UserInfo" />
+          <AssociationSet Name="FK_UserInfo_Teacher" Association="ClubSchoolModel.FK_UserInfo_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_User" Association="ClubSchoolModel.FK_UserInfo_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserInfo" EntitySet="UserInfoes" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Class">
@@ -496,6 +556,7 @@
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Groups" Relationship="ClubSchoolModel.FK_Group_Teacher" FromRole="Teacher" ToRole="Group" />
           <NavigationProperty Name="TeacherClubs" Relationship="ClubSchoolModel.FK_TeacherClub_Teacher" FromRole="Teacher" ToRole="TeacherClub" />
+          <NavigationProperty Name="UserInfoes" Relationship="ClubSchoolModel.FK_UserInfo_Teacher" FromRole="Teacher" ToRole="UserInfo" />
         </EntityType>
         <EntityType Name="TeacherClub">
           <Key>
@@ -653,6 +714,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserInfoes" Relationship="ClubSchoolModel.FK_UserInfo_User" FromRole="User" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="InfoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Teacher" Relationship="ClubSchoolModel.FK_UserInfo_Teacher" FromRole="UserInfo" ToRole="Teacher" />
+          <NavigationProperty Name="User" Relationship="ClubSchoolModel.FK_UserInfo_User" FromRole="UserInfo" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_UserInfo_Teacher">
+          <End Type="ClubSchoolModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="ClubSchoolModel.UserInfo" Role="UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="InfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_User">
+          <End Type="ClubSchoolModel.User" Role="User" Multiplicity="1" />
+          <End Type="ClubSchoolModel.UserInfo" Role="UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -771,6 +875,24 @@
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ClubId" ColumnName="ClubId" />
                 <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ClubSchoolModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="ClubSchoolModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="InfoId" ColumnName="InfoId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -107,6 +107,12 @@
     <Compile Include="TeacherClub.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>ClubSchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo.cs">
+      <DependentUpon>ClubSchoolModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

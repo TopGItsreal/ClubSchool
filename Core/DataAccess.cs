@@ -32,6 +32,10 @@ namespace Core
 
         public static List<Journal> GetJournals() => ClubSchool.GetContext().Journals.ToList();
 
+        public static List<User> GetUsers() => ClubSchool.GetContext().Users.ToList();
+
+        public static List<UserInfo> GetUsersInfo() => ClubSchool.GetContext().UserInfoes.ToList();
+
         public static bool SaveJournal(Journal journal)
         {
             if (journal.Id == 0)
@@ -80,6 +84,10 @@ namespace Core
             studentClub.IsDeleted = true;
             return SaveStudentClub(studentClub);
         }
+
+        public static User GetUser(string login, string password) => GetUsers().FirstOrDefault(x => x.Login == login && x.Password == password);
+
+
 
     }
 }

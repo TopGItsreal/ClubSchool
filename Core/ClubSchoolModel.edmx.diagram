@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e532079c6dc24a8a9d505cc87ccba3e2" Name="Diagram1" ZoomLevel="83" >
+      <Diagram DiagramId="e532079c6dc24a8a9d505cc87ccba3e2" Name="Diagram1" ZoomLevel="76" >
         <EntityTypeShape EntityType="ClubSchoolModel.Class" Width="1.5" PointX="1.5" PointY="10.25" />
         <EntityTypeShape EntityType="ClubSchoolModel.Club" Width="1.5" PointX="0.75" PointY="5" />
         <EntityTypeShape EntityType="ClubSchoolModel.Group" Width="1.5" PointX="3" PointY="1.75" />
         <EntityTypeShape EntityType="ClubSchoolModel.Journal" Width="1.5" PointX="8.25" PointY="5" />
         <EntityTypeShape EntityType="ClubSchoolModel.Room" Width="1.5" PointX="3" PointY="13.375" />
-        <EntityTypeShape EntityType="ClubSchoolModel.Schedule" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Schedule" Width="1.5" PointX="8" PointY="0.875" />
         <EntityTypeShape EntityType="ClubSchoolModel.Student" Width="1.5" PointX="3.75" PointY="9.875" />
         <EntityTypeShape EntityType="ClubSchoolModel.StudentClub" Width="1.5" PointX="6" PointY="4.875" />
         <EntityTypeShape EntityType="ClubSchoolModel.StudentGroup" Width="1.5" PointX="6" PointY="8" />
@@ -29,6 +29,10 @@
         <AssociationConnector Association="ClubSchoolModel.FK_StudentClub_Student" />
         <AssociationConnector Association="ClubSchoolModel.FK_StudentGroup_Student" />
         <AssociationConnector Association="ClubSchoolModel.FK_TeacherClub_Teacher" />
+        <EntityTypeShape EntityType="ClubSchoolModel.User" Width="1.5" PointX="0.5" PointY="1.5" />
+        <EntityTypeShape EntityType="ClubSchoolModel.UserInfo" Width="1.5" PointX="2.75" PointY="0.5" />
+        <AssociationConnector Association="ClubSchoolModel.FK_UserInfo_Teacher" />
+        <AssociationConnector Association="ClubSchoolModel.FK_UserInfo_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
