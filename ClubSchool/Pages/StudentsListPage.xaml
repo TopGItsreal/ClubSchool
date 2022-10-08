@@ -9,6 +9,67 @@
       Title="StudentsListPage">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="LvStudents"
+                  Grid.Column="1"
+                  Grid.Row="1"
+                  ItemsSource="{Binding Students}"
+                  SelectionChanged="LvStudents_SelectionChanged"
+                  MouseLeave="LvStudents_MouseLeave"
+                  MouseEnter="LvStudents_MouseEnter">
+            <ListView.Resources>
+                <!-- Alternatively use the ItemContainerStyle of course -->
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+
+                <!-- Use BasedOn to preserve existing style -->
+                <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView x:Name="gvStudents">
+                    <GridView.Columns>
+                        <GridViewColumn Header="ФИО">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding FirstName}"/>
+                                        <Run Text="{Binding LastName}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Класс">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Class.Name}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Присутствует" >
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <CheckBox HorizontalAlignment="Stretch"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
         
     </Grid>
 </Page>

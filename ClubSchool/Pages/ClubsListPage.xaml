@@ -20,9 +20,13 @@
         <TextBlock TextAlignment="Center">
             Кружки
         </TextBlock>
+        <Button x:Name="btnStudents" Content="Студенты"
+                HorizontalAlignment="Left"
+                Click="btnStudents_Click"/>
         <ListView x:Name="lvClubs" 
                   Grid.Row="1"
-                  ItemsSource="{Binding Clubs}">
+                  ItemsSource="{Binding Clubs}"
+                  SelectionChanged="lvClubs_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>

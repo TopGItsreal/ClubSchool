@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Linq;
 using Core;
 
 namespace ClubSchool.Pages
@@ -19,13 +20,32 @@ namespace ClubSchool.Pages
     /// </summary>
     public partial class ClubsListPage : Page
     {
-        public List<Club> Clubs { get; set; }
+        public IEnumerable<Club> Clubs { get; set; }
         public ClubsListPage()
         {
             InitializeComponent();
             Clubs = DataAccess.GetClubs();
 
             DataContext = this;
+        }
+        public ClubsListPage(IEnumerable<Club> clubs)
+        {
+            InitializeComponent();
+            Clubs = clubs;
+
+            DataContext = this;
+        }
+
+        private void btnStudents_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new StudentsListPage());
+        }
+
+        private void lvClubs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var club = lvClubs.SelectedItem as Club;
+            var students = club.StudentClubs.Select(x => x.Student);
+            NavigationService.Navigate(new StudentsListPage(students));
         }
     }
 }
