@@ -6,20 +6,17 @@
       xmlns:local="clr-namespace:ClubSchool.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ClubsListPage">
+      Title="Кружки">
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
-            <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-
-        <TextBlock TextAlignment="Center">
-            Кружки
-        </TextBlock>
+        
         <ListView x:Name="lvClubs" 
                   Grid.Row="1"
                   ItemsSource="{Binding Clubs}">
