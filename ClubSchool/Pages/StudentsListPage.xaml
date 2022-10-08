@@ -10,13 +10,12 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -27,18 +26,6 @@
                   SelectionChanged="LvStudents_SelectionChanged"
                   MouseLeave="LvStudents_MouseLeave"
                   MouseEnter="LvStudents_MouseEnter">
-            <ListView.Resources>
-                <!-- Alternatively use the ItemContainerStyle of course -->
-                <Style TargetType="ListViewItem" BasedOn="{StaticResource {x:Type ListViewItem}}">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-
-                <!-- Use BasedOn to preserve existing style -->
-                <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
-                    <Setter Property="VerticalAlignment" Value="Center"/>
-                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                </Style>
-            </ListView.Resources>
             <ListView.View>
                 <GridView x:Name="gvStudents">
                     <GridView.Columns>
@@ -70,6 +57,5 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        
     </Grid>
 </Page>
