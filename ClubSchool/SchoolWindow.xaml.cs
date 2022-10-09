@@ -21,7 +21,6 @@ namespace ClubSchool
     /// </summary>
     public partial class SchoolWindow : Window
     {
-
         public string pageTitle { get; set; }
         public SchoolWindow()
         {
@@ -50,6 +49,21 @@ namespace ClubSchool
         {
             if (frame.CanGoForward)
                 frame.GoForward();
+        }
+
+        private void btnClubs_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            frame.NavigationService.Navigate(new SchedulePage());
+        }
+
+        private void btnNewClub_Click(object sender, RoutedEventArgs e)
+        {
+            frame.NavigationService.Navigate(new ClubPage());
         }
     }
 }

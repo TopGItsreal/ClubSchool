@@ -16,13 +16,13 @@
             <RowDefinition/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
-
         <TextBox x:Name="tbLogin"
                  materialDesign:HintAssist.Hint="Логин"
                  materialDesign:HintAssist.Background="#CFD9E0"
                  Grid.Column="1"
                  Grid.Row="0"
-                 Margin="200, 0"/>
+                 Margin="200, 0"
+                 />
         <PasswordBox x:Name="pbPassword"
                      materialDesign:HintAssist.Hint="Пароль"
                      materialDesign:HintAssist.Background="#CFD9E0"
