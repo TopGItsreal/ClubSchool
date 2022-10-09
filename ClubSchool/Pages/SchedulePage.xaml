@@ -18,15 +18,17 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
-        <ComboBox ItemsSource="{Binding Teachers}">
-            <ComboBoxItem>
-                <TextBlock>
-                    <Run Text="{Binding FirstName}"/>
-                    <Run Text="{Binding LastName}"/>
-                </TextBlock>
-            </ComboBoxItem>
-        </ComboBox>
+        <StackPanel>
+            <TextBlock Text="День недели"/>
+            <ComboBox ItemsSource="{Binding Teachers}">
+                <ComboBoxItem>
+                    <TextBlock>
+                        <Run Text="{Binding FirstName}"/>
+                        <Run Text="{Binding LastName}"/>
+                    </TextBlock>
+                </ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
 
         <ListView x:Name="lvShedules" Grid.Row="1" Grid.ColumnSpan="2"
                   ItemsSource="{Binding Schedules}"

@@ -8,38 +8,66 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ClubPage">
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+            <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel>
-            
-            <TextBlock Text="Название кружка"/>
+        <StackPanel >
+            <StackPanel Orientation="Horizontal">
+                
+                <TextBlock Text="Название кружка"/>
 
-            <ComboBox x:Name="cbClubs" ItemsSource="{Binding Clubs}"
-                      IsEditable="True">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            
-            <TextBlock Text="Количество мест"/>
+                <ComboBox x:Name="cbClubs" ItemsSource="{Binding Clubs}"
+                          IsEditable="True"
+                          MinWidth="150"
+                          Text="{Binding Club.Name}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Количество мест"/>
 
-            <TextBox x:Name="tbMaxCount" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBox 
+                    MinWidth="50"
+                    x:Name="tbMaxCount"
+                    Text="{Binding Club.MaxStudentCount}"
+                    Height="auto"
+                    PreviewTextInput="NumberValidationTextBox"
+                    FontSize="20"
+                    Padding="2"/>
+            </StackPanel>
 
-            <Button x:Name="btnSave" Content="Save" Click="btnSave_Click"/>
+            <Button x:Name="btnSave" Content="Сохранить" Click="btnSave_Click"/>
 
             <TextBlock Text="Расписание"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" ItemsSource="{Binding Schedules}">
+        <ListView 
+            x:Name="lvSchedule"
+            Grid.Row="1" ItemsSource="{Binding Schedules}">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>

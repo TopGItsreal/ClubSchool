@@ -31,6 +31,10 @@ namespace ClubSchool.Pages
             Club = new Club();
             Clubs = DataAccess.GetClubs();
             Schedules = DataAccess.GetSchedules().Where(x=> x.TeacherClub.ClubId == Club.Id);
+
+            if (Schedules.Count() == 0)
+                lvSchedule.Visibility = Visibility.Hidden;
+
             DataContext = this;
         }
         public ClubPage(Club club)
@@ -39,6 +43,10 @@ namespace ClubSchool.Pages
             Club = club;
             Clubs = DataAccess.GetClubs();
             Schedules = DataAccess.GetSchedules().Where(x => x.TeacherClub.ClubId == Club.Id);
+
+            if (Schedules.Count() == 0)
+                lvSchedule.Visibility = Visibility.Hidden;
+
             DataContext = this;
         }
 
