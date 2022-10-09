@@ -28,14 +28,37 @@
             </ComboBoxItem>
         </ComboBox>
 
-        <ListView Grid.Row="1" Grid.ColumnSpan="2">
+        <ListView x:Name="lvShedules" Grid.Row="1" Grid.ColumnSpan="2"
+                  ItemsSource="{Binding Schedules}"
+                  SelectionChanged="lvShedules_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                        <GridViewColumn Header="">
+                        <GridViewColumn Header="Преподаватель">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock/>
+                                    <TextBlock>
+                                        <Run Text="{Binding TeacherClub.Teacher.LastName}"/>
+                                        <Run Text="{Binding TeacherClub.Teacher.FirstName}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Кружок">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding TeacherClub.Club.Name}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Кабинет">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Room.Name}"/>
+                                    </TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

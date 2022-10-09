@@ -10,6 +10,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Core;
 
 namespace ClubSchool.Pages
 {
@@ -18,9 +21,35 @@ namespace ClubSchool.Pages
     /// </summary>
     public partial class ClubPage : Page
     {
+        public Club Club { get; set; }
+        public List<Club> Clubs { get; set; }
+        public IEnumerable<Schedule> Schedules { get; set; }
+
         public ClubPage()
         {
             InitializeComponent();
+            Club = new Club();
+            Clubs = DataAccess.GetClubs();
+            Schedules = DataAccess.GetSchedules().Where(x=> x.TeacherClub.ClubId == Club.Id);
+            DataContext = this;
+        }
+        public ClubPage(Club club)
+        {
+            InitializeComponent();
+            Club = club;
+            Clubs = DataAccess.GetClubs();
+            Schedules = DataAccess.GetSchedules().Where(x => x.TeacherClub.ClubId == Club.Id);
+            DataContext = this;
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            var t = cbClubs.Text;
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

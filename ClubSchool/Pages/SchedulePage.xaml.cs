@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core;
 
 namespace ClubSchool.Pages
 {
@@ -18,9 +19,19 @@ namespace ClubSchool.Pages
     /// </summary>
     public partial class SchedulePage : Page
     {
+        public List<Schedule> Schedules { get; set; }
         public SchedulePage()
         {
             InitializeComponent();
+            Schedules = DataAccess.GetSchedules();
+            DataContext = this;
+
+        }
+
+        private void lvShedules_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var club = ((sender as ListView).SelectedItem as Schedule).TeacherClub.Club;
+            NavigationService.Navigate(new ClubPage(club));
         }
     }
 }

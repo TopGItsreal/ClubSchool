@@ -20,7 +20,11 @@ namespace Core
             this.StudentClubs = new HashSet<StudentClub>();
             this.TeacherClubs = new HashSet<TeacherClub>();
         }
-    
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public int MaxStudentCount { get; set; }

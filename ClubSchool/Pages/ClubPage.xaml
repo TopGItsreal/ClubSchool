@@ -19,26 +19,37 @@
         </Grid.RowDefinitions>
         <StackPanel>
             
-        
-        <TextBlock Text="Название кружка"/>
-        <ComboBox x:Name="cbClubs" ItemsSource="{Binding Clubs}"/>
-        <TextBox 
-            materialDesign:HintAssist.Hint="Логин"
-            x:Name="tbNewClub"/>
+            <TextBlock Text="Название кружка"/>
 
-        <TextBlock Text="Количество мест"/>
+            <ComboBox x:Name="cbClubs" ItemsSource="{Binding Clubs}"
+                      IsEditable="True">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            
+            <TextBlock Text="Количество мест"/>
 
-        <TextBlock Text="Расписание"/>
+            <TextBox x:Name="tbMaxCount" PreviewTextInput="NumberValidationTextBox"/>
+
+            <Button x:Name="btnSave" Content="Save" Click="btnSave_Click"/>
+
+            <TextBlock Text="Расписание"/>
         </StackPanel>
 
-        <ListView Grid.Row="1">
+        <ListView Grid.Row="1" ItemsSource="{Binding Schedules}">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
                         <GridViewColumn Header="Преподаватель">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock/>
+                                    <TextBlock >
+                                        <Run Text="{Binding TeacherClub.Teacher.LastName}"/>
+                                        <Run Text="{Binding TeacherClub.Teacher.FirstName}"/>
+                                    </TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -59,7 +70,9 @@
                         <GridViewColumn Header="Кабинет">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock/>
+                                    <TextBlock >
+                                        <Run Text="{Binding Room.Name}"/>
+                                    </TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
