@@ -11,6 +11,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -23,7 +24,8 @@
 
             <Image Source="/Resources/logo.png" Width="80" Grid.Column="0"/>
 
-            <TextBlock Text="{Binding pageTitle}" Grid.Column="1" FontSize="30"/>
+            
+            
             <StackPanel x:Name="spMenuButtons" Grid.Column="1" Orientation="Horizontal">
                 <Button x:Name="btnClubs" Content="Кружки" Click="btnClubs_Click"/>
                 <Button x:Name="btnSchedule" Content="Расписание" Click="btnSchedule_Click"/>
@@ -34,6 +36,10 @@
                 <Button x:Name="btnForward" Content="Вперед" Click="btnForward_Click"/>
             </StackPanel>
         </Grid>
-        <Frame x:Name="frame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+        <TextBlock x:Name="tbTitle" Text="{Binding PageTitle}" 
+                   Grid.Column="1"
+                   Grid.Row="1"
+                   HorizontalAlignment="Center" FontSize="30"/>
+        <Frame x:Name="frame" Grid.Row="2" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

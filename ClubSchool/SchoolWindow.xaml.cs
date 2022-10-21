@@ -21,23 +21,26 @@ namespace ClubSchool
     /// </summary>
     public partial class SchoolWindow : Window
     {
-        public string pageTitle { get; set; }
+        public string PageTitle { get; set; }
         public SchoolWindow()
         {
             InitializeComponent();
 
             frame.Navigated += Frame_Navigated;
             frame.NavigationService.Navigate(new AuthorizationPage());
+            DataContext = this;
         }
 
         private void Frame_Navigated(object sender, NavigationEventArgs e)
         {
             var pageContent = frame.Content;
 
-            pageTitle = (pageContent as Page).Title;
+            PageTitle = (pageContent as Page).Title;
+            tbTitle.Text = PageTitle;
 
             spButtons.Visibility = pageContent is AuthorizationPage ? Visibility.Hidden : Visibility.Visible;
             spMenuButtons.Visibility = pageContent is AuthorizationPage ? Visibility.Hidden : Visibility.Visible;
+            
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
