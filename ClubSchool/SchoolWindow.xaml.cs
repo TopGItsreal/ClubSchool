@@ -37,6 +37,7 @@ namespace ClubSchool
             pageTitle = (pageContent as Page).Title;
 
             spButtons.Visibility = pageContent is AuthorizationPage ? Visibility.Hidden : Visibility.Visible;
+            spMenuButtons.Visibility = pageContent is AuthorizationPage ? Visibility.Hidden : Visibility.Visible;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -53,7 +54,7 @@ namespace ClubSchool
 
         private void btnClubs_Click(object sender, RoutedEventArgs e)
         {
-
+            frame.NavigationService.Navigate(new ClubsListPage());
         }
 
         private void btnSchedule_Click(object sender, RoutedEventArgs e)

@@ -24,8 +24,7 @@
                   Grid.Row="1"
                   ItemsSource="{Binding Students}"
                   SelectionChanged="LvStudents_SelectionChanged"
-                  MouseLeave="LvStudents_MouseLeave"
-                  MouseEnter="LvStudents_MouseEnter">
+                  >
             <ListView.View>
                 <GridView x:Name="gvStudents">
                     <GridView.Columns>
@@ -49,7 +48,7 @@
                         <GridViewColumn Header="Присутствует" >
                             <GridViewColumn.CellTemplate >
                                 <DataTemplate>
-                                    <CheckBox HorizontalAlignment="Stretch"/>
+                                    <CheckBox HorizontalAlignment="Center" Margin="50 0"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

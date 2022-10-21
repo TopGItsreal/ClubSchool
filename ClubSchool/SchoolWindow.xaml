@@ -24,7 +24,7 @@
             <Image Source="/Resources/logo.png" Width="80" Grid.Column="0"/>
 
             <TextBlock Text="{Binding pageTitle}" Grid.Column="1" FontSize="30"/>
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <StackPanel x:Name="spMenuButtons" Grid.Column="1" Orientation="Horizontal">
                 <Button x:Name="btnClubs" Content="Кружки" Click="btnClubs_Click"/>
                 <Button x:Name="btnSchedule" Content="Расписание" Click="btnSchedule_Click"/>
                 <Button x:Name="btnNewClub" Content="Новый кружок" Click="btnNewClub_Click"/>
