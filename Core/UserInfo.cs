@@ -17,8 +17,5 @@ namespace Core
         public int Id { get; set; }
         public int UserId { get; set; }
         public int InfoId { get; set; }
-    
-        public virtual Teacher Teacher { get; set; }
-        public virtual User User { get; set; }
     }
 }

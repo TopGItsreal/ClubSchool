@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
 using Core;
 
 namespace ClubSchool.Pages
@@ -20,12 +21,15 @@ namespace ClubSchool.Pages
     public partial class SchedulePage : Page
     {
         public List<Schedule> Schedules { get; set; }
-        public SchedulePage()
+        public string[] DayNames { get; set; }
+        public SchedulePage(List<Schedule> schedules)
         {
             InitializeComponent();
-            Schedules = DataAccess.GetSchedules();
-            DataContext = this;
+            Schedules = schedules;
+            var day = App.Culture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek);
+            DayNames = App.Culture.DateTimeFormat.DayNames;
 
+            DataContext = this;
         }
 
         private void lvShedules_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -17,14 +17,16 @@ namespace Core
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.UserInfoes = new HashSet<UserInfo>();
+            this.Teachers = new HashSet<Teacher>();
         }
     
         public int Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserInfo> UserInfoes { get; set; }
+        public virtual ICollection<Teacher> Teachers { get; set; }
     }
 }

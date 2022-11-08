@@ -19,7 +19,7 @@
                 <Setter Property="FontSize" Value="16"/>
             </Style>
 
-            <Style TargetType="Grid">
+            <Style TargetType="Grid" x:Key="BacgroundGridStyle">
                 <Setter Property="Background" Value="#CFD9E0"/>
             </Style>
 
@@ -28,6 +28,7 @@
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="FontSize" Value="30"/>
             </Style>
+            
 
             <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
                 <Setter Property="VerticalAlignment" Value="Center"/>

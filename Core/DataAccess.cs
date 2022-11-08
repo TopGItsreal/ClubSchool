@@ -85,6 +85,8 @@ namespace Core
             return SaveStudentClub(studentClub);
         }
 
+        public static bool IsPasswordCorrect(string login, string password) => GetUsers().Any(x => x.Login == login && x.Password == password);
+
         public static User GetUser(string login, string password) => GetUsers().FirstOrDefault(x => x.Login == login && x.Password == password);
 
 

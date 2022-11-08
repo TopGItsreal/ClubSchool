@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:ClubSchool"
         mc:Ignorable="d"
         FontSize="30"
-        Icon="/Resources/logo.png"
         Title="Школьные клубы" Height="600" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -29,6 +28,7 @@
             <StackPanel x:Name="spMenuButtons" Grid.Column="1" Orientation="Horizontal">
                 <Button x:Name="btnClubs" Content="Кружки" Click="btnClubs_Click"/>
                 <Button x:Name="btnSchedule" Content="Расписание" Click="btnSchedule_Click"/>
+                <Button x:Name="btnMySchedule" Content="Мое расписание" Click="btnMySchedule_Click"/>
                 <Button x:Name="btnNewClub" Content="Новый кружок" Click="btnNewClub_Click"/>
             </StackPanel>
             <StackPanel x:Name="spButtons" Orientation="Horizontal" Grid.Column="2">

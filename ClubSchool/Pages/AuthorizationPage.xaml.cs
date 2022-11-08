@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core;
 
 namespace ClubSchool.Pages
 {
@@ -25,7 +26,14 @@ namespace ClubSchool.Pages
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ClubsListPage());
+            var login = tbLogin.Text;
+            var password = pbPassword.Password;
+
+            if (DataAccess.IsPasswordCorrect(login, password))
+            {
+                App.User = DataAccess.GetUser(login, password);
+                NavigationService.Navigate(new ClubsListPage());
+            }
         }
     }
 }

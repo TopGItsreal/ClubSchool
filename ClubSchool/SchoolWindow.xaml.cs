@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ClubSchool.Pages;
+using Core;
 
 namespace ClubSchool
 {
@@ -62,12 +63,26 @@ namespace ClubSchool
 
         private void btnSchedule_Click(object sender, RoutedEventArgs e)
         {
-            frame.NavigationService.Navigate(new SchedulePage());
+            frame.NavigationService.Navigate(new SchedulePage(DataAccess.GetSchedules()));
         }
 
         private void btnNewClub_Click(object sender, RoutedEventArgs e)
         {
             frame.NavigationService.Navigate(new ClubPage());
+        }
+
+        private void btnMySchedule_Click(object sender, RoutedEventArgs e)
+        {
+            var schedules = new List<Schedule>();
+            var teacher = App.User.Teachers.FirstOrDefault();
+            if (teacher != null)
+            {
+                foreach (var schedule in teacher.TeacherClubs.Select(x => x.Schedules))
+                {
+                    schedules.AddRange(schedule);
+                }
+            }
+            frame.NavigationService.Navigate(new SchedulePage(schedules));
         }
     }
 }

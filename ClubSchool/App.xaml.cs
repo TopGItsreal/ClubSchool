@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Globalization;
+using Core;
 
 namespace ClubSchool
 {
@@ -13,5 +15,7 @@ namespace ClubSchool
     /// </summary>
     public partial class App : Application
     {
+        public static CultureInfo Culture { get; set; } = new CultureInfo("ru-RU");
+        public static User User { get; set; }
     }
 }
