@@ -8,106 +8,87 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Кружок">
-    <Page.Resources>
-        <ResourceDictionary>
-            <Style TargetType="TextBlock">
-                <Setter Property="FontSize" Value="18"/>
-            </Style>
-            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
-                <Setter Property="FontSize" Value="18"/>
-            </Style>
-            <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
-                <Setter Property="FontSize" Value="18"/>
-            </Style>
-        </ResourceDictionary>
-    </Page.Resources>
-
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel >
-            <StackPanel Orientation="Horizontal">
-                
-                <TextBlock Text="Название кружка"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
 
-                <ComboBox x:Name="cbClubs" ItemsSource="{Binding Clubs}"
-                          IsEditable="True"
-                          MinWidth="150"
-                          Text="{Binding Club.Name}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Количество мест"/>
+            <ComboBox x:Name="cbClubs" ItemsSource="{Binding Clubs}"
+                      materialDesign:HintAssist.Hint="Название кружка"
+                      materialDesign:HintAssist.Background="{StaticResource BackgroundColor}"
+                      SelectedItem="{Binding Club}"
+                      Margin="20" FontSize="24"
+                      Grid.Column="0"
+                      Text="{Binding Club.Name}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBox x:Name="tbMaxCount"
+                     Text="{Binding Club.MaxStudentCount}"
+                     Height="auto" Margin="20" Grid.Column="1"
+                     PreviewTextInput="NumberValidationTextBox"
+                     materialDesign:HintAssist.Hint="Количество мест"
+                     materialDesign:HintAssist.Background="{StaticResource BackgroundColor}"
+                     Padding="10" FontSize="24"/>
 
-                <TextBox 
-                    MinWidth="50"
-                    x:Name="tbMaxCount"
-                    Text="{Binding Club.MaxStudentCount}"
-                    Height="auto"
-                    PreviewTextInput="NumberValidationTextBox"
-                    FontSize="20"
-                    Padding="2"/>
-            </StackPanel>
+            <Button x:Name="btnSave" Content="Сохранить" Click="btnSave_Click" Grid.Column="2" />
+        </Grid>
 
-            <Button x:Name="btnSave" Content="Сохранить" Click="btnSave_Click"/>
-
-            <TextBlock Text="Расписание"/>
-        </StackPanel>
-
-        <ListView 
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Расписание" HorizontalAlignment="Center" FontSize="24"/>
+            <ListView 
             x:Name="lvSchedule"
             Grid.Row="1" ItemsSource="{Binding Schedules}">
-            <ListView.View>
-                <GridView>
-                    <GridView.Columns>
-                        <GridViewColumn Header="Преподаватель">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock >
+                <ListView.View>
+                    <GridView>
+                        <GridView.Columns>
+                            <GridViewColumn Header="Преподаватель">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock >
                                         <Run Text="{Binding TeacherClub.Teacher.LastName}"/>
                                         <Run Text="{Binding TeacherClub.Teacher.FirstName}"/>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="День недели">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Время">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Кабинет">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock >
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="День недели">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Время">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Кабинет">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock >
                                         <Run Text="{Binding Room.Name}"/>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView.Columns>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Page>

@@ -23,26 +23,15 @@ namespace ClubSchool.Pages
     {
         public Club Club { get; set; }
         public List<Club> Clubs { get; set; }
-        public IEnumerable<Schedule> Schedules { get; set; }
+        public List<Schedule> Schedules { get; set; }
 
-        public ClubPage()
-        {
-            InitializeComponent();
-            Club = new Club();
-            Clubs = DataAccess.GetClubs();
-            Schedules = DataAccess.GetSchedules().Where(x=> x.TeacherClub.ClubId == Club.Id);
-
-            if (Schedules.Count() == 0)
-                lvSchedule.Visibility = Visibility.Hidden;
-
-            DataContext = this;
-        }
         public ClubPage(Club club)
         {
             InitializeComponent();
             Club = club;
             Clubs = DataAccess.GetClubs();
-            Schedules = DataAccess.GetSchedules().Where(x => x.TeacherClub.ClubId == Club.Id);
+            if (club != null)
+                Schedules = DataAccess.GetSchedules().FindAll(x => x.TeacherClub.ClubId == Club.Id);
 
             if (Schedules.Count() == 0)
                 lvSchedule.Visibility = Visibility.Hidden;

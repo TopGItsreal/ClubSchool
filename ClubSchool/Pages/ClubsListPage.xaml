@@ -38,20 +38,14 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <ListView ItemsSource="{Binding TeacherClubs}">
-                                        <ListView.View>
-                                            <GridView>
-                                                <GridViewColumn>
-                                                    <GridViewColumn.CellTemplate>
-                                                        <DataTemplate>
-                                                            <TextBlock >
-                                                                <Run Text="{Binding Teacher.FirstName}"/>
-                                                                <Run Text="{Binding Teacher.LastName}"/>
-                                                            </TextBlock>
-                                                        </DataTemplate>
-                                                    </GridViewColumn.CellTemplate>
-                                                </GridViewColumn>
-                                            </GridView>
-                                        </ListView.View>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <Run Text="{Binding Teacher.FirstName}"/>
+                                                    <Run Text="{Binding Teacher.LastName}"/>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>

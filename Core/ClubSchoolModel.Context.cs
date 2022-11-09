@@ -34,7 +34,6 @@ namespace Core
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentClub> StudentClubs { get; set; }
         public virtual DbSet<StudentGroup> StudentGroups { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TeacherClub> TeacherClubs { get; set; }
         public virtual DbSet<User> Users { get; set; }

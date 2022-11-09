@@ -6,15 +6,17 @@
         xmlns:local="clr-namespace:ClubSchool"
         mc:Ignorable="d"
         FontSize="30"
-        Title="Школьные клубы" Height="600" Width="800">
-    <Grid>
+        Title="Школьные клубы"
+        Height="600" Width="900"
+        MinHeight="600" MinWidth="900">
+    <Grid Background="{StaticResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid>
+        <Grid Margin="20 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition/>
@@ -27,7 +29,7 @@
             
             <StackPanel x:Name="spMenuButtons" Grid.Column="1" Orientation="Horizontal">
                 <Button x:Name="btnClubs" Content="Кружки" Click="btnClubs_Click"/>
-                <Button x:Name="btnSchedule" Content="Расписание" Click="btnSchedule_Click"/>
+                <Button x:Name="btnSchedule" Content="Общее расписание" Click="btnSchedule_Click"/>
                 <Button x:Name="btnMySchedule" Content="Мое расписание" Click="btnMySchedule_Click"/>
                 <Button x:Name="btnNewClub" Content="Новый кружок" Click="btnNewClub_Click"/>
             </StackPanel>
@@ -39,7 +41,7 @@
         <TextBlock x:Name="tbTitle" Text="{Binding PageTitle}" 
                    Grid.Column="1"
                    Grid.Row="1"
-                   HorizontalAlignment="Center" FontSize="30"/>
-        <Frame x:Name="frame" Grid.Row="2" NavigationUIVisibility="Hidden"/>
+                   HorizontalAlignment="Center" FontSize="30" Foreground="#FF673AB7"/>
+        <Frame x:Name="frame" Grid.Row="2" NavigationUIVisibility="Hidden" Margin="20"/>
     </Grid>
 </Window>

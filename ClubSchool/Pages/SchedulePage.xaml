@@ -4,9 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ClubSchool.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Расписание">
+      Title="Расписание" FontSize="16">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -15,14 +16,13 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel>
-            <TextBlock Text="День недели"/>
-            <ComboBox ItemsSource="{Binding DayNames}"/>
-
-        </StackPanel>
+        <ComboBox x:Name="cbDay" ItemsSource="{Binding DayNames}"
+                  materialDesign:HintAssist.Hint="День недели"
+                  materialDesign:HintAssist.Background="{StaticResource BackgroundColor}"
+                  SelectionChanged="cbDay_SelectionChanged"/>
 
         <ListView x:Name="lvShedules" Grid.Row="1" Grid.ColumnSpan="2"
                   ItemsSource="{Binding Schedules}"

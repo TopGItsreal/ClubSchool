@@ -98,9 +98,6 @@
     <Compile Include="StudentGroup.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>ClubSchoolModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Teacher.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>

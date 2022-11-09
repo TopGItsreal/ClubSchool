@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,13 +22,13 @@ namespace ClubSchool.Pages
     public partial class SchedulePage : Page
     {
         public List<Schedule> Schedules { get; set; }
-        public string[] DayNames { get; set; }
+        public IEnumerable<string> DayNames { get; set; }
         public SchedulePage(List<Schedule> schedules)
         {
             InitializeComponent();
             Schedules = schedules;
             var day = App.Culture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek);
-            DayNames = App.Culture.DateTimeFormat.DayNames;
+            DayNames = App.Culture.DateTimeFormat.DayNames.Select(x => char.ToUpper(x[0]) + x.Substring(1));
 
             DataContext = this;
         }
@@ -36,6 +37,11 @@ namespace ClubSchool.Pages
         {
             var club = ((sender as ListView).SelectedItem as Schedule).TeacherClub.Club;
             NavigationService.Navigate(new ClubPage(club));
+        }
+
+        private void cbDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lvShedules.ItemsSource = Schedules.FindAll(x => App.Culture.DateTimeFormat.GetDayName(x.Date.DayOfWeek) == cbDay.SelectedItem.ToString().ToLower());
         }
     }
 }

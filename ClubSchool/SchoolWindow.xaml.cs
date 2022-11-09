@@ -68,7 +68,7 @@ namespace ClubSchool
 
         private void btnNewClub_Click(object sender, RoutedEventArgs e)
         {
-            frame.NavigationService.Navigate(new ClubPage());
+            frame.NavigationService.Navigate(new ClubPage(new Club()));
         }
 
         private void btnMySchedule_Click(object sender, RoutedEventArgs e)
