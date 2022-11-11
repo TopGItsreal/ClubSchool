@@ -35,8 +35,12 @@ namespace ClubSchool.Pages
 
         private void lvShedules_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //var club = ((sender as ListView).SelectedItem as Schedule).TeacherClub.Club;
+            //NavigationService.Navigate(new ClubPage(club));
+
             var club = ((sender as ListView).SelectedItem as Schedule).TeacherClub.Club;
-            NavigationService.Navigate(new ClubPage(club));
+            var students = club.StudentClubs.Select(x => x.Student);
+            NavigationService.Navigate(new StudentsListPage(students));
         }
 
         private void cbDay_SelectionChanged(object sender, SelectionChangedEventArgs e)

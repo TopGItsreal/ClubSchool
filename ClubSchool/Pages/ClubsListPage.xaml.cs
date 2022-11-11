@@ -43,9 +43,12 @@ namespace ClubSchool.Pages
 
         private void lvClubs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var club = lvClubs.SelectedItem as Club;
-            var students = club.StudentClubs.Select(x => x.Student);
-            NavigationService.Navigate(new StudentsListPage(students));
+            var club = (sender as ListView).SelectedItem as Club;
+            NavigationService.Navigate(new ClubPage(club));
+
+            //var club = lvClubs.SelectedItem as Club;
+            //var students = club.StudentClubs.Select(x => x.Student);
+            //NavigationService.Navigate(new StudentsListPage(students));
         }
     }
 }
