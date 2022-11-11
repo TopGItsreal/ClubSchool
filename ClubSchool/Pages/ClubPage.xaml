@@ -22,7 +22,7 @@
 
             <ComboBox x:Name="cbClubs" ItemsSource="{Binding Clubs}"
                       materialDesign:HintAssist.Hint="Название кружка"
-                      materialDesign:HintAssist.Background="{StaticResource BackgroundColor}"
+                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
                       SelectedItem="{Binding Club}"
                       Margin="20" FontSize="24"
                       Grid.Column="0"
@@ -38,7 +38,7 @@
                      Height="auto" Margin="20" Grid.Column="1"
                      PreviewTextInput="NumberValidationTextBox"
                      materialDesign:HintAssist.Hint="Количество мест"
-                     materialDesign:HintAssist.Background="{StaticResource BackgroundColor}"
+                     materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
                      Padding="10" FontSize="24"/>
 
             <Button x:Name="btnSave" Content="Сохранить" Click="btnSave_Click" Grid.Column="2" />

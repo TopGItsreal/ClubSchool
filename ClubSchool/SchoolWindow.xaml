@@ -18,30 +18,35 @@
 
         <Grid Margin="20 10">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition />
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
             <Image Source="/Resources/logo.png" Width="80" Grid.Column="0"/>
-
-            
-            
-            <StackPanel x:Name="spMenuButtons" Grid.Column="1" Orientation="Horizontal">
+            <TextBlock x:Name="tbTitle" Text="{Binding PageTitle}" 
+                   Grid.Row="1"
+                   HorizontalAlignment="Center" FontSize="24" Foreground="#FF673AB7"/>
+            <StackPanel x:Name="spMenuButtons" Grid.Column="1" Orientation="Horizontal" Visibility="Collapsed">
                 <Button x:Name="btnClubs" Content="Кружки" Click="btnClubs_Click"/>
                 <Button x:Name="btnSchedule" Content="Общее расписание" Click="btnSchedule_Click"/>
                 <Button x:Name="btnMySchedule" Content="Мое расписание" Click="btnMySchedule_Click"/>
                 <Button x:Name="btnNewClub" Content="Новый кружок" Click="btnNewClub_Click"/>
             </StackPanel>
-            <StackPanel x:Name="spButtons" Orientation="Horizontal" Grid.Column="2">
+            <StackPanel x:Name="spButtons" Orientation="Horizontal" Grid.Column="2" Visibility="Collapsed">
                 <Button x:Name="btnBack" Content="Назад" Click="btnBack_Click"/>
                 <Button x:Name="btnForward" Content="Вперед" Click="btnForward_Click"/>
             </StackPanel>
+            
         </Grid>
-        <TextBlock x:Name="tbTitle" Text="{Binding PageTitle}" 
-                   Grid.Column="1"
-                   Grid.Row="1"
-                   HorizontalAlignment="Center" FontSize="30" Foreground="#FF673AB7"/>
-        <Frame x:Name="frame" Grid.Row="2" NavigationUIVisibility="Hidden" Margin="20"/>
+
+        <Border x:Name="bordContent" Grid.Row="2" Background="White" Margin="10" CornerRadius="10">
+            <Frame x:Name="frame" NavigationUIVisibility="Hidden" Margin="20"/>
+        </Border>
     </Grid>
 </Window>

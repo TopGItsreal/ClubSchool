@@ -21,8 +21,13 @@
         </Grid.ColumnDefinitions>
         <ComboBox x:Name="cbDay" ItemsSource="{Binding DayNames}"
                   materialDesign:HintAssist.Hint="День недели"
-                  materialDesign:HintAssist.Background="{StaticResource BackgroundColor}"
-                  SelectionChanged="cbDay_SelectionChanged"/>
+                  materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                  Background="{StaticResource HintBackgroundColor}"
+                  SelectionChanged="cbDay_SelectionChanged">
+            <ComboBox.Resources>
+                <SolidColorBrush x:Key="MaterialDesignPaper" Opacity="0"/>
+            </ComboBox.Resources>
+        </ComboBox>
 
         <ListView x:Name="lvShedules" Grid.Row="1" Grid.ColumnSpan="2"
                   ItemsSource="{Binding Schedules}"

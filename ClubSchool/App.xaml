@@ -14,8 +14,13 @@
             </ResourceDictionary.MergedDictionaries>
 
             <SolidColorBrush x:Key="BackgroundColor">
-                #fcffda
+                #DBE2E9
             </SolidColorBrush>
+
+            <SolidColorBrush x:Key="HintBackgroundColor">
+                #FFFFFF
+            </SolidColorBrush>
+            
 
             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                 <Setter Property="Margin" Value="2, 5"/>

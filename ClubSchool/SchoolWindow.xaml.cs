@@ -39,8 +39,13 @@ namespace ClubSchool
             PageTitle = (pageContent as Page).Title;
             tbTitle.Text = PageTitle;
 
-            spButtons.Visibility = pageContent is AuthorizationPage ? Visibility.Hidden : Visibility.Visible;
-            spMenuButtons.Visibility = pageContent is AuthorizationPage ? Visibility.Hidden : Visibility.Visible;
+            if (pageContent is AuthorizationPage)
+                bordContent.Background = new SolidColorBrush(Colors.Transparent);
+            else
+                bordContent.Background = new SolidColorBrush(Colors.White);
+            var visibility = pageContent is AuthorizationPage ? Visibility.Collapsed : Visibility.Visible;
+            spButtons.Visibility = visibility;
+            spMenuButtons.Visibility = visibility;
             
         }
 
