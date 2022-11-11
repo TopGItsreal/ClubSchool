@@ -19,42 +19,31 @@
         <Button x:Name="btnStudents" Content="Студенты"
                 HorizontalAlignment="Left"
                 Click="btnStudents_Click"/>
-        
-        <ListView x:Name="lvClubs" 
-                  Grid.Row="1"
+
+        <ListView x:Name="lvClubs" Grid.Row="1"
                   ItemsSource="{Binding Clubs}"
                   SelectionChanged="lvClubs_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridView.Columns>
-                        <GridViewColumn Header="Название">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Преподаватели">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <ListView ItemsSource="{Binding TeacherClubs}">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock>
-                                                    <Run Text="{Binding Teacher.FirstName}"/>
-                                                    <Run Text="{Binding Teacher.LastName}"/>
-                                                </TextBlock>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView.Columns>
+                    <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Преподаватели">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListView ItemsSource="{Binding TeacherClubs}" VerticalContentAlignment="Center">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <Run Text="{Binding Teacher.FirstName}"/>
+                                                <Run Text="{Binding Teacher.LastName}"/>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
-            
         </ListView>
-        
     </Grid>
 </Page>

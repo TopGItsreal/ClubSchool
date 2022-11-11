@@ -43,6 +43,10 @@
             <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
                 <Setter Property="Padding" Value="10"/>
             </Style>
+
+            <Style TargetType="ListView" BasedOn="{StaticResource MaterialDesignListView}">
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
