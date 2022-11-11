@@ -18,7 +18,6 @@
 
         <Grid Margin="20 10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
@@ -32,13 +31,13 @@
             <TextBlock x:Name="tbTitle" Text="{Binding PageTitle}" 
                    Grid.Row="1"
                    HorizontalAlignment="Center" FontSize="24" Foreground="#FF673AB7"/>
-            <StackPanel x:Name="spMenuButtons" Grid.Column="1" Orientation="Horizontal" Visibility="Collapsed">
+            <StackPanel x:Name="spMenuButtons" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
                 <Button x:Name="btnClubs" Content="Кружки" Click="btnClubs_Click"/>
                 <Button x:Name="btnSchedule" Content="Общее расписание" Click="btnSchedule_Click"/>
                 <Button x:Name="btnMySchedule" Content="Мое расписание" Click="btnMySchedule_Click"/>
                 <Button x:Name="btnNewClub" Content="Новый кружок" Click="btnNewClub_Click"/>
             </StackPanel>
-            <StackPanel x:Name="spButtons" Orientation="Horizontal" Grid.Column="2" Visibility="Collapsed">
+            <StackPanel x:Name="spButtons" Orientation="Horizontal" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right">
                 <Button x:Name="btnBack" Content="Назад" Click="btnBack_Click"/>
                 <Button x:Name="btnForward" Content="Вперед" Click="btnForward_Click"/>
             </StackPanel>
