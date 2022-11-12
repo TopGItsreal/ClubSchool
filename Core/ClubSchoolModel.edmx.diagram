@@ -4,18 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d2f677d8feea4d72b1bd1ac33279b510" Name="Diagram1" ZoomLevel="73" ShowGrid="false">
-        <EntityTypeShape EntityType="ClubSchoolModel.Class" Width="1.5" PointX="3" PointY="9" />
-        <EntityTypeShape EntityType="ClubSchoolModel.Club" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="ClubSchoolModel.Journal" Width="1.5" PointX="12.75" PointY="3.625" />
-        <EntityTypeShape EntityType="ClubSchoolModel.Room" Width="1.5" PointX="8.25" PointY="1" />
-        <EntityTypeShape EntityType="ClubSchoolModel.Schedule" Width="1.5" PointX="10.5" PointY="3.5" />
-        <EntityTypeShape EntityType="ClubSchoolModel.Student" Width="1.5" PointX="5.25" PointY="8.625" />
-        <EntityTypeShape EntityType="ClubSchoolModel.StudentTeacherClub" Width="1.5" PointX="7.5" PointY="3.625" />
-        <EntityTypeShape EntityType="ClubSchoolModel.sysdiagram" Width="1.5" PointX="7.75" PointY="6.625" />
-        <EntityTypeShape EntityType="ClubSchoolModel.Teacher" Width="1.5" PointX="3" PointY="3.5" />
-        <EntityTypeShape EntityType="ClubSchoolModel.TeacherClub" Width="1.5" PointX="5.25" PointY="3.5" />
-        <EntityTypeShape EntityType="ClubSchoolModel.User" Width="1.5" PointX="0.75" PointY="3.625" />
+      <Diagram DiagramId="d2f677d8feea4d72b1bd1ac33279b510" Name="Diagram1" ZoomLevel="83" ShowGrid="false">
+        <EntityTypeShape EntityType="ClubSchoolModel.Class" Width="1.5" PointX="6" PointY="8.75" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Club" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Journal" Width="1.5" PointX="12.75" PointY="3.5" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Room" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Schedule" Width="1.5" PointX="7.5" PointY="3.25" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Student" Width="1.5" PointX="8.25" PointY="8.5" />
+        <EntityTypeShape EntityType="ClubSchoolModel.StudentTeacherClub" Width="1.5" PointX="10.5" PointY="3.5" />
+        <EntityTypeShape EntityType="ClubSchoolModel.Teacher" Width="1.5" PointX="3" PointY="3.25" />
+        <EntityTypeShape EntityType="ClubSchoolModel.TeacherClub" Width="1.5" PointX="5.25" PointY="3.125" />
+        <EntityTypeShape EntityType="ClubSchoolModel.User" Width="1.5" PointX="0.75" PointY="3.5" />
         <AssociationConnector Association="ClubSchoolModel.FK_Student_Class" />
         <AssociationConnector Association="ClubSchoolModel.FK_TeacherClub_Club" />
         <AssociationConnector Association="ClubSchoolModel.FK_Journal_Schedule" />

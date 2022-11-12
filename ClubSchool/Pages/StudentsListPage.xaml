@@ -28,7 +28,7 @@
             <ListView.View>
                 <GridView x:Name="gvStudents">
                     <GridView.Columns>
-                        <GridViewColumn Header="">
+                        <GridViewColumn Header="Ученик">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>

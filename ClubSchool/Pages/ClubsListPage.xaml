@@ -32,10 +32,7 @@
                                 <ListView ItemsSource="{Binding TeacherClubs}" VerticalContentAlignment="Center">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock>
-                                                <Run Text="{Binding Teacher.FirstName}"/>
-                                                <Run Text="{Binding Teacher.LastName}"/>
-                                            </TextBlock>
+                                            <TextBlock Text="{Binding Teacher}"/>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>
@@ -52,16 +49,7 @@
                 <GridView>
                     <GridViewColumn Header="Кружок" DisplayMemberBinding="{Binding TeacherClub.Club.Name}"/>
                     <GridViewColumn Header="Группа" DisplayMemberBinding="{Binding TeacherClub.Name}"/>
-                    <GridViewColumn Header="Преподаватель">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <Run Text="{Binding TeacherClub.Teacher.FirstName}"/>
-                                    <Run Text="{Binding TeacherClub.Teacher.LastName}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    <GridViewColumn Header="Преподаватель" DisplayMemberBinding="{Binding TeacherClub.Teachers}"/>
                 </GridView>
             </ListView.View>
         </ListView>

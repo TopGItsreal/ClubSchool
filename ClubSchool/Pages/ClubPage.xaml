@@ -58,10 +58,7 @@
                             <GridViewColumn Header="Преподаватель">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock >
-                                        <Run Text="{Binding TeacherClub.Teacher.LastName}"/>
-                                        <Run Text="{Binding TeacherClub.Teacher.FirstName}"/>
-                                        </TextBlock>
+                                        <TextBlock Text="{Binding TeacherClub.Teacher}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

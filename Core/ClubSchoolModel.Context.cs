@@ -32,7 +32,6 @@ namespace Core
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<StudentTeacherClub> StudentTeacherClubs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<TeacherClub> TeacherClubs { get; set; }
         public virtual DbSet<User> Users { get; set; }

@@ -38,16 +38,7 @@
                   SelectionChanged="lvShedules_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Преподаватель">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                        <Run Text="{Binding TeacherClub.Teacher.LastName}"/>
-                                        <Run Text="{Binding TeacherClub.Teacher.FirstName}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    <GridViewColumn Header="Преподаватель" DisplayMemberBinding="{Binding TeacherClub.Teacher}"/>
                     <GridViewColumn Header="Кружок">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -70,6 +61,5 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
     </Grid>
 </Page>

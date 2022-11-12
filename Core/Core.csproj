@@ -93,15 +93,13 @@
     <Compile Include="StudentTeacherClub.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>ClubSchoolModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Teacher.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TeacherClub.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TeacherPartial.cs" />
     <Compile Include="User.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
