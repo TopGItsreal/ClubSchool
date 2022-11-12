@@ -63,7 +63,8 @@ namespace ClubSchool.Pages
 
             lvShedules.ItemsSource = day == "Все дни" ?
                                      Schedules.FindAll(x => x.Date.Date > date) :
-                                     Schedules.FindAll(x => App.Culture.DateTimeFormat.GetDayName(x.Date.DayOfWeek) == day.ToString().ToLower() && x.Date.Date > date);
+                                     Schedules.FindAll(x => App.Culture.DateTimeFormat.GetDayName(x.Date.DayOfWeek)== day.ToString().ToLower()
+                                     && x.Date.Date > date);
         }
     }
 }
