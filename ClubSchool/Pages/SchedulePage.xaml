@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <ComboBox x:Name="cbDay" ItemsSource="{Binding DayNames}"
@@ -29,39 +29,38 @@
                   SelectionChanged="lvShedules_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridView.Columns>
-                        <GridViewColumn Header="Преподаватель">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock>
+                    <GridViewColumn Header="Преподаватель">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
                                         <Run Text="{Binding TeacherClub.Teacher.LastName}"/>
                                         <Run Text="{Binding TeacherClub.Teacher.FirstName}"/>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Кружок">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Кружок">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
                                         <Run Text="{Binding TeacherClub.Club.Name}"/>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Кабинет">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Кабинет">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
                                         <Run Text="{Binding Room.Name}"/>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView.Columns>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Date, StringFormat=dd MMMM, ConverterCulture=ru}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        
+
     </Grid>
 </Page>

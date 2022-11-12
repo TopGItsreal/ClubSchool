@@ -8,9 +8,9 @@ namespace Core
 {
     public partial class ClubSchoolEntities
     {
-        private ClubSchoolEntities clubSchoolEntities;
+        private static ClubSchoolEntities clubSchoolEntities;
 
-        public ClubSchoolEntities GetContext()
+        public static ClubSchoolEntities GetContext()
         {
             if (clubSchoolEntities == null)
                 clubSchoolEntities = new ClubSchoolEntities();

@@ -45,5 +45,25 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <ListView x:Name="lvStudentGroups" Grid.Row="1"
+                  ItemsSource="{Binding StudentTeacherClubs}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Кружок" DisplayMemberBinding="{Binding TeacherClub.Club.Name}"/>
+                    <GridViewColumn Header="Группа" DisplayMemberBinding="{Binding TeacherClub.Name}"/>
+                    <GridViewColumn Header="Преподаватель">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding TeacherClub.Teacher.FirstName}"/>
+                                    <Run Text="{Binding TeacherClub.Teacher.LastName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

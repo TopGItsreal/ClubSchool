@@ -8,55 +8,45 @@ namespace Core
 {
     public static class DataAccess
     {
-        private static ClubSchoolEntities ClubSchool = new ClubSchoolEntities();
+        public static List<Student> GetStudents() => ClubSchoolEntities.GetContext().Students.ToList();
 
-        public static List<Student> GetStudents() => ClubSchool.GetContext().Students.ToList();
+        public static List<Teacher> GetTeachers() => ClubSchoolEntities.GetContext().Teachers.ToList();
 
-        public static List<Teacher> GetTeachers() => ClubSchool.GetContext().Teachers.ToList();
+        public static List<Class> GetClasses() => ClubSchoolEntities.GetContext().Classes.ToList();
 
-        public static List<Class> GetClasses() => ClubSchool.GetContext().Classes.ToList();
+        public static List<Schedule> GetSchedules() => ClubSchoolEntities.GetContext().Schedules.ToList();
 
-        public static List<Group> GetGroups() => ClubSchool.GetContext().Groups.ToList();
+        public static List<Room> GetRooms() => ClubSchoolEntities.GetContext().Rooms.ToList();
 
-        public static List<Schedule> GetSchedules() => ClubSchool.GetContext().Schedules.ToList();
+        public static List<TeacherClub> GetTeacherClubs() => ClubSchoolEntities.GetContext().TeacherClubs.ToList();
 
-        public static List<Room> GetRooms() => ClubSchool.GetContext().Rooms.ToList();
+        public static List<Club> GetClubs() => ClubSchoolEntities.GetContext().Clubs.ToList();
 
-        public static List<StudentGroup> GetStudentGroups() => ClubSchool.GetContext().StudentGroups.ToList();
+        public static List<Journal> GetJournals() => ClubSchoolEntities.GetContext().Journals.ToList();
 
-        public static List<StudentClub> GetStudentClubs() => ClubSchool.GetContext().StudentClubs.ToList();
-
-        public static List<TeacherClub> GetTeacherClubs() => ClubSchool.GetContext().TeacherClubs.ToList();
-
-        public static List<Club> GetClubs() => ClubSchool.GetContext().Clubs.ToList();
-
-        public static List<Journal> GetJournals() => ClubSchool.GetContext().Journals.ToList();
-
-        public static List<User> GetUsers() => ClubSchool.GetContext().Users.ToList();
-
-        public static List<UserInfo> GetUsersInfo() => ClubSchool.GetContext().UserInfoes.ToList();
+        public static List<User> GetUsers() => ClubSchoolEntities.GetContext().Users.ToList();
 
         public static bool SaveJournal(Journal journal)
         {
             if (journal.Id == 0)
-                ClubSchool.GetContext().Journals.Add(journal);
+                ClubSchoolEntities.GetContext().Journals.Add(journal);
 
-            return Convert.ToBoolean(ClubSchool.GetContext().SaveChanges());
+            return Convert.ToBoolean(ClubSchoolEntities.GetContext().SaveChanges());
         }
         public static bool SaveTeacher(Teacher teacher)
         {
             if (teacher.Id == 0)
-                ClubSchool.GetContext().Teachers.Add(teacher);
+                ClubSchoolEntities.GetContext().Teachers.Add(teacher);
 
-            return Convert.ToBoolean(ClubSchool.GetContext().SaveChanges());
+            return Convert.ToBoolean(ClubSchoolEntities.GetContext().SaveChanges());
         }
 
         public static bool SaveClub(Club club)
         {
             if (club.Id == 0)
-                ClubSchool.GetContext().Clubs.Add(club);
+                ClubSchoolEntities.GetContext().Clubs.Add(club);
 
-            return Convert.ToBoolean(ClubSchool.GetContext().SaveChanges());
+            return Convert.ToBoolean(ClubSchoolEntities.GetContext().SaveChanges());
         }
 
         public static bool RemoveClub(Club club)
@@ -71,25 +61,16 @@ namespace Core
             return SaveTeacher(teacher);
         }
 
-        public static bool SaveStudentClub(StudentClub studentClub)
-        {
-            if (studentClub.Id == 0)
-                ClubSchool.GetContext().StudentClubs.Add(studentClub);
-
-            return Convert.ToBoolean(ClubSchool.GetContext().SaveChanges());
-        }
-
-        public static bool RemoveStudentClub(StudentClub studentClub)
-        {
-            studentClub.IsDeleted = true;
-            return SaveStudentClub(studentClub);
-        }
 
         public static bool IsPasswordCorrect(string login, string password) => GetUsers().Any(x => x.Login == login && x.Password == password);
 
         public static User GetUser(string login, string password) => GetUsers().FirstOrDefault(x => x.Login == login && x.Password == password);
 
-
-
+        public static void SaveJournals(ICollection<Journal> journals, bool isNew = false)
+        {
+            if (isNew)
+                ClubSchoolEntities.GetContext().Journals.AddRange(journals);
+            ClubSchoolEntities.GetContext().SaveChanges();
+        }
     }
 }

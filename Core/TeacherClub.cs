@@ -18,16 +18,20 @@ namespace Core
         public TeacherClub()
         {
             this.Schedules = new HashSet<Schedule>();
+            this.StudentTeacherClubs = new HashSet<StudentTeacherClub>();
         }
     
         public int Id { get; set; }
         public int TeacherId { get; set; }
         public int ClubId { get; set; }
         public bool IsDeleted { get; set; }
+        public string Name { get; set; }
     
         public virtual Club Club { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Schedule> Schedules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentTeacherClub> StudentTeacherClubs { get; set; }
         public virtual Teacher Teacher { get; set; }
     }
 }

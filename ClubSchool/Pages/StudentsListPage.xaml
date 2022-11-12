@@ -28,7 +28,7 @@
             <ListView.View>
                 <GridView x:Name="gvStudents">
                     <GridView.Columns>
-                        <GridViewColumn Header="ФИО">
+                        <GridViewColumn Header="">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
@@ -42,13 +42,6 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Class.Name}"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Присутствует" >
-                            <GridViewColumn.CellTemplate >
-                                <DataTemplate>
-                                    <CheckBox HorizontalAlignment="Center" Margin="50 0"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

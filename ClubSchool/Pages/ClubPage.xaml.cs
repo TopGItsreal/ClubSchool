@@ -30,18 +30,25 @@ namespace ClubSchool.Pages
             InitializeComponent();
             Club = club;
             Clubs = DataAccess.GetClubs();
-            if (club != null)
-                Schedules = DataAccess.GetSchedules().FindAll(x => x.TeacherClub.ClubId == Club.Id);
+            Schedules = DataAccess.GetSchedules().FindAll(x => x.TeacherClub.ClubId == Club.Id);
 
             if (Schedules.Count() == 0)
-                lvSchedule.Visibility = Visibility.Hidden;
+                spSchedule.Visibility = Visibility.Collapsed;
 
             DataContext = this;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var t = cbClubs.Text;
+            try
+            {
+                DataAccess.SaveClub(Club);
+                NavigationService.GoBack();
+            }
+            catch
+            {
+                MessageBox.Show("Сохранение не удалось", "Ошибка");
+            }
         }
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {

@@ -26,6 +26,7 @@
                       SelectedItem="{Binding Club}"
                       Margin="20" FontSize="24"
                       Grid.Column="0"
+                      IsEditable="True"
                       Text="{Binding Club.Name}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -34,17 +35,20 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBox x:Name="tbMaxCount"
+                     materialDesign:HintAssist.Hint="Количество мест"
                      Text="{Binding Club.MaxStudentCount}"
                      Height="auto" Margin="20" Grid.Column="1"
                      PreviewTextInput="NumberValidationTextBox"
-                     materialDesign:HintAssist.Hint="Количество мест"
                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
                      Padding="10" FontSize="24"/>
 
-            <Button x:Name="btnSave" Content="Сохранить" Click="btnSave_Click" Grid.Column="2" />
+            <Button x:Name="btnSave" Content="Сохранить" 
+                    Grid.Column="2" FontSize="24"
+                    MinHeight="50"
+                    Click="btnSave_Click"/>
         </Grid>
 
-        <StackPanel Grid.Row="1">
+        <StackPanel x:Name="spSchedule" Grid.Row="1">
             <TextBlock Text="Расписание" HorizontalAlignment="Center" FontSize="24"/>
             <ListView 
             x:Name="lvSchedule"

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ClubSchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ClubSchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Class">
           <Key>
             <PropertyRef Name="Id" />
@@ -21,21 +21,13 @@
           <Property Name="MaxStudentCount" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="Group">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="TeacherId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Journal">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ScheduleId" Type="int" Nullable="false" />
-          <Property Name="StudentClubId" Type="int" Nullable="false" />
+          <Property Name="StudentGroupId" Type="int" Nullable="false" />
           <Property Name="IsVisited" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Room">
@@ -64,22 +56,23 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ClassId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="StudentClub">
+        <EntityType Name="StudentTeacherClub">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentId" Type="int" Nullable="false" />
-          <Property Name="ClubId" Type="int" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="TeacherClubId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="StudentGroup">
+        <EntityType Name="sysdiagrams">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StudentId" Type="int" Nullable="false" />
-          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -99,6 +92,7 @@
           <Property Name="TeacherId" Type="int" Nullable="false" />
           <Property Name="ClubId" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -110,26 +104,6 @@
           <Property Name="Email" Type="nvarchar" MaxLength="90" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" />
         </EntityType>
-        <EntityType Name="UserInfo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="InfoId" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_Group_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
-          <End Role="Group" Type="Self.Group" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Teacher">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Group">
-              <PropertyRef Name="TeacherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Journal_Schedule">
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
           <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
@@ -142,15 +116,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Journal_StudentClub">
-          <End Role="StudentClub" Type="Self.StudentClub" Multiplicity="1" />
+        <Association Name="FK_Journal_StudentTeacherClub">
+          <End Role="StudentTeacherClub" Type="Self.StudentTeacherClub" Multiplicity="1" />
           <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="StudentClub">
+            <Principal Role="StudentTeacherClub">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Journal">
-              <PropertyRef Name="StudentClubId" />
+              <PropertyRef Name="StudentGroupId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -190,51 +164,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentClub_Club">
-          <End Role="Club" Type="Self.Club" Multiplicity="1" />
-          <End Role="StudentClub" Type="Self.StudentClub" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Club">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentClub">
-              <PropertyRef Name="ClubId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentClub_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="StudentClub" Type="Self.StudentClub" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentClub">
-              <PropertyRef Name="StudentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentGroup_Group">
-          <End Role="Group" Type="Self.Group" Multiplicity="1" />
-          <End Role="StudentGroup" Type="Self.StudentGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Group">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentGroup">
-              <PropertyRef Name="GroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StudentGroup_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="StudentGroup" Type="Self.StudentGroup" Multiplicity="*" />
+          <End Role="StudentTeacherClub" Type="Self.StudentTeacherClub" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StudentGroup">
+            <Dependent Role="StudentTeacherClub">
               <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentTeacherClub_TeacherClub">
+          <End Role="TeacherClub" Type="Self.TeacherClub" Multiplicity="1" />
+          <End Role="StudentTeacherClub" Type="Self.StudentTeacherClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeacherClub">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentTeacherClub">
+              <PropertyRef Name="TeacherClubId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -277,27 +227,21 @@
         <EntityContainer Name="ClubSchoolModelStoreContainer">
           <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Journal" EntityType="Self.Journal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StudentClub" EntityType="Self.StudentClub" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StudentGroup" EntityType="Self.StudentGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentTeacherClub" EntityType="Self.StudentTeacherClub" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeacherClub" EntityType="Self.TeacherClub" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Group_Teacher" Association="Self.FK_Group_Teacher">
-            <End Role="Teacher" EntitySet="Teacher" />
-            <End Role="Group" EntitySet="Group" />
-          </AssociationSet>
           <AssociationSet Name="FK_Journal_Schedule" Association="Self.FK_Journal_Schedule">
             <End Role="Schedule" EntitySet="Schedule" />
             <End Role="Journal" EntitySet="Journal" />
           </AssociationSet>
-          <AssociationSet Name="FK_Journal_StudentClub" Association="Self.FK_Journal_StudentClub">
-            <End Role="StudentClub" EntitySet="StudentClub" />
+          <AssociationSet Name="FK_Journal_StudentTeacherClub" Association="Self.FK_Journal_StudentTeacherClub">
+            <End Role="StudentTeacherClub" EntitySet="StudentTeacherClub" />
             <End Role="Journal" EntitySet="Journal" />
           </AssociationSet>
           <AssociationSet Name="FK_Schedule_Room" Association="Self.FK_Schedule_Room">
@@ -312,21 +256,13 @@
             <End Role="Class" EntitySet="Class" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
-          <AssociationSet Name="FK_StudentClub_Club" Association="Self.FK_StudentClub_Club">
-            <End Role="Club" EntitySet="Club" />
-            <End Role="StudentClub" EntitySet="StudentClub" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentClub_Student" Association="Self.FK_StudentClub_Student">
-            <End Role="Student" EntitySet="Student" />
-            <End Role="StudentClub" EntitySet="StudentClub" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentGroup_Group" Association="Self.FK_StudentGroup_Group">
-            <End Role="Group" EntitySet="Group" />
-            <End Role="StudentGroup" EntitySet="StudentGroup" />
-          </AssociationSet>
           <AssociationSet Name="FK_StudentGroup_Student" Association="Self.FK_StudentGroup_Student">
             <End Role="Student" EntitySet="Student" />
-            <End Role="StudentGroup" EntitySet="StudentGroup" />
+            <End Role="StudentTeacherClub" EntitySet="StudentTeacherClub" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentTeacherClub_TeacherClub" Association="Self.FK_StudentTeacherClub_TeacherClub">
+            <End Role="TeacherClub" EntitySet="TeacherClub" />
+            <End Role="StudentTeacherClub" EntitySet="StudentTeacherClub" />
           </AssociationSet>
           <AssociationSet Name="FK_Teacher_User" Association="Self.FK_Teacher_User">
             <End Role="User" EntitySet="User" />
@@ -341,39 +277,80 @@
             <End Role="TeacherClub" EntitySet="TeacherClub" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClubSchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ClubSchoolEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Classes" EntityType="ClubSchoolModel.Class" />
+          <EntitySet Name="Clubs" EntityType="ClubSchoolModel.Club" />
+          <EntitySet Name="Journals" EntityType="ClubSchoolModel.Journal" />
+          <EntitySet Name="Rooms" EntityType="ClubSchoolModel.Room" />
+          <EntitySet Name="Schedules" EntityType="ClubSchoolModel.Schedule" />
+          <EntitySet Name="Students" EntityType="ClubSchoolModel.Student" />
+          <EntitySet Name="StudentTeacherClubs" EntityType="ClubSchoolModel.StudentTeacherClub" />
+          <EntitySet Name="sysdiagrams" EntityType="ClubSchoolModel.sysdiagram" />
+          <EntitySet Name="Teachers" EntityType="ClubSchoolModel.Teacher" />
+          <EntitySet Name="TeacherClubs" EntityType="ClubSchoolModel.TeacherClub" />
+          <EntitySet Name="Users" EntityType="ClubSchoolModel.User" />
+          <AssociationSet Name="FK_Student_Class" Association="ClubSchoolModel.FK_Student_Class">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherClub_Club" Association="ClubSchoolModel.FK_TeacherClub_Club">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="TeacherClub" EntitySet="TeacherClubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Journal_Schedule" Association="ClubSchoolModel.FK_Journal_Schedule">
+            <End Role="Schedule" EntitySet="Schedules" />
+            <End Role="Journal" EntitySet="Journals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Journal_StudentTeacherClub" Association="ClubSchoolModel.FK_Journal_StudentTeacherClub">
+            <End Role="StudentTeacherClub" EntitySet="StudentTeacherClubs" />
+            <End Role="Journal" EntitySet="Journals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Room" Association="ClubSchoolModel.FK_Schedule_Room">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_TeacherClub" Association="ClubSchoolModel.FK_Schedule_TeacherClub">
+            <End Role="TeacherClub" EntitySet="TeacherClubs" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentGroup_Student" Association="ClubSchoolModel.FK_StudentGroup_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentTeacherClub" EntitySet="StudentTeacherClubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentTeacherClub_TeacherClub" Association="ClubSchoolModel.FK_StudentTeacherClub_TeacherClub">
+            <End Role="TeacherClub" EntitySet="TeacherClubs" />
+            <End Role="StudentTeacherClub" EntitySet="StudentTeacherClubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_User" Association="ClubSchoolModel.FK_Teacher_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Teacher" EntitySet="Teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherClub_Teacher" Association="ClubSchoolModel.FK_TeacherClub_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="TeacherClub" EntitySet="TeacherClubs" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Class">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Students" Relationship="Self.FK_Student_Class" FromRole="Class" ToRole="Student" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Students" Relationship="ClubSchoolModel.FK_Student_Class" FromRole="Class" ToRole="Student" />
         </EntityType>
         <EntityType Name="Club">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MaxStudentCount" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="StudentClubs" Relationship="Self.FK_StudentClub_Club" FromRole="Club" ToRole="StudentClub" />
-          <NavigationProperty Name="TeacherClubs" Relationship="Self.FK_TeacherClub_Club" FromRole="Club" ToRole="TeacherClub" />
-        </EntityType>
-        <EntityType Name="Group">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TeacherId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Teacher" Relationship="Self.FK_Group_Teacher" FromRole="Group" ToRole="Teacher" />
-          <NavigationProperty Name="StudentGroups" Relationship="Self.FK_StudentGroup_Group" FromRole="Group" ToRole="StudentGroup" />
+          <NavigationProperty Name="TeacherClubs" Relationship="ClubSchoolModel.FK_TeacherClub_Club" FromRole="Club" ToRole="TeacherClub" />
         </EntityType>
         <EntityType Name="Journal">
           <Key>
@@ -381,18 +358,18 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ScheduleId" Type="Int32" Nullable="false" />
-          <Property Name="StudentClubId" Type="Int32" Nullable="false" />
+          <Property Name="StudentGroupId" Type="Int32" Nullable="false" />
           <Property Name="IsVisited" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Schedule" Relationship="Self.FK_Journal_Schedule" FromRole="Journal" ToRole="Schedule" />
-          <NavigationProperty Name="StudentClub" Relationship="Self.FK_Journal_StudentClub" FromRole="Journal" ToRole="StudentClub" />
+          <NavigationProperty Name="Schedule" Relationship="ClubSchoolModel.FK_Journal_Schedule" FromRole="Journal" ToRole="Schedule" />
+          <NavigationProperty Name="StudentTeacherClub" Relationship="ClubSchoolModel.FK_Journal_StudentTeacherClub" FromRole="Journal" ToRole="StudentTeacherClub" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Schedules" Relationship="Self.FK_Schedule_Room" FromRole="Room" ToRole="Schedule" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Schedules" Relationship="ClubSchoolModel.FK_Schedule_Room" FromRole="Room" ToRole="Schedule" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
@@ -403,56 +380,53 @@
           <Property Name="TeacherClubId" Type="Int32" Nullable="false" />
           <Property Name="RoomId" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Journals" Relationship="Self.FK_Journal_Schedule" FromRole="Schedule" ToRole="Journal" />
-          <NavigationProperty Name="Room" Relationship="Self.FK_Schedule_Room" FromRole="Schedule" ToRole="Room" />
-          <NavigationProperty Name="TeacherClub" Relationship="Self.FK_Schedule_TeacherClub" FromRole="Schedule" ToRole="TeacherClub" />
+          <NavigationProperty Name="Journals" Relationship="ClubSchoolModel.FK_Journal_Schedule" FromRole="Schedule" ToRole="Journal" />
+          <NavigationProperty Name="Room" Relationship="ClubSchoolModel.FK_Schedule_Room" FromRole="Schedule" ToRole="Room" />
+          <NavigationProperty Name="TeacherClub" Relationship="ClubSchoolModel.FK_Schedule_TeacherClub" FromRole="Schedule" ToRole="TeacherClub" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ClassId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Class" Relationship="Self.FK_Student_Class" FromRole="Student" ToRole="Class" />
-          <NavigationProperty Name="StudentClubs" Relationship="Self.FK_StudentClub_Student" FromRole="Student" ToRole="StudentClub" />
-          <NavigationProperty Name="StudentGroups" Relationship="Self.FK_StudentGroup_Student" FromRole="Student" ToRole="StudentGroup" />
+          <NavigationProperty Name="Class" Relationship="ClubSchoolModel.FK_Student_Class" FromRole="Student" ToRole="Class" />
+          <NavigationProperty Name="StudentTeacherClubs" Relationship="ClubSchoolModel.FK_StudentGroup_Student" FromRole="Student" ToRole="StudentTeacherClub" />
         </EntityType>
-        <EntityType Name="StudentClub">
+        <EntityType Name="StudentTeacherClub">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <Property Name="ClubId" Type="Int32" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Club" Relationship="Self.FK_StudentClub_Club" FromRole="StudentClub" ToRole="Club" />
-          <NavigationProperty Name="Journals" Relationship="Self.FK_Journal_StudentClub" FromRole="StudentClub" ToRole="Journal" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_StudentClub_Student" FromRole="StudentClub" ToRole="Student" />
+          <Property Name="TeacherClubId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Journals" Relationship="ClubSchoolModel.FK_Journal_StudentTeacherClub" FromRole="StudentTeacherClub" ToRole="Journal" />
+          <NavigationProperty Name="Student" Relationship="ClubSchoolModel.FK_StudentGroup_Student" FromRole="StudentTeacherClub" ToRole="Student" />
+          <NavigationProperty Name="TeacherClub" Relationship="ClubSchoolModel.FK_StudentTeacherClub_TeacherClub" FromRole="StudentTeacherClub" ToRole="TeacherClub" />
         </EntityType>
-        <EntityType Name="StudentGroup">
+        <EntityType Name="sysdiagram">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <Property Name="GroupId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Group" Relationship="Self.FK_StudentGroup_Group" FromRole="StudentGroup" ToRole="Group" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_StudentGroup_Student" FromRole="StudentGroup" ToRole="Student" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="UserId" Type="Int32" />
-          <NavigationProperty Name="Groups" Relationship="Self.FK_Group_Teacher" FromRole="Teacher" ToRole="Group" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Teacher_User" FromRole="Teacher" ToRole="User" />
-          <NavigationProperty Name="TeacherClubs" Relationship="Self.FK_TeacherClub_Teacher" FromRole="Teacher" ToRole="TeacherClub" />
+          <NavigationProperty Name="User" Relationship="ClubSchoolModel.FK_Teacher_User" FromRole="Teacher" ToRole="User" />
+          <NavigationProperty Name="TeacherClubs" Relationship="ClubSchoolModel.FK_TeacherClub_Teacher" FromRole="Teacher" ToRole="TeacherClub" />
         </EntityType>
         <EntityType Name="TeacherClub">
           <Key>
@@ -462,32 +436,26 @@
           <Property Name="TeacherId" Type="Int32" Nullable="false" />
           <Property Name="ClubId" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Club" Relationship="Self.FK_TeacherClub_Club" FromRole="TeacherClub" ToRole="Club" />
-          <NavigationProperty Name="Schedules" Relationship="Self.FK_Schedule_TeacherClub" FromRole="TeacherClub" ToRole="Schedule" />
-          <NavigationProperty Name="Teacher" Relationship="Self.FK_TeacherClub_Teacher" FromRole="TeacherClub" ToRole="Teacher" />
+          <NavigationProperty Name="Club" Relationship="ClubSchoolModel.FK_TeacherClub_Club" FromRole="TeacherClub" ToRole="Club" />
+          <NavigationProperty Name="Schedules" Relationship="ClubSchoolModel.FK_Schedule_TeacherClub" FromRole="TeacherClub" ToRole="Schedule" />
+          <NavigationProperty Name="StudentTeacherClubs" Relationship="ClubSchoolModel.FK_StudentTeacherClub_TeacherClub" FromRole="TeacherClub" ToRole="StudentTeacherClub" />
+          <NavigationProperty Name="Teacher" Relationship="ClubSchoolModel.FK_TeacherClub_Teacher" FromRole="TeacherClub" ToRole="Teacher" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Teachers" Relationship="Self.FK_Teacher_User" FromRole="User" ToRole="Teacher" />
-        </EntityType>
-        <EntityType Name="UserInfo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="InfoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Teachers" Relationship="ClubSchoolModel.FK_Teacher_User" FromRole="User" ToRole="Teacher" />
         </EntityType>
         <Association Name="FK_Student_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <End Type="ClubSchoolModel.Class" Role="Class" Multiplicity="1" />
+          <End Type="ClubSchoolModel.Student" Role="Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
               <PropertyRef Name="Id" />
@@ -497,21 +465,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentClub_Club">
-          <End Role="Club" Type="Self.Club" Multiplicity="1" />
-          <End Role="StudentClub" Type="Self.StudentClub" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Club">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentClub">
-              <PropertyRef Name="ClubId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TeacherClub_Club">
-          <End Role="Club" Type="Self.Club" Multiplicity="1" />
-          <End Role="TeacherClub" Type="Self.TeacherClub" Multiplicity="*" />
+          <End Type="ClubSchoolModel.Club" Role="Club" Multiplicity="1" />
+          <End Type="ClubSchoolModel.TeacherClub" Role="TeacherClub" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Club">
               <PropertyRef Name="Id" />
@@ -521,33 +477,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Group_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
-          <End Role="Group" Type="Self.Group" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Teacher">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Group">
-              <PropertyRef Name="TeacherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StudentGroup_Group">
-          <End Role="Group" Type="Self.Group" Multiplicity="1" />
-          <End Role="StudentGroup" Type="Self.StudentGroup" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Group">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StudentGroup">
-              <PropertyRef Name="GroupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Journal_Schedule">
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
-          <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+          <End Type="ClubSchoolModel.Schedule" Role="Schedule" Multiplicity="1" />
+          <End Type="ClubSchoolModel.Journal" Role="Journal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Schedule">
               <PropertyRef Name="Id" />
@@ -557,21 +489,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Journal_StudentClub">
-          <End Role="StudentClub" Type="Self.StudentClub" Multiplicity="1" />
-          <End Role="Journal" Type="Self.Journal" Multiplicity="*" />
+        <Association Name="FK_Journal_StudentTeacherClub">
+          <End Type="ClubSchoolModel.StudentTeacherClub" Role="StudentTeacherClub" Multiplicity="1" />
+          <End Type="ClubSchoolModel.Journal" Role="Journal" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="StudentClub">
+            <Principal Role="StudentTeacherClub">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Journal">
-              <PropertyRef Name="StudentClubId" />
+              <PropertyRef Name="StudentGroupId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Schedule_Room">
-          <End Role="Room" Type="Self.Room" Multiplicity="1" />
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <End Type="ClubSchoolModel.Room" Role="Room" Multiplicity="1" />
+          <End Type="ClubSchoolModel.Schedule" Role="Schedule" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Room">
               <PropertyRef Name="Id" />
@@ -582,8 +514,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Schedule_TeacherClub">
-          <End Role="TeacherClub" Type="Self.TeacherClub" Multiplicity="1" />
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <End Type="ClubSchoolModel.TeacherClub" Role="TeacherClub" Multiplicity="1" />
+          <End Type="ClubSchoolModel.Schedule" Role="Schedule" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TeacherClub">
               <PropertyRef Name="Id" />
@@ -593,33 +525,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentClub_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="StudentClub" Type="Self.StudentClub" Multiplicity="*" />
+        <Association Name="FK_StudentGroup_Student">
+          <End Type="ClubSchoolModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="ClubSchoolModel.StudentTeacherClub" Role="StudentTeacherClub" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StudentClub">
+            <Dependent Role="StudentTeacherClub">
               <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StudentGroup_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="StudentGroup" Type="Self.StudentGroup" Multiplicity="*" />
+        <Association Name="FK_StudentTeacherClub_TeacherClub">
+          <End Type="ClubSchoolModel.TeacherClub" Role="TeacherClub" Multiplicity="1" />
+          <End Type="ClubSchoolModel.StudentTeacherClub" Role="StudentTeacherClub" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Student">
+            <Principal Role="TeacherClub">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StudentGroup">
-              <PropertyRef Name="StudentId" />
+            <Dependent Role="StudentTeacherClub">
+              <PropertyRef Name="TeacherClubId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Teacher_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <End Type="ClubSchoolModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="ClubSchoolModel.Teacher" Role="Teacher" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -630,8 +562,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TeacherClub_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
-          <End Role="TeacherClub" Type="Self.TeacherClub" Multiplicity="*" />
+          <End Type="ClubSchoolModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="ClubSchoolModel.TeacherClub" Role="TeacherClub" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
               <PropertyRef Name="Id" />
@@ -641,74 +573,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ClubSchoolEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Classes" EntityType="Self.Class" />
-          <EntitySet Name="Clubs" EntityType="Self.Club" />
-          <EntitySet Name="Groups" EntityType="Self.Group" />
-          <EntitySet Name="Journals" EntityType="Self.Journal" />
-          <EntitySet Name="Rooms" EntityType="Self.Room" />
-          <EntitySet Name="Schedules" EntityType="Self.Schedule" />
-          <EntitySet Name="Students" EntityType="Self.Student" />
-          <EntitySet Name="StudentClubs" EntityType="Self.StudentClub" />
-          <EntitySet Name="StudentGroups" EntityType="Self.StudentGroup" />
-          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
-          <EntitySet Name="TeacherClubs" EntityType="Self.TeacherClub" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
-          <AssociationSet Name="FK_Student_Class" Association="Self.FK_Student_Class">
-            <End Role="Class" EntitySet="Classes" />
-            <End Role="Student" EntitySet="Students" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentClub_Club" Association="Self.FK_StudentClub_Club">
-            <End Role="Club" EntitySet="Clubs" />
-            <End Role="StudentClub" EntitySet="StudentClubs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TeacherClub_Club" Association="Self.FK_TeacherClub_Club">
-            <End Role="Club" EntitySet="Clubs" />
-            <End Role="TeacherClub" EntitySet="TeacherClubs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Group_Teacher" Association="Self.FK_Group_Teacher">
-            <End Role="Teacher" EntitySet="Teachers" />
-            <End Role="Group" EntitySet="Groups" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentGroup_Group" Association="Self.FK_StudentGroup_Group">
-            <End Role="Group" EntitySet="Groups" />
-            <End Role="StudentGroup" EntitySet="StudentGroups" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Journal_Schedule" Association="Self.FK_Journal_Schedule">
-            <End Role="Schedule" EntitySet="Schedules" />
-            <End Role="Journal" EntitySet="Journals" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Journal_StudentClub" Association="Self.FK_Journal_StudentClub">
-            <End Role="StudentClub" EntitySet="StudentClubs" />
-            <End Role="Journal" EntitySet="Journals" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Schedule_Room" Association="Self.FK_Schedule_Room">
-            <End Role="Room" EntitySet="Rooms" />
-            <End Role="Schedule" EntitySet="Schedules" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Schedule_TeacherClub" Association="Self.FK_Schedule_TeacherClub">
-            <End Role="TeacherClub" EntitySet="TeacherClubs" />
-            <End Role="Schedule" EntitySet="Schedules" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentClub_Student" Association="Self.FK_StudentClub_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="StudentClub" EntitySet="StudentClubs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentGroup_Student" Association="Self.FK_StudentGroup_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="StudentGroup" EntitySet="StudentGroups" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Teacher_User" Association="Self.FK_Teacher_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Teacher" EntitySet="Teachers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TeacherClub_Teacher" Association="Self.FK_TeacherClub_Teacher">
-            <End Role="Teacher" EntitySet="Teachers" />
-            <End Role="TeacherClub" EntitySet="TeacherClubs" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -717,126 +582,110 @@
           <EntitySetMapping Name="Classes">
             <EntityTypeMapping TypeName="ClubSchoolModel.Class">
               <MappingFragment StoreEntitySet="Class">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clubs">
             <EntityTypeMapping TypeName="ClubSchoolModel.Club">
               <MappingFragment StoreEntitySet="Club">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="MaxStudentCount" ColumnName="MaxStudentCount" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Groups">
-            <EntityTypeMapping TypeName="ClubSchoolModel.Group">
-              <MappingFragment StoreEntitySet="Group">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaxStudentCount" ColumnName="MaxStudentCount" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Journals">
             <EntityTypeMapping TypeName="ClubSchoolModel.Journal">
               <MappingFragment StoreEntitySet="Journal">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
-                <ScalarProperty Name="StudentClubId" ColumnName="StudentClubId" />
                 <ScalarProperty Name="IsVisited" ColumnName="IsVisited" />
+                <ScalarProperty Name="StudentGroupId" ColumnName="StudentGroupId" />
+                <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rooms">
             <EntityTypeMapping TypeName="ClubSchoolModel.Room">
               <MappingFragment StoreEntitySet="Room">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Schedules">
             <EntityTypeMapping TypeName="ClubSchoolModel.Schedule">
               <MappingFragment StoreEntitySet="Schedule">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="TeacherClubId" ColumnName="TeacherClubId" />
-                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="TeacherClubId" ColumnName="TeacherClubId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="ClubSchoolModel.Student">
               <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StudentClubs">
-            <EntityTypeMapping TypeName="ClubSchoolModel.StudentClub">
-              <MappingFragment StoreEntitySet="StudentClub">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <EntitySetMapping Name="StudentTeacherClubs">
+            <EntityTypeMapping TypeName="ClubSchoolModel.StudentTeacherClub">
+              <MappingFragment StoreEntitySet="StudentTeacherClub">
+                <ScalarProperty Name="TeacherClubId" ColumnName="TeacherClubId" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StudentGroups">
-            <EntityTypeMapping TypeName="ClubSchoolModel.StudentGroup">
-              <MappingFragment StoreEntitySet="StudentGroup">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ClubSchoolModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Teachers">
             <EntityTypeMapping TypeName="ClubSchoolModel.Teacher">
               <MappingFragment StoreEntitySet="Teacher">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TeacherClubs">
             <EntityTypeMapping TypeName="ClubSchoolModel.TeacherClub">
               <MappingFragment StoreEntitySet="TeacherClub">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="ClubSchoolModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserInfoes">
-            <EntityTypeMapping TypeName="ClubSchoolModel.UserInfo">
-              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="InfoId" ColumnName="InfoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

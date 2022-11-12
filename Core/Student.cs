@@ -17,8 +17,7 @@ namespace Core
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
-            this.StudentClubs = new HashSet<StudentClub>();
-            this.StudentGroups = new HashSet<StudentGroup>();
+            this.StudentTeacherClubs = new HashSet<StudentTeacherClub>();
         }
     
         public int Id { get; set; }
@@ -28,8 +27,6 @@ namespace Core
     
         public virtual Class Class { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentClub> StudentClubs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentGroup> StudentGroups { get; set; }
+        public virtual ICollection<StudentTeacherClub> StudentTeacherClubs { get; set; }
     }
 }

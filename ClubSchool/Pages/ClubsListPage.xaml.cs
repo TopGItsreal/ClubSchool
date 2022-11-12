@@ -21,17 +21,26 @@ namespace ClubSchool.Pages
     public partial class ClubsListPage : Page
     {
         public IEnumerable<Club> Clubs { get; set; }
+        public IEnumerable<StudentTeacherClub> StudentTeacherClubs { get; set; }
+
         public ClubsListPage()
         {
             InitializeComponent();
             Clubs = DataAccess.GetClubs();
+            StudentTeacherClubs = new List<StudentTeacherClub>();
+
+            lvStudentGroups.Visibility = Visibility.Collapsed;
 
             DataContext = this;
         }
-        public ClubsListPage(IEnumerable<Club> clubs)
+
+        public ClubsListPage(Student student)
         {
             InitializeComponent();
-            Clubs = clubs;
+            StudentTeacherClubs = student.StudentTeacherClubs;
+            Clubs = new List<Club>();
+
+            lvClubs.Visibility = Visibility.Collapsed;
 
             DataContext = this;
         }
@@ -44,6 +53,8 @@ namespace ClubSchool.Pages
         private void lvClubs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var club = (sender as ListView).SelectedItem as Club;
+            if (club == null)
+                return;
             NavigationService.Navigate(new ClubPage(club));
 
             //var club = lvClubs.SelectedItem as Club;

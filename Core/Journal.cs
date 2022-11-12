@@ -16,10 +16,10 @@ namespace Core
     {
         public int Id { get; set; }
         public int ScheduleId { get; set; }
-        public int StudentClubId { get; set; }
+        public int StudentGroupId { get; set; }
         public bool IsVisited { get; set; }
     
         public virtual Schedule Schedule { get; set; }
-        public virtual StudentClub StudentClub { get; set; }
+        public virtual StudentTeacherClub StudentTeacherClub { get; set; }
     }
 }

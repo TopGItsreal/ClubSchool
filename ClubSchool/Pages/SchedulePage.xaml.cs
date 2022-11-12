@@ -22,25 +22,23 @@ namespace ClubSchool.Pages
     public partial class SchedulePage : Page
     {
         public List<Schedule> Schedules { get; set; }
-        public IEnumerable<string> DayNames { get; set; }
+        public List<string> DayNames { get; set; }
         public SchedulePage(List<Schedule> schedules)
         {
             InitializeComponent();
             Schedules = schedules;
             var day = App.Culture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek);
-            DayNames = App.Culture.DateTimeFormat.DayNames.Select(x => char.ToUpper(x[0]) + x.Substring(1));
+            DayNames = App.Culture.DateTimeFormat.DayNames.Select(x => char.ToUpper(x[0]) + x.Substring(1)).ToList();
+            cbDay.SelectedItem = char.ToUpper(day[0]) + day.Substring(1);
 
             DataContext = this;
         }
 
         private void lvShedules_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //var club = ((sender as ListView).SelectedItem as Schedule).TeacherClub.Club;
-            //NavigationService.Navigate(new ClubPage(club));
-
-            var club = ((sender as ListView).SelectedItem as Schedule).TeacherClub.Club;
-            var students = club.StudentClubs.Select(x => x.Student);
-            NavigationService.Navigate(new StudentsListPage(students));
+            var schedule = (sender as ListView).SelectedItem as Schedule;
+            if (schedule != null)
+                NavigationService.Navigate(new JournalPage(schedule));
         }
 
         private void cbDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
