@@ -59,6 +59,7 @@
     <Compile Include="Club.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClubPartial.cs" />
     <Compile Include="ClubSchoolEntities.cs" />
     <Compile Include="ClubSchoolModel.Context.cs">
       <AutoGen>True</AutoGen>
