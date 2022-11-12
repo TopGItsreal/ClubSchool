@@ -46,6 +46,10 @@
             <Style TargetType="ListView" BasedOn="{StaticResource MaterialDesignListView}">
                 <Setter Property="FontSize" Value="18"/>
             </Style>
+
+            <Style TargetType="DatePicker" BasedOn="{StaticResource MaterialDesignOutlinedDatePicker}">
+                <Setter Property="Padding" Value="10"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

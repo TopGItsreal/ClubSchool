@@ -23,7 +23,6 @@
             <ComboBox x:Name="cbClubs" ItemsSource="{Binding Clubs}"
                       materialDesign:HintAssist.Hint="Название кружка"
                       materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
-                      SelectedItem="{Binding Club}"
                       Margin="20" FontSize="24"
                       Grid.Column="0"
                       IsEditable="True"

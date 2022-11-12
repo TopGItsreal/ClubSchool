@@ -30,7 +30,10 @@
                         <GridViewColumn Header="Присутствие">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox IsChecked="{Binding IsVisited}" HorizontalAlignment="Center" Margin="50 0"/>
+                                    <CheckBox IsChecked="{Binding IsVisited}"
+                                              HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"
+                                              Margin="50 0"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

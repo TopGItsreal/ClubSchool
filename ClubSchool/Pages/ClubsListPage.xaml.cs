@@ -56,10 +56,6 @@ namespace ClubSchool.Pages
             if (club == null)
                 return;
             NavigationService.Navigate(new ClubPage(club));
-
-            //var club = lvClubs.SelectedItem as Club;
-            //var students = club.StudentClubs.Select(x => x.Student);
-            //NavigationService.Navigate(new StudentsListPage(students));
         }
     }
 }

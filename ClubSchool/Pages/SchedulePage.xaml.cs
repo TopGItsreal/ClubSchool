@@ -29,7 +29,10 @@ namespace ClubSchool.Pages
             Schedules = schedules;
             var day = App.Culture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek);
             DayNames = App.Culture.DateTimeFormat.DayNames.Select(x => char.ToUpper(x[0]) + x.Substring(1)).ToList();
+            DayNames.Insert(0, "Все дни");
+            
             cbDay.SelectedItem = char.ToUpper(day[0]) + day.Substring(1);
+            dpDateStart.SelectedDate = new DateTime(DateTime.Today.Year, 1, 1);
 
             DataContext = this;
         }
@@ -43,7 +46,24 @@ namespace ClubSchool.Pages
 
         private void cbDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            lvShedules.ItemsSource = Schedules.FindAll(x => App.Culture.DateTimeFormat.GetDayName(x.Date.DayOfWeek) == cbDay.SelectedItem.ToString().ToLower());
+            ApplyFilters();
+        }
+
+        private void dpDateStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        public void ApplyFilters()
+        {
+            var date = dpDateStart.SelectedDate;
+            var day = cbDay.SelectedItem;
+            if (DateTime.MinValue == date || day == null)
+                return;
+
+            lvShedules.ItemsSource = day == "Все дни" ?
+                                     Schedules.FindAll(x => x.Date.Date > date) :
+                                     Schedules.FindAll(x => App.Culture.DateTimeFormat.GetDayName(x.Date.DayOfWeek) == day.ToString().ToLower() && x.Date.Date > date);
         }
     }
 }

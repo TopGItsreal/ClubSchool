@@ -30,15 +30,15 @@ namespace ClubSchool.Pages
 
             var dateEquals = schedule.Date.Date == DateTime.Today.Date;
 
+            if (schedule.TeacherClub.Teacher.User.Id != App.User.Id)
+                spMain.IsEnabled = false;
+
             if (schedule.Journals.Count() != 0)
                 Journals = schedule.Journals;
             else
             {
                 if (!dateEquals || schedule.TeacherClub.Teacher.User.Id != App.User.Id)
-                {
-                    spMain.IsEnabled = false;
                     return;
-                }
 
                 Journals = new List<Journal>();
                 foreach (var StudentTeacherClub in schedule.TeacherClub.StudentTeacherClubs)
