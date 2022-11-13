@@ -34,5 +34,11 @@ namespace ClubSchool.Pages
             var student = (sender as ListView).SelectedItem as Student;
             NavigationService.Navigate(new ClubsListPage(student));
         }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var text = tbSearch.Text;
+            LvStudents.ItemsSource = Students.FindAll(x => x.LastName.ToLower().Contains(text.ToLower()));
+        }
     }
 }

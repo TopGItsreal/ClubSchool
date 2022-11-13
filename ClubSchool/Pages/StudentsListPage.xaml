@@ -3,28 +3,25 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:ClubSchool.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Ученики">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="LvStudents"
-                  Grid.Column="1"
-                  Grid.Row="1"
+        <TextBox x:Name="tbSearch" MinWidth="300"
+                 materialDesign:HintAssist.Hint="Поиск по фамилии"
+                 materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                 HorizontalAlignment="Left" TextChanged="tbSearch_TextChanged"/>
+        <ListView x:Name="LvStudents" Grid.Row="1"
                   ItemsSource="{Binding Students}"
-                  SelectionChanged="LvStudents_SelectionChanged"
-                  >
+                  SelectionChanged="LvStudents_SelectionChanged">
             <ListView.View>
                 <GridView x:Name="gvStudents">
                     <GridView.Columns>

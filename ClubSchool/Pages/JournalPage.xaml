@@ -17,7 +17,7 @@
             <ListView x:Name="lvJournal" ItemsSource="{Binding Journals}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="ФИО">
+                        <GridViewColumn Header="Ученик">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>

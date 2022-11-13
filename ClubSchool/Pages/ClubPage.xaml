@@ -49,9 +49,8 @@
 
         <StackPanel x:Name="spSchedule" Grid.Row="1">
             <TextBlock Text="Расписание" HorizontalAlignment="Center" FontSize="24"/>
-            <ListView 
-            x:Name="lvSchedule"
-            Grid.Row="1" ItemsSource="{Binding Schedules}">
+            <ListView x:Name="lvSchedule" Grid.Row="1"
+                      ItemsSource="{Binding Schedules}">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
@@ -62,17 +61,10 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="День недели">
+                            <GridViewColumn Header="Дата">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Время">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock/>
+                                        <TextBlock Text="{Binding Date, ConverterCulture=ru}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
