@@ -43,7 +43,9 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock>
-                                        <Run Text="{Binding TeacherClub.Club.Name}"/>
+                                    <Run Text="{Binding TeacherClub.Name}"/>
+                                    <Run Text="–"/>
+                                    <Run Text="{Binding TeacherClub.Club.Name}"/>
                                 </TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -52,7 +54,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock>
-                                        <Run Text="{Binding Room.Name}"/>
+                                    <Run Text="{Binding Room.Name}"/>
                                 </TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
