@@ -30,6 +30,7 @@ namespace ClubSchool.Pages
             StudentTeacherClubs = new List<StudentTeacherClub>();
 
             lvStudentGroups.Visibility = Visibility.Collapsed;
+            btnNewClub.Visibility = DataAccess.IsAdmin(App.Teacher.User) ? Visibility.Visible : Visibility.Collapsed;
 
             DataContext = this;
         }
@@ -41,6 +42,7 @@ namespace ClubSchool.Pages
             Clubs = new List<Club>();
 
             lvClubs.Visibility = Visibility.Collapsed;
+            btnNewClub.Visibility = DataAccess.IsAdmin(App.Teacher.User) ? Visibility.Visible : Visibility.Collapsed;
 
             DataContext = this;
         }
