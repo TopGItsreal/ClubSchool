@@ -40,12 +40,27 @@ namespace ClubSchool
             tbTitle.Text = PageTitle;
 
             if (pageContent is AuthorizationPage)
+            {
                 bordContent.Background = new SolidColorBrush(Colors.Transparent);
+                App.Teacher = null;
+            }    
             else
                 bordContent.Background = new SolidColorBrush(Colors.White);
-            var visibility = pageContent is AuthorizationPage ? Visibility.Collapsed : Visibility.Visible;
-            spButtons.Visibility = visibility;
-            spMenuButtons.Visibility = visibility;
+
+            if (App.Teacher != null && DataAccess.IsAdmin(App.Teacher.User))
+            {
+                btnMySchedule.Visibility = Visibility.Collapsed;
+                spAdminButtons.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnMySchedule.Visibility = Visibility.Visible;
+                spAdminButtons.Visibility = Visibility.Collapsed;
+            }
+
+            var buttonsVisibility = pageContent is AuthorizationPage ? Visibility.Collapsed : Visibility.Visible;
+            spButtons.Visibility = buttonsVisibility;
+            spMenuButtons.Visibility = buttonsVisibility;
             
         }
 
@@ -71,23 +86,24 @@ namespace ClubSchool
             frame.NavigationService.Navigate(new SchedulePage(DataAccess.GetSchedules()));
         }
 
-        private void btnNewClub_Click(object sender, RoutedEventArgs e)
-        {
-            frame.NavigationService.Navigate(new ClubPage(new Club()));
-        }
-
         private void btnMySchedule_Click(object sender, RoutedEventArgs e)
         {
             var schedules = new List<Schedule>();
-            var teacher = App.User.Teachers.FirstOrDefault();
-            if (teacher != null)
+            foreach (var schedule in App.Teacher.TeacherClubs.Select(x => x.Schedules))
             {
-                foreach (var schedule in teacher.TeacherClubs.Select(x => x.Schedules))
-                {
-                    schedules.AddRange(schedule);
-                }
+                schedules.AddRange(schedule);
             }
             frame.NavigationService.Navigate(new SchedulePage(schedules));
+        }
+
+        private void btnTeachers_Click(object sender, RoutedEventArgs e)
+        {
+            frame.NavigationService.Navigate(new TeachersListPage());
+        }
+
+        private void btnStat_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

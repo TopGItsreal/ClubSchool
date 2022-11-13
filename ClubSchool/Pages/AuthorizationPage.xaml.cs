@@ -29,11 +29,13 @@ namespace ClubSchool.Pages
             var login = tbLogin.Text;
             var password = pbPassword.Password;
 
-            if (DataAccess.IsPasswordCorrect(login, password))
+            if ((App.Teacher = DataAccess.LoginTeacher(login, password)) == null)
             {
-                App.User = DataAccess.GetUser(login, password);
-                NavigationService.Navigate(new ClubsListPage());
+                MessageBox.Show("Неверный логин и/или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
+            
+            NavigationService.Navigate(new ClubsListPage());
         }
     }
 }

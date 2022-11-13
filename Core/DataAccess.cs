@@ -61,16 +61,18 @@ namespace Core
             return SaveTeacher(teacher);
         }
 
-
-        public static bool IsPasswordCorrect(string login, string password) => GetUsers().Any(x => x.Login == login && x.Password == password);
-
         public static User GetUser(string login, string password) => GetUsers().FirstOrDefault(x => x.Login == login && x.Password == password);
 
+        public static Teacher LoginTeacher(string login, string password) => GetTeachers().FirstOrDefault(x => x.User.Login == login &&
+                                                                                                               x.User.Password == password);
         public static void SaveJournals(ICollection<Journal> journals, bool isNew = false)
         {
             if (isNew)
                 ClubSchoolEntities.GetContext().Journals.AddRange(journals);
             ClubSchoolEntities.GetContext().SaveChanges();
         }
+
+
+        public static bool IsAdmin(User user) => user.Login == user.Password && user.Login == "admin";
     }
 }

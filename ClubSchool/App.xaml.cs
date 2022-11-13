@@ -16,6 +16,6 @@ namespace ClubSchool
     public partial class App : Application
     {
         public static CultureInfo Culture { get; set; } = new CultureInfo("ru-RU");
-        public static User User { get; set; }
+        public static Teacher Teacher { get; set; }
     }
 }

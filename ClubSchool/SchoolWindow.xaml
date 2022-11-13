@@ -37,7 +37,10 @@
                 <Button x:Name="btnClubs" Content="Кружки" Click="btnClubs_Click"/>
                 <Button x:Name="btnSchedule" Content="Общее расписание" Click="btnSchedule_Click"/>
                 <Button x:Name="btnMySchedule" Content="Мое расписание" Click="btnMySchedule_Click"/>
-                <Button x:Name="btnNewClub" Content="Новый кружок" Click="btnNewClub_Click"/>
+                <StackPanel x:Name="spAdminButtons" Orientation="Horizontal">
+                    <Button x:Name="btnTeachers" Content="Учителя" Click="btnTeachers_Click"/>
+                    <Button x:Name="btnStat" Content="Статистика" Click="btnStat_Click"/>
+                </StackPanel>
             </StackPanel>
             <StackPanel x:Name="spButtons" Orientation="Horizontal" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right">
                 <Button x:Name="btnBack" Content="Назад" Click="btnBack_Click"/>

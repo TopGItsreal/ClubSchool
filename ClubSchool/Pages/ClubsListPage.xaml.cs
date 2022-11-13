@@ -57,5 +57,10 @@ namespace ClubSchool.Pages
                 return;
             NavigationService.Navigate(new ClubPage(club));
         }
+
+        private void btnNewClub_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ClubPage(new Club()));
+        }
     }
 }

@@ -23,6 +23,7 @@ namespace ClubSchool.Pages
     {
         public List<Schedule> Schedules { get; set; }
         public List<string> DayNames { get; set; }
+
         public SchedulePage(List<Schedule> schedules)
         {
             InitializeComponent();

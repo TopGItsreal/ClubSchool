@@ -35,6 +35,9 @@ namespace ClubSchool.Pages
             if (Schedules.Count() == 0)
                 spSchedule.Visibility = Visibility.Collapsed;
 
+            if (DataAccess.IsAdmin(App.Teacher.User))
+                gridMain.IsEnabled = false;
+
             DataContext = this;
         }
 

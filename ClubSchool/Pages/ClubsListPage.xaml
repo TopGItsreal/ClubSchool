@@ -20,6 +20,11 @@
                 HorizontalAlignment="Left"
                 Click="btnStudents_Click"/>
 
+
+        <Button x:Name="btnNewClub" Content="Новый кружок"
+                HorizontalAlignment="Right"
+                Click="btnNewClub_Click"/>
+
         <ListView x:Name="lvClubs" Grid.Row="1"
                   ItemsSource="{Binding Clubs}"
                   SelectionChanged="lvClubs_SelectionChanged">
