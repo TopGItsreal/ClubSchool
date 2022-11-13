@@ -59,7 +59,13 @@
                                 <ListView ItemsSource="{Binding TeacherClubs}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Name}"/>
+                                            <StackPanel>
+                                                <TextBlock>
+                                                    <Run Text="{Binding Name}"/>
+                                                    <Run Text="–"/>
+                                                    <Run Text="{Binding Club.Name}"/>
+                                                </TextBlock>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>
