@@ -58,8 +58,8 @@ namespace ClubSchool.Pages
             var lastName = tbLastName.Text.ToLower();
             var firstName = tbFirstName.Text.ToLower();
 
-            lvTeachers.ItemsSource = Teachers.FindAll(x => x.FirstName.ToLower().Contains(lastName) ||
-                                                           x.LastName.ToLower().Contains(firstName));
+            lvTeachers.ItemsSource = Teachers.FindAll(x => x.LastName.ToLower().Contains(lastName) &&
+                                                           x.FirstName.ToLower().Contains(firstName));
         }
     }
 }

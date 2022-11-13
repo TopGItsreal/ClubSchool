@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:ClubSchool.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="TeachersListPage">
+      Title="Учителя">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -38,7 +38,7 @@
                     Grid.Column="2" Click="btnNewTeacher_Click"/>
         </Grid>
         <ListView x:Name="lvTeachers" Grid.Row="1"
-                  ItemsSource="{Binding Students}"
+                  ItemsSource="{Binding Teachers}"
                   SelectionChanged="lvTeachers_SelectionChanged">
             <ListView.View>
                 <GridView x:Name="gvStudents">
