@@ -3,12 +3,71 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:ClubSchool.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TeachersListPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="tbLastName" Grid.Column="0"
+                     FontSize="20" Padding="10" Margin="5 0"
+                     materialDesign:HintAssist.Hint="Поиск по фамилии"
+                     materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                     TextChanged="SearchText"/>
+
+            <TextBox x:Name="tbFirstName" FontSize="20" Grid.Column="1"
+                     Padding="10" Margin="5 0"
+                     materialDesign:HintAssist.Hint="Поиск по имени"
+                     materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                     TextChanged="SearchText"/>
+
+            <Button x:Name="btnNewTeacher" Content="Добавить учителя"
+                    Grid.Column="2" Click="btnNewTeacher_Click"/>
+        </Grid>
+        <ListView x:Name="lvTeachers" Grid.Row="1"
+                  ItemsSource="{Binding Students}"
+                  SelectionChanged="lvTeachers_SelectionChanged">
+            <ListView.View>
+                <GridView x:Name="gvStudents">
+                    <GridViewColumn Header="Преподаватель">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding LastName}"/>
+                                    <Run Text="{Binding FirstName}"/>
+                                    <Run Text="{Binding Patronymic}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Кружки">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListView ItemsSource="{Binding TeacherClubs}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

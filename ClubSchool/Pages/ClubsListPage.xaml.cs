@@ -32,7 +32,16 @@ namespace ClubSchool.Pages
             lvStudentGroups.Visibility = Visibility.Collapsed;
             btnNewClub.Visibility = DataAccess.IsAdmin(App.Teacher.User) ? Visibility.Visible : Visibility.Collapsed;
 
+            DataAccess.AddNewItemEvent += DataAccess_AddNewItemEvent;
+
             DataContext = this;
+        }
+
+        private void DataAccess_AddNewItemEvent()
+        {
+            Clubs = DataAccess.GetClubs();
+            lvClubs.ItemsSource = Clubs;
+            lvClubs.Items.Refresh();
         }
 
         public ClubsListPage(Student student)

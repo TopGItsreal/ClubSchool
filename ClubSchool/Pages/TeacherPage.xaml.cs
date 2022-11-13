@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,15 @@ namespace ClubSchool.Pages
     /// </summary>
     public partial class TeacherPage : Page
     {
-        public TeacherPage()
+        public Teacher Teacher { get; set; }
+
+        public TeacherPage(Teacher teacher)
         {
             InitializeComponent();
+
+            Teacher = teacher;
+
+            this.DataContext = this;
         }
     }
 }
