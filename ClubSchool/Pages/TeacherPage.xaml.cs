@@ -29,7 +29,20 @@ namespace ClubSchool.Pages
 
             Teacher = teacher;
 
-            this.DataContext = this;
+            this.DataContext = Teacher;
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataAccess.SaveTeacher(Teacher);
+                NavigationService.GoBack();
+            }
+            catch
+            {
+                MessageBox.Show("Ну удалось сохранить учителя", "Ошибка");
+            }
         }
     }
 }
