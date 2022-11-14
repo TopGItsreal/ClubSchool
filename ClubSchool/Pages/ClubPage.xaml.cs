@@ -23,19 +23,19 @@ namespace ClubSchool.Pages
     {
         public Club Club { get; set; }
         public List<Club> Clubs { get; set; }
-        public List<Schedule> Schedules { get; set; }
+        public List<Core.Group> Groups { get; set; }
 
         public ClubPage(Club club)
         {
             InitializeComponent();
             Club = club;
             Clubs = DataAccess.GetClubs();
-            Schedules = DataAccess.GetSchedules().FindAll(x => x.Group.ClubId == Club.Id);
+            Groups = DataAccess.GetGroups().FindAll(x => !x.IsDeleted && x.ClubId == Club.Id);
 
-            if (Schedules.Count() == 0)
-                spSchedule.Visibility = Visibility.Collapsed;
+            if (Groups.Count() == 0)
+                spGroup.Visibility = Visibility.Collapsed;
 
-            if (DataAccess.IsAdmin(App.Teacher.User))
+            if (!DataAccess.IsAdmin(App.Teacher.User))
                 gridMain.IsEnabled = false;
 
             DataContext = this;

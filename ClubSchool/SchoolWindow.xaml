@@ -35,6 +35,7 @@
                        Foreground="#FF673AB7"/>
             <StackPanel x:Name="spMenuButtons" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="btnClubs" Content="Кружки" Click="btnClubs_Click"/>
+                <Button x:Name="btnGroups" Content="Группы" Click="btnGroups_Click"/>
                 <Button x:Name="btnSchedule" Content="Общее расписание" Click="btnSchedule_Click"/>
                 <Button x:Name="btnMySchedule" Content="Мое расписание" Click="btnMySchedule_Click"/>
                 <StackPanel x:Name="spAdminButtons" Orientation="Horizontal">

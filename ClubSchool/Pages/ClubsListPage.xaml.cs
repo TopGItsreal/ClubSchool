@@ -26,7 +26,7 @@ namespace ClubSchool.Pages
         public ClubsListPage()
         {
             InitializeComponent();
-            Clubs = DataAccess.GetClubs();
+            Clubs = DataAccess.GetNotDeletedClubs();
             StudentGroups = new List<StudentGroup>();
 
             lvStudentGroups.Visibility = Visibility.Collapsed;
@@ -39,7 +39,7 @@ namespace ClubSchool.Pages
 
         private void DataAccess_AddNewItemEvent()
         {
-            Clubs = DataAccess.GetClubs();
+            Clubs = DataAccess.GetNotDeletedClubs();
             lvClubs.ItemsSource = Clubs;
             lvClubs.Items.Refresh();
         }
