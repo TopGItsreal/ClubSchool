@@ -21,9 +21,9 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
             <ComboBox x:Name="cbDay" ItemsSource="{Binding DayNames}"
-                  materialDesign:HintAssist.Hint="День недели"
-                  materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
-                  SelectionChanged="cbDay_SelectionChanged"/>
+                      materialDesign:HintAssist.Hint="День недели"
+                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                      SelectionChanged="cbDay_SelectionChanged"/>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0">
                 <TextBlock Text="Отобразить с:" VerticalAlignment="Center"
@@ -39,9 +39,9 @@
                 HorizontalAlignment="Right" 
                 Click="btnNewSchedule_Click"/>
 
-        <ListView x:Name="lvShedules" Grid.Row="1" Grid.ColumnSpan="2"
+        <ListView x:Name="lvSchedules" Grid.Row="1" Grid.ColumnSpan="2"
                   ItemsSource="{Binding Schedules}"
-                  SelectionChanged="lvShedules_SelectionChanged">
+                  SelectionChanged="lvSchedules_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Преподаватель" DisplayMemberBinding="{Binding Group.Teacher}"/>

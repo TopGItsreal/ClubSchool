@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:ClubSchool.Windows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Составление раписания" Height="450" Width="800">
+        Title="Составление раписания"
+        Height="650" Width="1000"
+        MinHeight="650" MinWidth="1000">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
@@ -17,24 +19,12 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Viewbox Grid.RowSpan="3">
-            <Calendar x:Name="cdClubsDays" 
-                  Language="ru-RU"
-                  SelectedDatesChanged="cdClubsDays_SelectedDatesChanged" 
-                  />
-        </Viewbox>
 
-        <ListView x:Name="lvSchedules" Grid.Column="1" Grid.RowSpan="2">
+        <ListView x:Name="lvSchedules" Margin="20">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Кружок">
@@ -79,7 +69,12 @@
             </ListView.View>
         </ListView>
 
-        <StackPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="3">
+        <StackPanel Grid.Column="1" Margin="20 0">
+            <Viewbox MaxHeight="350">
+                <Calendar x:Name="cdClubsDays" 
+                          Language="ru-RU"
+                          SelectedDatesChanged="cdClubsDays_SelectedDatesChanged" />
+            </Viewbox>
             <ComboBox x:Name="cbClubs" ItemsSource="{Binding Clubs}"
                       materialDesign:HintAssist.Hint="Кружки" 
                       SelectionChanged="cbClubs_SelectionChanged"
@@ -106,15 +101,13 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <materialDesign:TimePicker 
-                x:Name="tpClubTime"
-                Is24Hours="True" 
-                materialDesign:HintAssist.Hint="Время" />
-            <Button x:Name="btnAddClub" Content="Добавить кружок" Click="btnAddClub_Click"/>
-
+            <materialDesign:TimePicker x:Name="tpClubTime"
+                                       Is24Hours="True"
+                                       FontSize="20"
+                                       materialDesign:HintAssist.Hint="Время" />
+            <Button x:Name="btnAddClub" Content="Сохранить кружок" 
+                    FontSize="20" MinHeight="40"
+                    Click="btnAddClub_Click"/>
         </StackPanel>
-
-
-
     </Grid>
 </Window>

@@ -51,7 +51,7 @@ namespace ClubSchool.Pages
             ApplyFilters();
         }
 
-        private void lvShedules_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lvSchedules_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var schedule = (sender as ListView).SelectedItem as Schedule;
             if (schedule != null)
@@ -75,12 +75,12 @@ namespace ClubSchool.Pages
             if (DateTime.MinValue == date || day == null)
                 return;
 
-            lvShedules.ItemsSource = day == "Все дни" ?
+            lvSchedules.ItemsSource = day == "Все дни" ?
                                      Schedules.FindAll(x => x.Date.Date > date) :
                                      Schedules.FindAll(x => App.Culture.DateTimeFormat.GetDayName(x.Date.DayOfWeek)== day.ToString().ToLower()
                                      && x.Date.Date > date);
 
-            lvShedules.Items.Refresh();
+            lvSchedules.Items.Refresh();
         }
 
         private void btnNewSchedule_Click(object sender, RoutedEventArgs e)

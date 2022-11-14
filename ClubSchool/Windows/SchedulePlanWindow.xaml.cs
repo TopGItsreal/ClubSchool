@@ -52,7 +52,13 @@ namespace ClubSchool.Windows
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            var schedule = (sender as MenuItem).DataContext as Schedule;
 
+            cdClubsDays.SelectedDate = schedule.Date;
+            cbClubs.SelectedItem = schedule.Group.Club;
+            cbRooms.SelectedItem = schedule.Room;
+            cbGroups.SelectedItem = schedule.Group;
+            tpClubTime.SelectedTime = schedule.Date;
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
