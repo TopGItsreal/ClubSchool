@@ -77,6 +77,15 @@ namespace Core
             AddNewItemEvent?.Invoke();
         }
 
+        public static void SaveSchedule(Schedule schedule)
+        {
+            if (schedule.Id == 0)
+                ClubSchoolEntities.GetContext().Schedules.Add(schedule);
+
+            ClubSchoolEntities.GetContext().SaveChanges();
+            AddNewItemEvent?.Invoke();
+        }
+
 
         public static bool IsAdmin(User user) => user.Role.Name == "Заместитель директора";
     }

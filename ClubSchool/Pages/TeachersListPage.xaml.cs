@@ -42,7 +42,10 @@ namespace ClubSchool.Pages
 
         private void btnNewTeacher_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new TeacherPage(new Teacher()));
+            NavigationService.Navigate(new TeacherPage(new Teacher
+            {
+                User = new User { RoleId = 1 }
+            }));
         }
 
         private void lvTeachers_SelectionChanged(object sender, SelectionChangedEventArgs e)

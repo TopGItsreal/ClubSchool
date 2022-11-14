@@ -99,6 +99,7 @@
     <Compile Include="StudentGroup.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="StudentPartial.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>

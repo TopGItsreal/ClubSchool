@@ -7,6 +7,15 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="SchedulePlanWindow" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Margin" Value="0 5"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -14,26 +23,96 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <Viewbox Grid.RowSpan="3">
+            <Calendar x:Name="cdClubsDays" 
+                  Language="ru-RU"
+                  SelectedDatesChanged="cdClubsDays_SelectedDatesChanged" 
+                  />
+        </Viewbox>
 
-        <Calendar Grid.RowSpan="3"/>
-
-        <ListView x:Name="lvLessons" Grid.Column="1" Grid.RowSpan="2">
+        <ListView x:Name="lvSchedules" Grid.Column="1" Grid.RowSpan="2">
             <ListView.View>
                 <GridView>
-                    
+                    <GridViewColumn Header="Кружок">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Group.Name}"/>
+                                    <Run Text="-"/>
+                                    <Run Text="{Binding Group.Club.Name}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Учитель" DisplayMemberBinding="{Binding Group.Teacher}"/>
+                    <GridViewColumn Header="Кабинет" DisplayMemberBinding="{Binding Room.Name}"/>
+                    <GridViewColumn Header="Время">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Date, StringFormat=hh:mm}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Menu>
+                                    <MenuItem>
+                                        <MenuItem.Header>
+                                            <materialDesign:PackIcon Kind="Menu" />
+                                        </MenuItem.Header>
+                                        <MenuItem Header="Подробнее" Foreground="Blue"
+                                                  x:Name="btnEdit"
+                                                  Click="btnEdit_Click"/>
+                                        <MenuItem Header="Удалить" Foreground="Red"
+                                                  x:Name="btnDelete"
+                                                  Click="btnDelete_Click"/>
+                                    </MenuItem>
+                                </Menu>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
 
         <StackPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="3">
-            <ComboBox x:Name="cbLessons"/>
-            <ComboBox x:Name="cbTeachers"/>
-            <materialDesign:TimePicker/>
-            <Button x:Name="btnAddClub" Content="Добавить кружок"/>
+            <ComboBox x:Name="cbClubs" ItemsSource="{Binding Clubs}"
+                      materialDesign:HintAssist.Hint="Кружки" 
+                      SelectionChanged="cbClubs_SelectionChanged"
+                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"/>
+            <ComboBox x:Name="cbRooms" ItemsSource="{Binding Rooms}" 
+                      materialDesign:HintAssist.Hint="Кабинеты" 
+                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                      DisplayMemberPath="Name"
+                      SelectionChanged="cbRooms_SelectionChanged"/>
+            <ComboBox x:Name="cbGroups"
+                      SelectionChanged="cbGroups_SelectionChanged"
+                      materialDesign:HintAssist.Hint="Группы" 
+                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                      ItemsSource="{Binding Groups}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>
+                                <Run Text="{Binding Name}"/>
+                                <Run Text="– "/>
+                            </TextBlock>
+                            <TextBlock Text="{Binding Teacher}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <materialDesign:TimePicker 
+                x:Name="tpClubTime"
+                Is24Hours="True" 
+                materialDesign:HintAssist.Hint="Время" 
+                                       />
+            <Button x:Name="btnAddClub" Content="Добавить кружок" Click="btnAddClub_Click"/>
 
         </StackPanel>
 
