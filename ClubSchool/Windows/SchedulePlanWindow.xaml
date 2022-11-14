@@ -40,11 +40,10 @@
                     <GridViewColumn Header="Кружок">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock>
-                                    <Run Text="{Binding Group.Name}"/>
-                                    <Run Text="-"/>
-                                    <Run Text="{Binding Group.Club.Name}"/>
-                                </TextBlock>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Group.Name}"/>
+                                    <TextBlock Text="{Binding Group.Club.Name}"/>
+                                </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -53,7 +52,7 @@
                     <GridViewColumn Header="Время">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Date, StringFormat=hh:mm}"/>
+                                <TextBlock Text="{Binding Date, StringFormat=HH:mm}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -110,8 +109,7 @@
             <materialDesign:TimePicker 
                 x:Name="tpClubTime"
                 Is24Hours="True" 
-                materialDesign:HintAssist.Hint="Время" 
-                                       />
+                materialDesign:HintAssist.Hint="Время" />
             <Button x:Name="btnAddClub" Content="Добавить кружок" Click="btnAddClub_Click"/>
 
         </StackPanel>

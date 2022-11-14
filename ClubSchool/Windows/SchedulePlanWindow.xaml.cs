@@ -69,15 +69,10 @@ namespace ClubSchool.Windows
                 errorMessage.AppendLine("Выберите группу");
             if (cbRooms.SelectedItem == null)
                 errorMessage.AppendLine("Выберите кабинет");
-            if (tpClubTime.SelectedTime == null)
-                errorMessage.AppendLine("Выберите время");
-
-            if (errorMessage.Length > 0)
-            {
-                MessageBox.Show(errorMessage.ToString(), "Ошибка");
-                return;
-            }
-
+            if (tpClubTime.SelectedTime == null 
+                || tpClubTime.SelectedTime.Value.TimeOfDay < TimeSpan.FromHours(6)
+                || tpClubTime.SelectedTime.Value.TimeOfDay > TimeSpan.FromHours(22))
+                errorMessage.AppendLine("Выберите корректное время");
 
             var schedule = new Schedule
             {
@@ -85,6 +80,21 @@ namespace ClubSchool.Windows
                 Group = cbGroups.SelectedItem as Group,
                 Room = cbRooms.SelectedItem as Room,
             };
+
+            if (Schedules.Any(x => Math.Abs((x.Date - schedule.Date).TotalHours) < 1
+                && x.Group.Teacher == schedule.Group.Teacher))
+                errorMessage.AppendLine("Учитель в это время занят");
+
+            if (Schedules.Any(x => Math.Abs((x.Date - schedule.Date).TotalHours) < 1
+                && x.Room == schedule.Room))
+                errorMessage.AppendLine("Кабинет в это время занят");
+
+            if (errorMessage.Length > 0)
+            {
+                MessageBox.Show(errorMessage.ToString(), "Ошибка");
+                return;
+            }
+
 
             DataAccess.SaveSchedule(schedule);
         }
