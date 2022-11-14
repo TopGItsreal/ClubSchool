@@ -33,6 +33,12 @@
             </StackPanel>
         </StackPanel>
 
+        <Button x:Name="btnNewSchedule" 
+                Content="Составить расписание" 
+                Grid.Column="1"
+                HorizontalAlignment="Right" 
+                Click="btnNewSchedule_Click"/>
+
         <ListView x:Name="lvShedules" Grid.Row="1" Grid.ColumnSpan="2"
                   ItemsSource="{Binding Schedules}"
                   SelectionChanged="lvShedules_SelectionChanged">

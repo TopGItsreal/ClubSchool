@@ -67,5 +67,10 @@ namespace ClubSchool.Pages
                                      Schedules.FindAll(x => App.Culture.DateTimeFormat.GetDayName(x.Date.DayOfWeek)== day.ToString().ToLower()
                                      && x.Date.Date > date);
         }
+
+        private void btnNewSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            new Windows.SchedulePlanWindow().ShowDialog();
+        }
     }
 }

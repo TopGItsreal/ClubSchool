@@ -4,9 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClubSchool.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="SchedulePlanWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Calendar Grid.RowSpan="3"/>
+
+        <ListView x:Name="lvLessons" Grid.Column="1" Grid.RowSpan="2">
+            <ListView.View>
+                <GridView>
+                    
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="3">
+            <ComboBox x:Name="cbLessons"/>
+            <ComboBox x:Name="cbTeachers"/>
+            <materialDesign:TimePicker/>
+            <Button x:Name="btnAddClub" Content="Добавить кружок"/>
+
+        </StackPanel>
+
+
+
     </Grid>
 </Window>
