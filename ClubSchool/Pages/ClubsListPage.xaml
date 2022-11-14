@@ -37,7 +37,10 @@
                                 <ListView ItemsSource="{Binding NotDeletedGroups}" VerticalContentAlignment="Center">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Teacher}"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Name, StringFormat={}{0} - }"/>
+                                                <TextBlock Text="{Binding Teacher}"/>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>

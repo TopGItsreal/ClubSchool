@@ -38,7 +38,7 @@ namespace ClubSchool.Pages
         private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             var text = tbSearch.Text.ToLower();
-            LvStudents.ItemsSource = Students.FindAll(x => x.LastName.ToLower().Contains(text));
+            lvStudents.ItemsSource = Students.FindAll(x => x.LastName.ToLower().Contains(text));
         }
     }
 }

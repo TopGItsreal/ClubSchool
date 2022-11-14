@@ -105,5 +105,10 @@ namespace ClubSchool
         {
 
         }
+
+        private void btnGroups_Click(object sender, RoutedEventArgs e)
+        {
+            frame.NavigationService.Navigate(new GroupsListPage());
+        }
     }
 }

@@ -20,11 +20,11 @@
                  materialDesign:HintAssist.Hint="Поиск по фамилии"
                  materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
                  HorizontalAlignment="Left" TextChanged="tbSearch_TextChanged"/>
-        <ListView x:Name="LvStudents" Grid.Row="1"
+        <ListView x:Name="lvStudents" Grid.Row="1"
                   ItemsSource="{Binding Students}"
                   SelectionChanged="LvStudents_SelectionChanged">
             <ListView.View>
-                <GridView x:Name="gvStudents">
+                <GridView>
                     <GridView.Columns>
                         <GridViewColumn Header="Ученик">
                             <GridViewColumn.CellTemplate>

@@ -47,32 +47,25 @@
                     Click="btnSave_Click"/>
         </Grid>
 
-        <StackPanel x:Name="spSchedule" Grid.Row="1">
-            <TextBlock Text="Расписание" HorizontalAlignment="Center" FontSize="24"/>
-            <ListView x:Name="lvSchedule" Grid.Row="1"
-                      ItemsSource="{Binding Schedules}">
+        <StackPanel x:Name="spGroup" Grid.Row="1">
+            <TextBlock Text="Группы" HorizontalAlignment="Center" FontSize="24"/>
+            <ListView x:Name="lvGroup" Grid.Row="1"
+                      ItemsSource="{Binding Groups}">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
                             <GridViewColumn Header="Преподаватель">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Group.Teacher}"/>
+                                        <TextBlock Text="{Binding Teacher}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Дата">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Date, ConverterCulture=ru}"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Header="Кабинет">
+                            <GridViewColumn Header="Группа">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock >
-                                        <Run Text="{Binding Room.Name}"/>
+                                        <Run Text="{Binding Group.Name}"/>
                                         </TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>

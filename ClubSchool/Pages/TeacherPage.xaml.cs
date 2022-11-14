@@ -23,11 +23,15 @@ namespace ClubSchool.Pages
     {
         public Teacher Teacher { get; set; }
 
-        public TeacherPage(Teacher teacher)
+        public TeacherPage(Teacher teacher, bool isNew = false)
         {
             InitializeComponent();
 
             Teacher = teacher;
+            if (isNew)
+                Title = $"Новый {Title}";
+            else
+                Title = $"{Title} {Teacher.Id}";
 
             this.DataContext = Teacher;
         }

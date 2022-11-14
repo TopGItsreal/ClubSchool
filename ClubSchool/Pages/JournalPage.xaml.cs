@@ -40,17 +40,7 @@ namespace ClubSchool.Pages
                 if (!dateEquals || schedule.Group.Teacher.Id != App.Teacher.Id)
                     return;
 
-                Journals = new List<Journal>();
-                foreach (var StudentGroup in schedule.Group.StudentGroups)
-                {
-                    Journals.Add(new Journal
-                    {
-                        Schedule = schedule,
-                        StudentGroup = StudentGroup
-                    });
-                }
-
-                DataAccess.SaveJournals(Journals, true);
+                Journals = DataAccess.GenerateJournals(schedule);
             }
 
             this.DataContext = this;

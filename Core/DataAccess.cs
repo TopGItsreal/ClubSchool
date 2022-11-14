@@ -13,11 +13,13 @@ namespace Core
 
         public static List<Student> GetStudents() => ClubSchoolEntities.GetContext().Students.ToList();
         public static List<Teacher> GetTeachers() => ClubSchoolEntities.GetContext().Teachers.ToList();
+        public static List<Teacher> GetNotDeletedTeachers() => GetTeachers().FindAll(x => !x.IsDeleted);
         public static List<Class> GetClasses() => ClubSchoolEntities.GetContext().Classes.ToList();
         public static List<Schedule> GetSchedules() => ClubSchoolEntities.GetContext().Schedules.ToList();
         public static List<Room> GetRooms() => ClubSchoolEntities.GetContext().Rooms.ToList();
         public static List<Group> GetGroups() => ClubSchoolEntities.GetContext().Groups.ToList();
         public static List<Club> GetClubs() => ClubSchoolEntities.GetContext().Clubs.ToList();
+        public static List<Club> GetNotDeletedClubs() => GetClubs().FindAll(x => !x.IsDeleted);
         public static List<Journal> GetJournals() => ClubSchoolEntities.GetContext().Journals.ToList();
         public static List<User> GetUsers() => ClubSchoolEntities.GetContext().Users.ToList();
 
@@ -57,6 +59,16 @@ namespace Core
         public static void RemoveClub(Club club)
         {
             club.IsDeleted = true;
+
+            foreach (var group in club.Groups)
+            {
+                group.IsDeleted = true;
+                foreach (var studentGroup in group.StudentGroups)
+                {
+                    studentGroup.IsDeleted = true;
+                }
+            }
+
             SaveClub(club);
         }
 
@@ -69,6 +81,7 @@ namespace Core
                                                       x.User.PhoneNumber == login) &&
                                                       x.User.Password == password);
         }
+
         public static void SaveJournals(ICollection<Journal> journals, bool isNew = false)
         {
             if (isNew)
@@ -77,6 +90,24 @@ namespace Core
             AddNewItemEvent?.Invoke();
         }
 
+        public static ICollection<Journal> GenerateJournals(Schedule schedule)
+        {
+            ICollection<Journal> Journals = new List<Journal>();
+            foreach (var studentGroup in schedule.Group.StudentGroups)
+            {
+                if (studentGroup.IsDeleted)
+                    continue;
+                Journals.Add(new Journal
+                {
+                    Schedule = schedule,
+                    StudentGroup = studentGroup
+                });
+            }
+
+            DataAccess.SaveJournals(Journals, true);
+
+            return Journals;
+        }
 
         public static bool IsAdmin(User user) => user.Role.Name == "Заместитель директора";
     }
