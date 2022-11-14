@@ -9,11 +9,31 @@
       Title="Статистика">
 
     <Grid>
-        <TextBlock Text="Пока пусто. Не смешно, не смеемся"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   FontSize="40"
-                   FontFamily="Times New Roman"/>
-
+        <ListView x:Name="lvStudentStatistics" ItemsSource="{Binding Statistics}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ученик">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Student.LastName}"/>
+                                    <Run Text="{Binding Student.FirstName}"/>
+                                    <Run Text="{Binding Student.Patronymic}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Посещаемость">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Attendance}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>
