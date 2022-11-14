@@ -38,7 +38,10 @@
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Name, StringFormat={}{0} - }"/>
+                                                <TextBlock>
+                                                    <Run Text="{Binding Name}"/>
+                                                    <Run Text="- "/>
+                                                </TextBlock>
                                                 <TextBlock Text="{Binding Teacher}"/>
                                             </StackPanel>
                                         </DataTemplate>

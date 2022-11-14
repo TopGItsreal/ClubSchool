@@ -29,6 +29,9 @@ namespace ClubSchool.Pages
             Groups = DataAccess.GetNotDeletedGroups();
             DataAccess.AddNewItemEvent += DataAccess_AddNewItemEvent;
 
+            btnNewGroup.Visibility = DataAccess.IsAdmin(App.Teacher.User) ?
+                                        Visibility.Visible : Visibility.Collapsed;
+
             this.DataContext = this;
         }
 

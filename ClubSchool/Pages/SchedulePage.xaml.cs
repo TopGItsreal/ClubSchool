@@ -35,6 +35,9 @@ namespace ClubSchool.Pages
             cbDay.SelectedItem = char.ToUpper(day[0]) + day.Substring(1);
             dpDateStart.SelectedDate = new DateTime(DateTime.Today.Year, 1, 1);
 
+            btnNewSchedule.Visibility = DataAccess.IsAdmin(App.Teacher.User) ?
+                                        Visibility.Visible : Visibility.Collapsed;
+
             DataContext = this;
         }
 
