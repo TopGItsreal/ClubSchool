@@ -30,7 +30,7 @@ namespace ClubSchool.Pages
             InitializeComponent();
             Club = club;
             Clubs = DataAccess.GetClubs();
-            Groups = DataAccess.GetGroups().FindAll(x => !x.IsDeleted && x.ClubId == Club.Id);
+            Groups = DataAccess.GetNotDeletedGroups().FindAll(x => x.ClubId == Club.Id);
 
             if (Groups.Count() == 0)
                 spGroup.Visibility = Visibility.Collapsed;

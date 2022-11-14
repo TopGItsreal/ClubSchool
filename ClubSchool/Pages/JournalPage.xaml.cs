@@ -30,7 +30,7 @@ namespace ClubSchool.Pages
 
             var dateEquals = schedule.Date.Date == DateTime.Today.Date;
 
-            if (schedule.Group.Teacher.Id != App.Teacher.Id || !DataAccess.IsAdmin(App.Teacher.User))
+            if (schedule.Group.Teacher.Id != App.Teacher.Id && !DataAccess.IsAdmin(App.Teacher.User))
                 spMain.IsEnabled = false;
 
             if (schedule.Journals.Count() != 0)

@@ -14,13 +14,19 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="FontSize" Value="20"/>
-                <Setter Property="Margin" Value="0 5"/>
+                <Setter Property="Margin" Value="10 5"/>
             </Style>
 
             <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
                 <Setter Property="Padding" Value="10"/>
                 <Setter Property="FontSize" Value="20"/>
-                <Setter Property="Margin" Value="0 5"/>
+                <Setter Property="Margin" Value="10 5"/>
+            </Style>
+
+            <Style x:Key="btnSecond" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatSecondaryMidBgButton}">
+                <Setter Property="Margin" Value="2, 5"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="16"/>
             </Style>
         </ResourceDictionary>
     </Page.Resources>
@@ -32,23 +38,62 @@
 
         <Grid.RowDefinitions>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Margin="10" VerticalAlignment="Center">
-            <TextBox x:Name="tbName" Text="{Binding Group.Name}" Padding="10"
-                     materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
-                     materialDesign:HintAssist.Hint="Название"/>
-            <ComboBox x:Name="cbClub" ItemsSource="{Binding Clubs}"
-                      materialDesign:HintAssist.Hint="Клуб"
-                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
-                      SelectedItem="{Binding Group.Club}"
-                      SelectionChanged="cbClub_SelectionChanged"/>
-            <ComboBox x:Name="cbTeacher" ItemsSource="{Binding Teachers}"
-                      materialDesign:HintAssist.Hint="Учитель"
-                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
-                      SelectedItem="{Binding Group.Teacher}"
-                      SelectionChanged="cbTeacher_SelectionChanged"/>
+        
+        <TextBox x:Name="tbName" Text="{Binding Group.Name}" Padding="10"
+                 materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                 materialDesign:HintAssist.Hint="Название"/>
+        <ComboBox x:Name="cbClub" ItemsSource="{Binding Clubs}"
+                  Grid.Row="1"
+                  materialDesign:HintAssist.Hint="Клуб"
+                  materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                  SelectedItem="{Binding Group.Club}"
+                  SelectionChanged="cbClub_SelectionChanged"/>
+        <ComboBox x:Name="cbTeacher" ItemsSource="{Binding Teachers}"
+                  Grid.Row="2"
+                  materialDesign:HintAssist.Hint="Учитель"
+                  materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                  SelectedItem="{Binding Group.Teacher}"
+                  SelectionChanged="cbTeacher_SelectionChanged"/>
+
+        <ComboBox x:Name="cbStudents" ItemsSource="{Binding Students}"
+                  Grid.Column="1"
+                  materialDesign:HintAssist.Hint="Ученики"
+                  materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                  SelectionChanged="cbStudents_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding FirstName}"/>
+                        <Run Text="{Binding LastName}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <ListView x:Name="lvStudents" ItemsSource="{Binding Group.StudentGroups}"
+                  Grid.Column="1" Grid.Row="1"
+                  Grid.RowSpan="2" Margin="10 5"
+                  SelectionChanged="lvStudents_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding Student.FirstName}"/>
+                        <Run Text="{Binding Student.LastName}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Button x:Name="btnDelete" Content="Удалить" Style="{StaticResource btnSecond}"
+                    Margin="20 5" Click="btnDelete_Click"/>
+            <Button x:Name="btnSave" Content="Сохранить"
+                    Margin="20 5" Click="btnSave_Click"/>
         </StackPanel>
     </Grid>
 </Page>

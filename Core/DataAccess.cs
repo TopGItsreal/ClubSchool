@@ -12,16 +12,20 @@ namespace Core
         public static event AddNewItem AddNewItemEvent;
 
         public static List<Student> GetStudents() => ClubSchoolEntities.GetContext().Students.ToList();
-        public static List<Teacher> GetTeachers() => ClubSchoolEntities.GetContext().Teachers.ToList();
-        public static List<Teacher> GetNotDeletedTeachers() => GetTeachers().FindAll(x => !x.IsDeleted);
         public static List<Class> GetClasses() => ClubSchoolEntities.GetContext().Classes.ToList();
         public static List<Schedule> GetSchedules() => ClubSchoolEntities.GetContext().Schedules.ToList();
         public static List<Room> GetRooms() => ClubSchoolEntities.GetContext().Rooms.ToList();
-        public static List<Group> GetGroups() => ClubSchoolEntities.GetContext().Groups.ToList();
-        public static List<Club> GetClubs() => ClubSchoolEntities.GetContext().Clubs.ToList();
-        public static List<Club> GetNotDeletedClubs() => GetClubs().FindAll(x => !x.IsDeleted);
         public static List<Journal> GetJournals() => ClubSchoolEntities.GetContext().Journals.ToList();
         public static List<User> GetUsers() => ClubSchoolEntities.GetContext().Users.ToList();
+
+        public static List<Group> GetGroups() => ClubSchoolEntities.GetContext().Groups.ToList();
+        public static List<Group> GetNotDeletedGroups() => GetGroups().FindAll(x => !x.IsDeleted);
+
+        public static List<Club> GetClubs() => ClubSchoolEntities.GetContext().Clubs.ToList();
+        public static List<Club> GetNotDeletedClubs() => GetClubs().FindAll(x => !x.IsDeleted);
+
+        public static List<Teacher> GetTeachers() => ClubSchoolEntities.GetContext().Teachers.ToList();
+        public static List<Teacher> GetNotDeletedTeachers() => GetTeachers().FindAll(x => !x.IsDeleted);
 
         public static void SaveJournal(Journal journal)
         {
@@ -110,5 +114,26 @@ namespace Core
         }
 
         public static bool IsAdmin(User user) => user.Role.Name == "Заместитель директора";
+
+        public static void SaveGroup(Group group)
+        {
+            if (group.Id == 0)
+                ClubSchoolEntities.GetContext().Groups.Add(group);
+
+            ClubSchoolEntities.GetContext().SaveChanges();
+            AddNewItemEvent?.Invoke();
+        }
+
+        public static void RemoveGroup(Group group)
+        {
+            group.IsDeleted = true;
+
+            foreach (var studentGroup in group.StudentGroups)
+            {
+                studentGroup.IsDeleted = true;
+            }
+
+            SaveGroup(group);
+        }
     }
 }
