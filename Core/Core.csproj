@@ -93,6 +93,7 @@
     <Compile Include="Schedule.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SchedulePartial.cs" />
     <Compile Include="Student.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>

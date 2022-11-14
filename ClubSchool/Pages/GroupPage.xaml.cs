@@ -41,7 +41,24 @@ namespace ClubSchool.Pages
             else
                 Title = $"{Title} {Group.Id}";
 
+
+            ChangeEditing();
             this.DataContext = this;
+        }
+
+        public void ChangeEditing()
+        {
+            if (DataAccess.IsAdmin(App.Teacher.User))
+                return;
+
+            if (Group.Teacher == App.Teacher)
+            {
+                cbClub.IsEnabled = false;
+                cbTeacher.IsEnabled = false;
+                btnDelete.IsEnabled = false;
+            }
+            else
+                gridMain.IsEnabled= false;
         }
 
         private void cbTeacher_SelectionChanged(object sender, SelectionChangedEventArgs e)

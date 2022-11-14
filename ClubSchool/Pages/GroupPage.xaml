@@ -30,7 +30,7 @@
             </Style>
         </ResourceDictionary>
     </Page.Resources>
-    <Grid>
+    <Grid x:Name="gridMain">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>

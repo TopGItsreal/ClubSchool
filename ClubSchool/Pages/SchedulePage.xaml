@@ -48,11 +48,10 @@
                     <GridViewColumn Header="Кружок">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock>
-                                    <Run Text="{Binding Group.Name}"/>
-                                    <Run Text="–"/>
-                                    <Run Text="{Binding Group.Club.Name}"/>
-                                </TextBlock>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Group.Name}"/>
+                                    <TextBlock Text="{Binding Group.Club.Name}"/>
+                                </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -65,7 +64,18 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Дата" DisplayMemberBinding="{Binding Date, ConverterCulture=ru}"/>
+                    <GridViewColumn Header="Дата">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Date, StringFormat=d, ConverterCulture=ru}"/>
+                                    <TextBlock Text="{Binding Date, StringFormat=t, ConverterCulture=ru}"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Посещаемость" DisplayMemberBinding="{Binding Attendance}"/>
                 </GridView>
             </ListView.View>
         </ListView>
