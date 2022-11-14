@@ -51,7 +51,7 @@ namespace ClubSchool.Pages
                     AttendanceValue = allLessons != 0 ? 100 * visitedLessons / allLessons : 0,
                 });
             }
-            Statistics = Statistics.OrderBy(x => x.AttendanceValue).Reverse().ToList();
+            Statistics = Statistics.OrderBy(x => x.AttendanceValue).ThenByDescending(x => x.Attendance).Reverse().ToList();
 
             DataContext = this;
         }
