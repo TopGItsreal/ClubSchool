@@ -76,6 +76,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClubSchoolModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ClubStatistic.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="Group.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
@@ -94,6 +95,7 @@
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SchedulePartial.cs" />
+    <Compile Include="StatisticService.cs" />
     <Compile Include="Student.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
@@ -101,6 +103,7 @@
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="StudentPartial.cs" />
+    <Compile Include="StudentStatistic.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>

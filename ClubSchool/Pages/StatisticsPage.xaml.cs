@@ -27,32 +27,9 @@ namespace ClubSchool.Pages
         public StatisticsPage()
         {
             InitializeComponent();
-            StudentStatistics = new List<StudentStatistic>();
+            Statistics = StatisticService.GetStudentStatistics();
             ClubStatistics = new List<ClubStatistic>();
 
-            foreach (var student in DataAccess.GetStudents())
-            {
-                var allLessons = 0;
-                var visitedLessons = 0;
-
-                foreach (var group in student.StudentGroups)
-                {
-                    foreach (var lesson in group.Journals)
-                    {
-                        allLessons++;
-                        if (lesson.IsVisited)
-                            visitedLessons++;
-                    }
-                }
-
-                StudentStatistics.Add(new StudentStatistic
-                { 
-                    Student = student, 
-                    Attendance = allLessons != 0 ? (100 * visitedLessons / allLessons).ToString() + " %" :
-                                                   "Не было занятий",
-                    AttendanceValue = allLessons != 0 ? 100 * visitedLessons / allLessons : 0,
-                });
-            }
 
             foreach(var club in DataAccess.GetClubs())
             {
@@ -82,23 +59,9 @@ namespace ClubSchool.Pages
                 });
             }
 
-            StudentStatistics = StudentStatistics.OrderBy(x => x.AttendanceValue).ThenByDescending(x => x.Attendance).Reverse().ToList();
             ClubStatistics = ClubStatistics.OrderBy(x => x.AttendanceValue).ThenByDescending(x => x.Attendance).Reverse().ToList();
 
             DataContext = this;
-        }
-
-        public class StudentStatistic
-        {
-            public Student Student { get; set; }
-            public string Attendance { get; set; }
-            public double AttendanceValue { get; set; }
-        }
-        public class ClubStatistic
-        {
-            public Club Club { get; set; }
-            public string Attendance { get; set; }
-            public double AttendanceValue { get; set; }
         }
     }
 }
