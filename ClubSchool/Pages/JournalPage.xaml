@@ -21,8 +21,8 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                                    <Run Text="{Binding StudentTeacherClub.Student.FirstName}"/>
-                                    <Run Text="{Binding StudentTeacherClub.Student.LastName}"/>
+                                    <Run Text="{Binding StudentGroup.Student.FirstName}"/>
+                                    <Run Text="{Binding StudentGroup.Student.LastName}"/>
                                     </TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>

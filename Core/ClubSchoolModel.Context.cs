@@ -27,13 +27,15 @@ namespace Core
     
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<Club> Clubs { get; set; }
+        public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Journal> Journals { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<StudentTeacherClub> StudentTeacherClubs { get; set; }
+        public virtual DbSet<StudentGroup> StudentGroups { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
-        public virtual DbSet<TeacherClub> TeacherClubs { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

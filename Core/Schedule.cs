@@ -22,13 +22,13 @@ namespace Core
     
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
-        public int TeacherClubId { get; set; }
+        public int GroupId { get; set; }
         public int RoomId { get; set; }
         public bool IsDeleted { get; set; }
     
+        public virtual Group Group { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Journal> Journals { get; set; }
         public virtual Room Room { get; set; }
-        public virtual TeacherClub TeacherClub { get; set; }
     }
 }

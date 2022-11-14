@@ -34,7 +34,7 @@
                     <GridViewColumn Header="Преподаватели">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ListView ItemsSource="{Binding TeacherClubs}" VerticalContentAlignment="Center">
+                                <ListView ItemsSource="{Binding NotDeletedGroups}" VerticalContentAlignment="Center">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Teacher}"/>
@@ -49,12 +49,12 @@
         </ListView>
 
         <ListView x:Name="lvStudentGroups" Grid.Row="1"
-                  ItemsSource="{Binding StudentTeacherClubs}">
+                  ItemsSource="{Binding StudentGroups}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Кружок" DisplayMemberBinding="{Binding TeacherClub.Club.Name}"/>
-                    <GridViewColumn Header="Группа" DisplayMemberBinding="{Binding TeacherClub.Name}"/>
-                    <GridViewColumn Header="Преподаватель" DisplayMemberBinding="{Binding TeacherClub.Teachers}"/>
+                    <GridViewColumn Header="Кружок" DisplayMemberBinding="{Binding Group.Club.Name}"/>
+                    <GridViewColumn Header="Группа" DisplayMemberBinding="{Binding Group.Name}"/>
+                    <GridViewColumn Header="Преподаватель" DisplayMemberBinding="{Binding Group.Teachers}"/>
                 </GridView>
             </ListView.View>
         </ListView>

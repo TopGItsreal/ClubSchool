@@ -9,5 +9,7 @@ namespace Core
     public partial class Club
     {
         public override string ToString() => Name;
+
+        public ICollection<Group> NotDeletedGroups => Groups.ToList().FindAll(x => !x.IsDeleted);
     }
 }

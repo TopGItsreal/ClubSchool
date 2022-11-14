@@ -12,14 +12,12 @@ namespace Core
     using System;
     using System.Collections.Generic;
     
-    public partial class Journal
+    public partial class sysdiagram
     {
-        public int Id { get; set; }
-        public int ScheduleId { get; set; }
-        public int StudentGroupId { get; set; }
-        public bool IsVisited { get; set; }
-    
-        public virtual Schedule Schedule { get; set; }
-        public virtual StudentGroup StudentGroup { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -38,14 +38,14 @@
                   SelectionChanged="lvShedules_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Преподаватель" DisplayMemberBinding="{Binding TeacherClub.Teacher}"/>
+                    <GridViewColumn Header="Преподаватель" DisplayMemberBinding="{Binding Group.Teacher}"/>
                     <GridViewColumn Header="Кружок">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock>
-                                    <Run Text="{Binding TeacherClub.Name}"/>
+                                    <Run Text="{Binding Group.Name}"/>
                                     <Run Text="–"/>
-                                    <Run Text="{Binding TeacherClub.Club.Name}"/>
+                                    <Run Text="{Binding Group.Club.Name}"/>
                                 </TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

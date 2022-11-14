@@ -89,7 +89,7 @@ namespace ClubSchool
         private void btnMySchedule_Click(object sender, RoutedEventArgs e)
         {
             var schedules = new List<Schedule>();
-            foreach (var schedule in App.Teacher.TeacherClubs.Select(x => x.Schedules))
+            foreach (var schedule in App.Teacher.Groups.Select(x => x.Schedules))
             {
                 schedules.AddRange(schedule);
             }

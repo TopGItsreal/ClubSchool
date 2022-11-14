@@ -30,7 +30,7 @@ namespace ClubSchool.Pages
             InitializeComponent();
             Club = club;
             Clubs = DataAccess.GetClubs();
-            Schedules = DataAccess.GetSchedules().FindAll(x => x.TeacherClub.ClubId == Club.Id);
+            Schedules = DataAccess.GetSchedules().FindAll(x => x.Group.ClubId == Club.Id);
 
             if (Schedules.Count() == 0)
                 spSchedule.Visibility = Visibility.Collapsed;
