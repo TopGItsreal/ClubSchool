@@ -24,10 +24,14 @@ namespace ClubSchool.Pages
         public List<Schedule> Schedules { get; set; }
         public List<string> DayNames { get; set; }
 
-        public SchedulePage(List<Schedule> schedules)
+        public bool IsAll { get; set; }
+
+        public SchedulePage(bool isAll = true)
         {
             InitializeComponent();
-            Schedules = schedules;
+
+            IsAll = isAll;
+            Schedules = IsAll ? DataAccess.GetSchedules() : DataAccess.GetSchedules(App.Teacher);
             var day = App.Culture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek);
             DayNames = App.Culture.DateTimeFormat.DayNames.Select(x => char.ToUpper(x[0]) + x.Substring(1)).ToList();
             DayNames.Insert(0, "Все дни");
@@ -37,8 +41,14 @@ namespace ClubSchool.Pages
 
             btnNewSchedule.Visibility = DataAccess.IsAdmin(App.Teacher.User) ?
                                         Visibility.Visible : Visibility.Collapsed;
-
+            DataAccess.AddNewItemEvent += DataAccess_AddNewItemEvent;
             DataContext = this;
+        }
+
+        private void DataAccess_AddNewItemEvent()
+        {
+            Schedules = IsAll ? DataAccess.GetSchedules() : DataAccess.GetSchedules(App.Teacher);
+            ApplyFilters();
         }
 
         private void lvShedules_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,6 +79,8 @@ namespace ClubSchool.Pages
                                      Schedules.FindAll(x => x.Date.Date > date) :
                                      Schedules.FindAll(x => App.Culture.DateTimeFormat.GetDayName(x.Date.DayOfWeek)== day.ToString().ToLower()
                                      && x.Date.Date > date);
+
+            lvShedules.Items.Refresh();
         }
 
         private void btnNewSchedule_Click(object sender, RoutedEventArgs e)

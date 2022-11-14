@@ -83,17 +83,12 @@ namespace ClubSchool
 
         private void btnSchedule_Click(object sender, RoutedEventArgs e)
         {
-            frame.NavigationService.Navigate(new SchedulePage(DataAccess.GetSchedules()));
+            frame.NavigationService.Navigate(new SchedulePage());
         }
 
         private void btnMySchedule_Click(object sender, RoutedEventArgs e)
         {
-            var schedules = new List<Schedule>();
-            foreach (var schedule in App.Teacher.Groups.Select(x => x.Schedules))
-            {
-                schedules.AddRange(schedule);
-            }
-            frame.NavigationService.Navigate(new SchedulePage(schedules));
+            frame.NavigationService.Navigate(new SchedulePage(false));
         }
 
         private void btnTeachers_Click(object sender, RoutedEventArgs e)
@@ -103,7 +98,7 @@ namespace ClubSchool
 
         private void btnStat_Click(object sender, RoutedEventArgs e)
         {
-
+            frame.NavigationService.Navigate(new StatisticsPage());
         }
 
         private void btnGroups_Click(object sender, RoutedEventArgs e)

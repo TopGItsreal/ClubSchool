@@ -84,14 +84,24 @@ namespace ClubSchool.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            var errorMessage = new StringBuilder();
             try
             {
+                if (string.IsNullOrWhiteSpace(Group.Name))
+                    errorMessage.AppendLine("Имя группы обязательно для заполнения");
+                if (Group.Club == null)
+                    errorMessage.AppendLine("Не выбран кружок группы");
+                if (Group.Teacher == null)
+                    errorMessage.AppendLine("Не выбран учитель группы");
+                if (errorMessage.Length > 0)
+                    throw new Exception();
+
                 DataAccess.SaveGroup(Group);
                 NavigationService.GoBack();
             }
             catch
             {
-                MessageBox.Show("Не удалось сохранить группу", "Ошибка");
+                MessageBox.Show(errorMessage.ToString(), "Ошибка");
             }
         }
 
@@ -118,9 +128,15 @@ namespace ClubSchool.Pages
         {
             var student = cbStudents.SelectedItem as Student;
 
-            if (student == null)
+            if (student == null || Group.StudentGroups.Any(x => x.Student == student && x.Group == Group))
                 return;
 
+
+            if(Group.Club == null || Group.StudentGroups.Count >= Group.Club.MaxStudentCount)
+            {
+                MessageBox.Show("Превышено максимальное количество учеников", "Ошибка");
+                return;
+            }
             Group.StudentGroups.Add(new StudentGroup
             {
                 Student = student,

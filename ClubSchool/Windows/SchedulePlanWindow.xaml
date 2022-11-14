@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClubSchool.Windows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="SchedulePlanWindow" Height="450" Width="800">
+        Title="Составление раписания" Height="450" Width="800">
     <Window.Resources>
         <ResourceDictionary>
             <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">

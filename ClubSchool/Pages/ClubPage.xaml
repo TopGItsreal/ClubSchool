@@ -65,7 +65,7 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock >
-                                        <Run Text="{Binding Group.Name}"/>
+                                        <Run Text="{Binding Name}"/>
                                         </TextBlock>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>

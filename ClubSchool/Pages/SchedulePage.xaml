@@ -28,7 +28,7 @@
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10 0">
                 <TextBlock Text="Отобразить с:" VerticalAlignment="Center"
                            Margin="5" FontSize="20"/>
-                <DatePicker x:Name="dpDateStart" MinWidth="100"
+                <DatePicker x:Name="dpDateStart" MinWidth="100" Language="ru"
                             Padding="8" FontSize="20" SelectedDateChanged="dpDateStart_SelectedDateChanged"/>
             </StackPanel>
         </StackPanel>

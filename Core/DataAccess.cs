@@ -14,6 +14,7 @@ namespace Core
         public static List<Student> GetStudents() => ClubSchoolEntities.GetContext().Students.ToList();
         public static List<Class> GetClasses() => ClubSchoolEntities.GetContext().Classes.ToList();
         public static List<Schedule> GetSchedules() => ClubSchoolEntities.GetContext().Schedules.ToList();
+        
         public static List<Room> GetRooms() => ClubSchoolEntities.GetContext().Rooms.ToList();
         public static List<Journal> GetJournals() => ClubSchoolEntities.GetContext().Journals.ToList();
         public static List<User> GetUsers() => ClubSchoolEntities.GetContext().Users.ToList();
@@ -131,6 +132,16 @@ namespace Core
 
             ClubSchoolEntities.GetContext().SaveChanges();
             AddNewItemEvent?.Invoke();
+        }
+
+        public static List<Schedule> GetSchedules(Teacher teacher)
+        {
+            var schedules = new List<Schedule>();
+            foreach (var schedule in teacher.Groups.Select(x => x.Schedules))
+            {
+                schedules.AddRange(schedule);
+            }
+            return schedules;
         }
 
         public static void RemoveGroup(Group group)
