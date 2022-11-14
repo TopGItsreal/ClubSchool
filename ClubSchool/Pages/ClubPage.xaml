@@ -20,23 +20,14 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <ComboBox x:Name="cbClubs" ItemsSource="{Binding Clubs}"
-                      materialDesign:HintAssist.Hint="Название кружка"
-                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
-                      Margin="20" FontSize="24"
-                      Grid.Column="0"
-                      IsEditable="True"
-                      Text="{Binding Club.Name}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <TextBox x:Name="tbName" Text="{Binding Club.Name}" Grid.Column="0"
+                       materialDesign:HintAssist.Hint="Название кружка"
+                       materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                       Margin="20" Padding="10" FontSize="24"/>
             <TextBox x:Name="tbMaxCount"
                      materialDesign:HintAssist.Hint="Количество мест"
                      Text="{Binding Club.MaxStudentCount}"
-                     Height="auto" Margin="20" Grid.Column="1"
+                     Margin="20" Grid.Column="1"
                      PreviewTextInput="NumberValidationTextBox"
                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
                      Padding="10" FontSize="24"/>

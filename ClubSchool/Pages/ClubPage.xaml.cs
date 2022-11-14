@@ -43,8 +43,11 @@ namespace ClubSchool.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            //Сделать проверку на корректное название
             try
             {
+                if (string.IsNullOrWhiteSpace(Club.Name))
+                    throw new Exception();
                 DataAccess.SaveClub(Club);
                 NavigationService.GoBack();
             }
