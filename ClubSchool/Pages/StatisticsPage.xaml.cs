@@ -27,39 +27,8 @@ namespace ClubSchool.Pages
         public StatisticsPage()
         {
             InitializeComponent();
-            Statistics = StatisticService.GetStudentStatistics();
-            ClubStatistics = new List<ClubStatistic>();
-
-
-            foreach(var club in DataAccess.GetClubs())
-            {
-                var allLessons = 0;
-                var visitedLessons = 0;
-
-                foreach(var group in club.Groups)
-                {
-                    foreach(var studentGroup in group.StudentGroups)
-                    {
-                        foreach (var lesson in studentGroup.Journals)
-                        {
-                            allLessons++;
-                            if (lesson.IsVisited)
-                                visitedLessons++;
-                        }
-                    }
-                }
-
-                ClubStatistics.Add(new ClubStatistic
-                {
-                    Club = club,
-                    Attendance = allLessons != 0 ? (100 * visitedLessons / allLessons).ToString() + " %" :
-                                                   "Не было занятий",
-                    AttendanceValue = allLessons != 0 ? 100 * visitedLessons / allLessons : 0,
-
-                });
-            }
-
-            ClubStatistics = ClubStatistics.OrderBy(x => x.AttendanceValue).ThenByDescending(x => x.Attendance).Reverse().ToList();
+            StudentStatistics = StatisticService.GetStudentStatistics();
+            ClubStatistics = StatisticService.GetClubStatistics();
 
             DataContext = this;
         }
