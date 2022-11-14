@@ -21,12 +21,14 @@ namespace ClubSchool.Pages
     /// </summary>
     public partial class StatisticsPage : Page
     {
-        public List<Statistic> Statistics { get; set; }
+        public List<StudentStatistic> StudentStatistics { get; set; }
+        public List<ClubStatistic> ClubStatistics { get; set; }
 
         public StatisticsPage()
         {
             InitializeComponent();
-            Statistics = new List<Statistic>();
+            StudentStatistics = new List<StudentStatistic>();
+            ClubStatistics = new List<ClubStatistic>();
 
             foreach (var student in DataAccess.GetStudents())
             {
@@ -43,7 +45,7 @@ namespace ClubSchool.Pages
                     }
                 }
 
-                Statistics.Add(new Statistic
+                StudentStatistics.Add(new StudentStatistic
                 { 
                     Student = student, 
                     Attendance = allLessons != 0 ? (100 * visitedLessons / allLessons).ToString() + " %" :
@@ -51,14 +53,50 @@ namespace ClubSchool.Pages
                     AttendanceValue = allLessons != 0 ? 100 * visitedLessons / allLessons : 0,
                 });
             }
-            Statistics = Statistics.OrderBy(x => x.AttendanceValue).ThenByDescending(x => x.Attendance).Reverse().ToList();
+
+            foreach(var club in DataAccess.GetClubs())
+            {
+                var allLessons = 0;
+                var visitedLessons = 0;
+
+                foreach(var group in club.Groups)
+                {
+                    foreach(var studentGroup in group.StudentGroups)
+                    {
+                        foreach (var lesson in studentGroup.Journals)
+                        {
+                            allLessons++;
+                            if (lesson.IsVisited)
+                                visitedLessons++;
+                        }
+                    }
+                }
+
+                ClubStatistics.Add(new ClubStatistic
+                {
+                    Club = club,
+                    Attendance = allLessons != 0 ? (100 * visitedLessons / allLessons).ToString() + " %" :
+                                                   "Не было занятий",
+                    AttendanceValue = allLessons != 0 ? 100 * visitedLessons / allLessons : 0,
+
+                });
+            }
+
+            StudentStatistics = StudentStatistics.OrderBy(x => x.AttendanceValue).ThenByDescending(x => x.Attendance).Reverse().ToList();
+            ClubStatistics = ClubStatistics.OrderBy(x => x.AttendanceValue).ThenByDescending(x => x.Attendance).Reverse().ToList();
 
             DataContext = this;
         }
 
-        public class Statistic 
+        public class StudentStatistic
         {
             public Student Student { get; set; }
+            public string Attendance { get; set; }
+            public double AttendanceValue { get; set; }
+        }
+        public class ClubStatistic
+        {
+            public Club Club { get; set; }
             public string Attendance { get; set; }
             public double AttendanceValue { get; set; }
         }
