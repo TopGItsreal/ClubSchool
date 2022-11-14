@@ -16,7 +16,7 @@ namespace Core
         public static List<Class> GetClasses() => ClubSchoolEntities.GetContext().Classes.ToList();
         public static List<Schedule> GetSchedules() => ClubSchoolEntities.GetContext().Schedules.ToList();
         public static List<Room> GetRooms() => ClubSchoolEntities.GetContext().Rooms.ToList();
-        public static List<TeacherClub> GetTeacherClubs() => ClubSchoolEntities.GetContext().TeacherClubs.ToList();
+        public static List<Group> GetGroups() => ClubSchoolEntities.GetContext().Groups.ToList();
         public static List<Club> GetClubs() => ClubSchoolEntities.GetContext().Clubs.ToList();
         public static List<Journal> GetJournals() => ClubSchoolEntities.GetContext().Journals.ToList();
         public static List<User> GetUsers() => ClubSchoolEntities.GetContext().Users.ToList();
@@ -78,6 +78,6 @@ namespace Core
         }
 
 
-        public static bool IsAdmin(User user) => user.Login == user.Password && user.Login == "admin";
+        public static bool IsAdmin(User user) => user.Role.Name == "Заместитель директора";
     }
 }

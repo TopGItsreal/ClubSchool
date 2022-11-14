@@ -30,23 +30,23 @@ namespace ClubSchool.Pages
 
             var dateEquals = schedule.Date.Date == DateTime.Today.Date;
 
-            if (schedule.TeacherClub.Teacher.Id != App.Teacher.Id || !DataAccess.IsAdmin(App.Teacher.User))
+            if (schedule.Group.Teacher.Id != App.Teacher.Id || !DataAccess.IsAdmin(App.Teacher.User))
                 spMain.IsEnabled = false;
 
             if (schedule.Journals.Count() != 0)
                 Journals = schedule.Journals;
             else
             {
-                if (!dateEquals || schedule.TeacherClub.Teacher.Id != App.Teacher.Id)
+                if (!dateEquals || schedule.Group.Teacher.Id != App.Teacher.Id)
                     return;
 
                 Journals = new List<Journal>();
-                foreach (var StudentTeacherClub in schedule.TeacherClub.StudentTeacherClubs)
+                foreach (var StudentGroup in schedule.Group.StudentGroups)
                 {
                     Journals.Add(new Journal
                     {
                         Schedule = schedule,
-                        StudentTeacherClub = StudentTeacherClub
+                        StudentGroup = StudentGroup
                     });
                 }
 

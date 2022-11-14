@@ -12,21 +12,22 @@ namespace Core
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentTeacherClub
+    public partial class StudentGroup
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StudentTeacherClub()
+        public StudentGroup()
         {
             this.Journals = new HashSet<Journal>();
         }
     
         public int Id { get; set; }
         public int StudentId { get; set; }
-        public int TeacherClubId { get; set; }
+        public int GroupId { get; set; }
+        public bool IsDeleted { get; set; }
     
+        public virtual Group Group { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Journal> Journals { get; set; }
         public virtual Student Student { get; set; }
-        public virtual TeacherClub TeacherClub { get; set; }
     }
 }

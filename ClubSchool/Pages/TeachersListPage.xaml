@@ -56,7 +56,7 @@
                     <GridViewColumn Header="Кружки">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ListView ItemsSource="{Binding TeacherClubs}">
+                                <ListView ItemsSource="{Binding Groups}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel>

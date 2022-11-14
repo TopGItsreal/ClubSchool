@@ -57,7 +57,7 @@
                             <GridViewColumn Header="Преподаватель">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding TeacherClub.Teacher}"/>
+                                        <TextBlock Text="{Binding Group.Teacher}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

@@ -12,24 +12,26 @@ namespace Core
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Group
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Group()
         {
-            this.Teachers = new HashSet<Teacher>();
+            this.Schedules = new HashSet<Schedule>();
+            this.StudentGroups = new HashSet<StudentGroup>();
         }
     
         public int Id { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
+        public int TeacherId { get; set; }
+        public int ClubId { get; set; }
         public bool IsDeleted { get; set; }
-        public int RoleId { get; set; }
+        public string Name { get; set; }
     
-        public virtual Role Role { get; set; }
+        public virtual Club Club { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Teacher> Teachers { get; set; }
+        public virtual ICollection<Schedule> Schedules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentGroup> StudentGroups { get; set; }
+        public virtual Teacher Teacher { get; set; }
     }
 }

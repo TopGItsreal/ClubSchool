@@ -21,13 +21,13 @@ namespace ClubSchool.Pages
     public partial class ClubsListPage : Page
     {
         public IEnumerable<Club> Clubs { get; set; }
-        public IEnumerable<StudentTeacherClub> StudentTeacherClubs { get; set; }
+        public IEnumerable<StudentGroup> StudentGroups { get; set; }
 
         public ClubsListPage()
         {
             InitializeComponent();
             Clubs = DataAccess.GetClubs();
-            StudentTeacherClubs = new List<StudentTeacherClub>();
+            StudentGroups = new List<StudentGroup>();
 
             lvStudentGroups.Visibility = Visibility.Collapsed;
             btnNewClub.Visibility = DataAccess.IsAdmin(App.Teacher.User) ? Visibility.Visible : Visibility.Collapsed;
@@ -47,7 +47,7 @@ namespace ClubSchool.Pages
         public ClubsListPage(Student student)
         {
             InitializeComponent();
-            StudentTeacherClubs = student.StudentTeacherClubs;
+            StudentGroups = student.NotDeletedStudentGroups;
             Clubs = new List<Club>();
 
             lvClubs.Visibility = Visibility.Collapsed;

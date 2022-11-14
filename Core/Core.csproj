@@ -77,10 +77,16 @@
       <DependentUpon>ClubSchoolModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataAccess.cs" />
+    <Compile Include="Group.cs">
+      <DependentUpon>ClubSchoolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Journal.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role.cs">
+      <DependentUpon>ClubSchoolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Room.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
@@ -90,13 +96,13 @@
     <Compile Include="Student.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="StudentTeacherClub.cs">
+    <Compile Include="StudentGroup.cs">
+      <DependentUpon>ClubSchoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Teacher.cs">
-      <DependentUpon>ClubSchoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TeacherClub.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TeacherPartial.cs" />
