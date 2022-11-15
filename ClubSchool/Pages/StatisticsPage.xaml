@@ -9,7 +9,7 @@
       Title="Статистика">
 
     <Grid>
-        <ListView x:Name="lvStudentStatistics" ItemsSource="{Binding Statistics}">
+        <ListView x:Name="lvStudentStatistics" ItemsSource="{Binding StudentStatistics}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Ученик">
