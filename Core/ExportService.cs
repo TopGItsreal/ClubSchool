@@ -27,7 +27,7 @@ namespace Core
             {
                 worksheet.Cells[1][rowIndex] = studentStatistics[i].Student.LastName;
                 worksheet.Cells[2][rowIndex] = studentStatistics[i].Student.FirstName;
-                worksheet.Cells[3][rowIndex] = studentStatistics[i].AttendanceValue;
+                worksheet.Cells[3][rowIndex] = studentStatistics[i].Attendance;
                 rowIndex++;
             }
 
@@ -47,7 +47,7 @@ namespace Core
             for (int i = 0; i < clubStatistics.Count; i++)
             {
                 worksheet.Cells[1][rowIndex] = clubStatistics[i].Club.Name;
-                worksheet.Cells[2][rowIndex] = clubStatistics[i].AttendanceValue;
+                worksheet.Cells[2][rowIndex] = clubStatistics[i].Attendance;
                 rowIndex++;
             }
 

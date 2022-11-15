@@ -50,6 +50,10 @@
             <Style TargetType="DatePicker" BasedOn="{StaticResource MaterialDesignOutlinedDatePicker}">
                 <Setter Property="Padding" Value="10"/>
             </Style>
+
+            <Style TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignChoiceChipPrimaryOutlineRadioButton}">
+                <Setter Property="FontSize" Value="24"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

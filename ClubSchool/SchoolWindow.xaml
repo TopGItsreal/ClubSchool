@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ClubSchool"
         mc:Ignorable="d"
         FontSize="30"
@@ -43,9 +44,17 @@
                     <Button x:Name="btnStat" Content="Статистика" Click="btnStat_Click"/>
                 </StackPanel>
             </StackPanel>
+
             <StackPanel x:Name="spButtons" Orientation="Horizontal" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right">
                 <Button x:Name="btnBack" Content="Назад" Click="btnBack_Click"/>
                 <Button x:Name="btnForward" Content="Вперед" Click="btnForward_Click"/>
+                <Button x:Name="btnExit" Grid.Row="1" Grid.Column="1"
+                        HorizontalAlignment="Left" Padding="5"
+                        Click="btnExit_Click">
+                    <Button.Content>
+                        <materialDesign:PackIcon Kind="ExitRun"/>
+                    </Button.Content>
+                </Button>
             </StackPanel>
             
         </Grid>

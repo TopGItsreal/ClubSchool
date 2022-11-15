@@ -105,5 +105,13 @@ namespace ClubSchool
         {
             frame.NavigationService.Navigate(new GroupsListPage());
         }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Вы точно хотите выйти?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+                frame.NavigationService.Navigate(new AuthorizationPage());
+        }
     }
 }

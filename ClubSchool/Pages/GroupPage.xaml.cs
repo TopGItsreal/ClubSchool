@@ -37,7 +37,10 @@ namespace ClubSchool.Pages
             Students = DataAccess.GetStudents();
 
             if (isNew)
+            {
                 Title = $"Новая {Title}";
+                btnDelete.IsEnabled = false;
+            }
             else
                 Title = $"{Title} {Group.Id}";
 

@@ -32,5 +32,26 @@ namespace ClubSchool.Pages
 
             DataContext = this;
         }
+
+        private void RadioButtonClick(object sender, RoutedEventArgs e)
+        {
+            var content = (sender as RadioButton).Content.ToString();
+
+            if (content == "Ученики")
+            {
+                lvStudentStatistics.Visibility = Visibility.Visible;
+                lvClubStatistics.Visibility = Visibility.Collapsed;
+            }
+            else if (content == "Кружки")
+            {
+                lvStudentStatistics.Visibility = Visibility.Collapsed;
+                lvClubStatistics.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void btnExcelExport_Click(object sender, RoutedEventArgs e)
+        {
+            ExportService.ExportStatistics(StudentStatistics, ClubStatistics);
+        }
     }
 }

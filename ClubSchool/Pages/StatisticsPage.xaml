@@ -9,7 +9,20 @@
       Title="Статистика">
 
     <Grid>
-        <ListView x:Name="lvStudentStatistics" ItemsSource="{Binding StudentStatistics}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <RadioButton x:Name="rbStudents" Content="Ученики" IsChecked="True" Click="RadioButtonClick"/>
+            <RadioButton x:Name="rbClubs" Content="Кружки" Click="RadioButtonClick"/>
+        </StackPanel>
+
+        <Button x:Name="btnExcelExport" Content="Экспорт" HorizontalAlignment="Right" Click="btnExcelExport_Click"/>
+
+        <ListView x:Name="lvStudentStatistics" ItemsSource="{Binding StudentStatistics}"
+                  Grid.Row="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Ученик">
@@ -19,6 +32,32 @@
                                     <Run Text="{Binding Student.LastName}"/>
                                     <Run Text="{Binding Student.FirstName}"/>
                                     <Run Text="{Binding Student.Patronymic}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Посещаемость">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Attendance}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView x:Name="lvClubStatistics" ItemsSource="{Binding ClubStatistics}"
+                  Grid.Row="1" Visibility="Hidden">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Кружок">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Club.Name}"/>
                                 </TextBlock>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
