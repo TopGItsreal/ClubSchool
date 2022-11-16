@@ -37,14 +37,14 @@ namespace ClubSchool.Pages
             Students = DataAccess.GetStudents();
 
             ChangeEditing();
-
             if (isNew)
             {
                 Title = $"Новая {Title}";
                 btnDelete.IsEnabled = false;
             }
             else
-                Title = $"{Title} {Group.Id}";
+                if (Group != null)
+                    Title = $"{Title} {Group.Id}";
 
             this.DataContext = this;
         }
@@ -62,6 +62,7 @@ namespace ClubSchool.Pages
             }
             else
             {
+                btnSave.IsEnabled = false;
                 tbName.IsEnabled = false;
                 cbClub.IsEnabled = false;
                 cbTeacher.IsEnabled = false;
@@ -89,6 +90,7 @@ namespace ClubSchool.Pages
             if (message != MessageBoxResult.Yes)
                 return;
             DataAccess.RemoveGroup(Group);
+            NavigationService.GoBack();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

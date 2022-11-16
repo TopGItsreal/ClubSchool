@@ -160,5 +160,10 @@ namespace Core
 
             SaveGroup(group);
         }
+
+        public static bool IsLoginUnique(string login)
+        {
+            return !GetUsers().Any(x => x.Login == login);
+        } 
     }
 }

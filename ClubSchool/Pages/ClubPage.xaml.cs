@@ -56,10 +56,5 @@ namespace ClubSchool.Pages
                 MessageBox.Show("Сохранение не удалось", "Ошибка");
             }
         }
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex(@"\b([1-9]|[12][0-5])\b");
-            e.Handled = !regex.IsMatch((sender as TextBox).Text + e.Text);
-        }
     }
 }

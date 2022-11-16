@@ -55,7 +55,10 @@ namespace ClubSchool.Pages
 
         private void lvGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            NavigationService.Navigate(new GroupPage(lvGroups.SelectedItem as Group));
+            var group = lvGroups.SelectedItem as Group;
+
+            if (group != null)
+                NavigationService.Navigate(new GroupPage(group));
         }
     }
 }

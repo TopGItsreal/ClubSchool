@@ -28,7 +28,6 @@
                      materialDesign:HintAssist.Hint="Количество мест"
                      Text="{Binding Club.MaxStudentCount}"
                      Margin="20" Grid.Column="1"
-                     PreviewTextInput="NumberValidationTextBox"
                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
                      Padding="10" FontSize="24"/>
 

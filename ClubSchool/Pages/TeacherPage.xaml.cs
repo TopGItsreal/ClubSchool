@@ -43,8 +43,10 @@ namespace ClubSchool.Pages
             StringBuilder errorMessage = new StringBuilder();
             try
             {
-                if(!IsLoginValid(Teacher.User.Login))
+                if(!IsLoginFilled(Teacher.User.Login))
                     errorMessage.AppendLine("Логин не должен быть пустым.");
+                if (!DataAccess.IsLoginUnique(Teacher.User.Login))
+                    errorMessage.AppendLine("Логин должен быть уникальным.");
                 if (!IsNameValid(Teacher.FirstName))
                     errorMessage.AppendLine("Некорректное имя.");
                 if (!IsNameValid(Teacher.LastName))
@@ -66,7 +68,7 @@ namespace ClubSchool.Pages
             }
         }
 
-        private bool IsLoginValid(string login)
+        private bool IsLoginFilled(string login)
         {
             if (string.IsNullOrWhiteSpace(login))
                 return false;

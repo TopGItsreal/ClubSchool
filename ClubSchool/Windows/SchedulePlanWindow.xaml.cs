@@ -101,6 +101,12 @@ namespace ClubSchool.Windows
                 || tpClubTime.SelectedTime.Value.TimeOfDay > TimeSpan.FromHours(22))
                 errorMessage.AppendLine("Выберите корректное время");
 
+            if (errorMessage.Length > 0)
+            {
+                MessageBox.Show(errorMessage.ToString(), "Ошибка");
+                return;
+            }
+
             var schedule = new Schedule
             {
                 Date = ((DateTime)cdClubsDays.SelectedDate).Date + tpClubTime.SelectedTime.Value.TimeOfDay,

@@ -48,9 +48,7 @@
             <TextBox x:Name="tbEmail" Text="{Binding User.Email}" Padding="10"
                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
                      materialDesign:HintAssist.Hint="Email"/>
-            <TextBox x:Name="tbPhoneNumber" Text="{Binding User.PhoneNumber}" Padding="10"
-                     materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
-                     materialDesign:HintAssist.Hint="Телефон"/>
+
             <TextBox x:Name="tbPassword" Text="{Binding User.Password}" Padding="10"
                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
                      materialDesign:HintAssist.Hint="Пароль"/>
