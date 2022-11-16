@@ -28,8 +28,8 @@ namespace ClubSchool.Windows
         {
             InitializeComponent();
             Schedules = DataAccess.GetSchedules();
-            Clubs = DataAccess.GetClubs();
-            Groups = DataAccess.GetGroups();
+            Clubs = DataAccess.GetNotDeletedClubs();
+            Groups = DataAccess.GetNotDeletedGroups();
             Rooms = DataAccess.GetRooms();
             cdClubsDays.SelectedDate = DateTime.Now;
 
@@ -59,11 +59,32 @@ namespace ClubSchool.Windows
             cbRooms.SelectedItem = schedule.Room;
             cbGroups.SelectedItem = schedule.Group;
             tpClubTime.SelectedTime = schedule.Date;
+
+            var enable = schedule.Date > DateTime.Now;
+
+            cbClubs.IsEnabled = enable;
+            cbRooms.IsEnabled = enable;
+            cbGroups.IsEnabled = enable;
+            tpClubTime.IsEnabled = enable;
+            btnAddClub.IsEnabled = enable;
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            var schedule = (sender as MenuItem).DataContext as Schedule;
 
+            if (schedule.Date > DateTime.Now)
+            {
+                MessageBox.Show("Нельзя удалить прошедшее занятие", "Ошибка");
+                return;
+            }
+
+            var result = MessageBox.Show("Вы точно хотите удалить данное занятие?",
+                                         "Предупреждение",
+                                         MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+                DataAccess.RemoveSchedule(schedule);
         }
 
         private void btnAddClub_Click(object sender, RoutedEventArgs e)
@@ -86,6 +107,9 @@ namespace ClubSchool.Windows
                 Group = cbGroups.SelectedItem as Group,
                 Room = cbRooms.SelectedItem as Room,
             };
+
+            if (schedule.Date < DateTime.Now)
+                errorMessage.AppendLine("Выберите корректную дату");
 
             if (Schedules.Any(x => Math.Abs((x.Date - schedule.Date).TotalHours) < 1
                 && x.Group.Teacher == schedule.Group.Teacher))

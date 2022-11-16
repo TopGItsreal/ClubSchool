@@ -36,6 +36,8 @@ namespace ClubSchool.Pages
             Teachers = DataAccess.GetNotDeletedTeachers();
             Students = DataAccess.GetStudents();
 
+            ChangeEditing();
+
             if (isNew)
             {
                 Title = $"Новая {Title}";
@@ -44,8 +46,6 @@ namespace ClubSchool.Pages
             else
                 Title = $"{Title} {Group.Id}";
 
-
-            ChangeEditing();
             this.DataContext = this;
         }
 
@@ -61,7 +61,13 @@ namespace ClubSchool.Pages
                 btnDelete.IsEnabled = false;
             }
             else
-                gridMain.IsEnabled= false;
+            {
+                tbName.IsEnabled = false;
+                cbClub.IsEnabled = false;
+                cbTeacher.IsEnabled = false;
+                cbStudents.IsEnabled = false;
+                btnDelete.IsEnabled = false;
+            }
         }
 
         private void cbTeacher_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -110,6 +116,9 @@ namespace ClubSchool.Pages
 
         private void lvStudents_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (Group.Teacher != App.Teacher)
+                return;
+
             var studentGroup = lvStudents.SelectedItem as StudentGroup;
 
             if (studentGroup == null)

@@ -122,6 +122,11 @@ namespace Core
             AddNewItemEvent?.Invoke();
         }
 
+        public static void RemoveSchedule(Schedule schedule)
+        {
+            schedule.IsDeleted = true;
+            SaveSchedule(schedule);
+        }
 
         public static bool IsAdmin(User user) => user.Role.Name == "Заместитель директора";
 

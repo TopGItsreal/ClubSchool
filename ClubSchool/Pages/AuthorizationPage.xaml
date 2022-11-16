@@ -16,11 +16,11 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBox x:Name="tbLogin"
+            <TextBox x:Name="tbLogin" MaxWidth="500"
                      materialDesign:HintAssist.Hint="Логин"
                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
                      Grid.Row="0"/>
-            <PasswordBox x:Name="pbPassword"
+            <PasswordBox x:Name="pbPassword" MaxWidth="500"
                          materialDesign:HintAssist.Hint="Пароль"
                          materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
                          Grid.Row="1" Margin="0"/>

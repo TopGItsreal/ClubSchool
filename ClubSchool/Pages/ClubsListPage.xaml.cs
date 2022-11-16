@@ -30,7 +30,11 @@ namespace ClubSchool.Pages
             StudentGroups = new List<StudentGroup>();
 
             lvStudentGroups.Visibility = Visibility.Collapsed;
-            btnNewClub.Visibility = DataAccess.IsAdmin(App.Teacher.User) ? Visibility.Visible : Visibility.Collapsed;
+            if (!DataAccess.IsAdmin(App.Teacher.User))
+            {
+                btnNewClub.Visibility = Visibility.Hidden;
+                gvcDelete.Width = 0;
+            }
 
             DataAccess.AddNewItemEvent += DataAccess_AddNewItemEvent;
 
@@ -72,6 +76,24 @@ namespace ClubSchool.Pages
         private void btnNewClub_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ClubPage(new Club()));
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var club = (sender as Button).DataContext as Club;
+
+            if (club == null)
+                return;
+
+            var result = MessageBox.Show("Вы точно хотите удалить данный кружок?\n" +
+                                         "Также удалятся группы, записанные на этот кружок.", 
+                                         "Предупреждение",
+                                         MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                DataAccess.RemoveClub(club);
+            }
         }
     }
 }

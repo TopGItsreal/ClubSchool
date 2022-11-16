@@ -54,7 +54,7 @@
                                         <MenuItem.Header>
                                             <materialDesign:PackIcon Kind="Menu" />
                                         </MenuItem.Header>
-                                        <MenuItem Header="Подробнее" Foreground="Blue"
+                                        <MenuItem Header="Изменить"
                                                   x:Name="btnEdit"
                                                   Click="btnEdit_Click"/>
                                         <MenuItem Header="Удалить" Foreground="Red"

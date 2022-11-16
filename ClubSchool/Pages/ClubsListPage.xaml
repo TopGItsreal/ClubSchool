@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:ClubSchool.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -31,7 +32,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Преподаватели">
+                    <GridViewColumn Header="Учителя">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <ListView ItemsSource="{Binding NotDeletedGroups}" VerticalContentAlignment="Center">
@@ -50,6 +51,19 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn x:Name="gvcDelete">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btnDelete" Foreground="Red"
+                                        Background="Transparent" BorderBrush="Transparent"
+                                        MinHeight="50" Click="btnDelete_Click">
+                                    <Button.Content>
+                                        <materialDesign:PackIcon Kind="DeleteOutline" Width="30" Height="30"/>
+                                    </Button.Content>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -60,7 +74,7 @@
                 <GridView>
                     <GridViewColumn Header="Кружок" DisplayMemberBinding="{Binding Group.Club.Name}"/>
                     <GridViewColumn Header="Группа" DisplayMemberBinding="{Binding Group.Name}"/>
-                    <GridViewColumn Header="Преподаватель" DisplayMemberBinding="{Binding Group.Teacher}"/>
+                    <GridViewColumn Header="Учитель" DisplayMemberBinding="{Binding Group.Teacher}"/>
                 </GridView>
             </ListView.View>
         </ListView>

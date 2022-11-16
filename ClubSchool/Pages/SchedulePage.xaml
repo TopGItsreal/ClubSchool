@@ -44,7 +44,7 @@
                   SelectionChanged="lvSchedules_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Преподаватель" DisplayMemberBinding="{Binding Group.Teacher}"/>
+                    <GridViewColumn Header="Учитель" DisplayMemberBinding="{Binding Group.Teacher}"/>
                     <GridViewColumn Header="Кружок">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

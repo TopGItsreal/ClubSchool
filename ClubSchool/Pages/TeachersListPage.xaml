@@ -42,7 +42,7 @@
                   SelectionChanged="lvTeachers_SelectionChanged">
             <ListView.View>
                 <GridView x:Name="gvStudents">
-                    <GridViewColumn Header="Преподаватель">
+                    <GridViewColumn Header="Учитель">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock>

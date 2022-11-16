@@ -45,7 +45,7 @@
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
-                            <GridViewColumn Header="Преподаватель">
+                            <GridViewColumn Header="Учитель">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Teacher}"/>
