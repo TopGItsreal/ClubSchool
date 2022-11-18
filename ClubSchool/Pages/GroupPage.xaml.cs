@@ -132,8 +132,8 @@ namespace ClubSchool.Pages
 
             if (message == MessageBoxResult.Yes)
             {
-                Group.StudentGroups.Remove(studentGroup);
-                lvStudents.ItemsSource = Group.StudentGroups;
+                studentGroup.IsDeleted = true;
+                lvStudents.ItemsSource = Group.NotDeletedStudentGroups;
                 lvStudents.Items.Refresh();
             }
         }
@@ -142,7 +142,7 @@ namespace ClubSchool.Pages
         {
             var student = cbStudents.SelectedItem as Student;
 
-            if (student == null || Group.StudentGroups.Any(x => x.Student == student && x.Group == Group))
+            if (student == null || Group.StudentGroups.Any(x => x.Student == student && x.Group == Group && !x.IsDeleted))
                 return;
 
 
@@ -151,13 +151,20 @@ namespace ClubSchool.Pages
                 MessageBox.Show("Превышено максимальное количество учеников", "Ошибка");
                 return;
             }
-            Group.StudentGroups.Add(new StudentGroup
-            {
-                Student = student,
-                Group = Group
-            });
 
-            lvStudents.ItemsSource = Group.StudentGroups;
+            var studentGroup = Group.StudentGroups.FirstOrDefault(x => x.Student == student && x.Group == Group && x.IsDeleted);
+            if (studentGroup == null)
+            {
+                Group.StudentGroups.Add(new StudentGroup
+                {
+                    Student = student,
+                    Group = Group
+                });
+            }
+            else
+                studentGroup.IsDeleted = false;
+
+            lvStudents.ItemsSource = Group.NotDeletedStudentGroups;
             lvStudents.Items.Refresh();
         }
     }

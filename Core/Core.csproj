@@ -85,6 +85,7 @@
     <Compile Include="Group.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GroupPartial.cs" />
     <Compile Include="Journal.cs">
       <DependentUpon>ClubSchoolModel.tt</DependentUpon>
     </Compile>

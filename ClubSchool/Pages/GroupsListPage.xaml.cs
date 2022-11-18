@@ -27,6 +27,8 @@ namespace ClubSchool.Pages
             InitializeComponent();
 
             Groups = DataAccess.GetNotDeletedGroups();
+            if (!DataAccess.IsAdmin(App.Teacher.User))
+                Groups = Groups.FindAll(x => x.Teacher == App.Teacher);
             DataAccess.AddNewItemEvent += DataAccess_AddNewItemEvent;
 
             btnNewGroup.Visibility = DataAccess.IsAdmin(App.Teacher.User) ?
@@ -38,6 +40,8 @@ namespace ClubSchool.Pages
         private void DataAccess_AddNewItemEvent()
         {
             Groups = DataAccess.GetNotDeletedGroups();
+            if (!DataAccess.IsAdmin(App.Teacher.User))
+                Groups = Groups.FindAll(x => x.Teacher == App.Teacher);
             lvGroups.ItemsSource = Groups;
             lvGroups.Items.Refresh();
         }

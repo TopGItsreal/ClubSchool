@@ -25,7 +25,7 @@ namespace ClubSchool.Pages
         public StudentsListPage()
         {
             InitializeComponent();
-            Students = DataAccess.GetStudents();
+            Students = DataAccess.GetStudents().OrderBy(x => x.Class.Name).ThenBy(y => y.LastName).ToList();
             DataContext = this;
         }
 

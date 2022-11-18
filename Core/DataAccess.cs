@@ -98,7 +98,7 @@ namespace Core
         public static ICollection<Journal> GenerateJournals(Schedule schedule)
         {
             ICollection<Journal> Journals = new List<Journal>();
-            foreach (var studentGroup in schedule.Group.StudentGroups)
+            foreach (var studentGroup in schedule.Group.StudentGroups.ToList().FindAll(x => !x.IsDeleted))
             {
                 if (studentGroup.IsDeleted)
                     continue;

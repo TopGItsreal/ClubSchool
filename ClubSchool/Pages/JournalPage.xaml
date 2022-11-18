@@ -8,38 +8,42 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Журнал">
 
-    <Grid>
-        <StackPanel x:Name="spMain">
-            <Button x:Name="btnSave" Content="Сохранить" 
-                    Grid.Column="2" FontSize="24"
-                    MinHeight="50" HorizontalAlignment="Left"
-                    Click="btnSave_Click"/>
-            <ListView x:Name="lvJournal" ItemsSource="{Binding Journals}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Ученик">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock>
+    <Grid x:Name="gridMain">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="btnSave" Content="Сохранить" 
+                FontSize="24" MinHeight="50"
+                HorizontalAlignment="Left"
+                Click="btnSave_Click"/>
+
+        <ListView x:Name="lvJournal" ItemsSource="{Binding Journals}" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Ученик">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
                                     <Run Text="{Binding StudentGroup.Student.FirstName}"/>
                                     <Run Text="{Binding StudentGroup.Student.LastName}"/>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Присутствие">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox IsChecked="{Binding IsVisited}"
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Присутствие">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsVisited}"
                                               HorizontalAlignment="Center" 
                                               VerticalAlignment="Center"
                                               Margin="50 0"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>
