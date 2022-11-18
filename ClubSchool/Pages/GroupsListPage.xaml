@@ -29,6 +29,7 @@
                 <GridView>
                     <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Header="Учитель" DisplayMemberBinding="{Binding Teacher}"/>
+                    <GridViewColumn Header="Кружок" DisplayMemberBinding="{Binding Club}"/>
                 </GridView>
             </ListView.View>
         </ListView>

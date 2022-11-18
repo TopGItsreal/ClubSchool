@@ -14,12 +14,22 @@
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <TextBox x:Name="tbSearch" MinWidth="300"
+        <StackPanel Orientation="Horizontal">
+            
+            <TextBox x:Name="tbSearch" MinWidth="300"
                  FontSize="20" Padding="10"
                  materialDesign:HintAssist.Hint="Поиск по фамилии"
                  materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
                  HorizontalAlignment="Left" TextChanged="tbSearch_TextChanged"/>
+            
+            <ComboBox x:Name="cbClass" ItemsSource="{Binding Classes}" 
+                      materialDesign:HintAssist.Hint="Класс"
+                      materialDesign:HintAssist.Background="{StaticResource HintBackgroundColor}"
+                      SelectedIndex="0" Margin="10 0"
+                      Padding="10" FontSize="20"
+                      SelectionChanged="cbClass_SelectionChanged" DisplayMemberPath="Name"/>
+
+        </StackPanel>
         <ListView x:Name="lvStudents" Grid.Row="1"
                   ItemsSource="{Binding Students}"
                   SelectionChanged="LvStudents_SelectionChanged">

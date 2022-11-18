@@ -62,8 +62,9 @@
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
-                        <Run Text="{Binding FirstName}"/>
                         <Run Text="{Binding LastName}"/>
+                        <Run Text="{Binding FirstName}"/>
+                        <Run Text="{Binding Class.Name}"/>
                     </TextBlock>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
@@ -76,8 +77,9 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
-                        <Run Text="{Binding Student.FirstName}"/>
                         <Run Text="{Binding Student.LastName}"/>
+                        <Run Text="{Binding Student.FirstName}"/>
+                        <Run Text="{Binding Student.Class.Name}"/>
                     </TextBlock>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -34,7 +34,7 @@ namespace ClubSchool.Pages
             Group = group;
             Clubs = DataAccess.GetNotDeletedClubs();
             Teachers = DataAccess.GetNotDeletedTeachers();
-            Students = DataAccess.GetStudents();
+            Students = DataAccess.GetStudents().OrderBy(x => x.Class.Name).ThenBy(y => y.LastName).ToList();
 
             ChangeEditing();
             if (isNew)
@@ -118,7 +118,7 @@ namespace ClubSchool.Pages
 
         private void lvStudents_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Group.Teacher != App.Teacher)
+            if (!DataAccess.IsAdmin(App.Teacher.User) && Group.Teacher != App.Teacher)
                 return;
 
             var studentGroup = lvStudents.SelectedItem as StudentGroup;

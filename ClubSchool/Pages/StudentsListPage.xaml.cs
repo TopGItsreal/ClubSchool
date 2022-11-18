@@ -21,10 +21,14 @@ namespace ClubSchool.Pages
     public partial class StudentsListPage : Page
     {
         public List<Student> Students { get; set; }
+        public List<Class> Classes { get; set; }
 
         public StudentsListPage()
         {
             InitializeComponent();
+            Classes = DataAccess.GetClasses();
+            Classes.Insert(0, new Class { Name = "Все классы" });
+
             Students = DataAccess.GetStudents().OrderBy(x => x.Class.Name).ThenBy(y => y.LastName).ToList();
             DataContext = this;
         }
@@ -39,6 +43,18 @@ namespace ClubSchool.Pages
         {
             var text = tbSearch.Text.ToLower();
             lvStudents.ItemsSource = Students.FindAll(x => x.LastName.ToLower().Contains(text));
+        }
+
+        private void cbClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var text = tbSearch.Text.ToLower();
+            var students = Students.FindAll(x => x.LastName.ToLower().Contains(text));
+            if ((cbClass.SelectedItem as Class).Name != "Все классы")
+            {
+                students = students.FindAll(x => x.Class == cbClass.SelectedItem as Class);
+            }
+
+            lvStudents.ItemsSource = students;
         }
     }
 }
